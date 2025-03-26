@@ -1,0 +1,45 @@
+name: GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      # The branch where the project source code resides
+      # 项目源代码所在的分支
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [lts/*]
+        os: [ubuntu-latest]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+
+      - name: 📦 Install Dependencies
+        run: npm install
+
+      - name: 🌌 Build Valaxy Blog
+        run: npm run build
+
+      - name: 📦 install wrangler
+        run: npm install -g wrangler
+
+      - name: 🚀 Deploy to Cloudflare Pages
+        run: wrangler pages deploy ./dist --project-name blog --branch main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

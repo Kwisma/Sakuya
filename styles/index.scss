@@ -1,0 +1,21 @@
+// 自定义光标
+// 替换鼠标光标样式。
+a {
+  cursor: var(--cursor-pointer), auto;
+
+  &:hover {
+    cursor: var(--cursor-pointer), auto;
+  }
+}
+
+button {
+  cursor: var(--cursor-pointer), pointer;
+}
+
+input {
+  cursor: var(--cursor-text), text;
+}
+// 给播放器留空间
+.mt-0\! {
+  margin-bottom: 100px !important;
+}
