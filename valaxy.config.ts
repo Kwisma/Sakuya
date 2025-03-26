@@ -168,12 +168,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         // 图标颜色
         color: 'aqua',
         // 文章链接
-        url: '/archives/index.md',
+        url: '/archives',
         // 图标标题
-        title: '郊野魔法',
+        title: '档案',
       },
-      // 由valaxy和valaxy-theme-${name}提供动力，默认为yun
-      powered: true,
+      // 框架和主题来源信息显示
+      powered: false,
       // ICP 备案信息的配置。
       beian: {
         enable: true,
