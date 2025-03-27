@@ -1,7 +1,8 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
 import { addonWaline } from 'valaxy-addon-waline'
-
+import { addonComponents, ValaxyThemesResolver } from 'valaxy-addon-components'
+import { addonLive2d } from 'valaxy-addon-live2d'
 // add icons what you will need
 const safelist = [
   'i-ri-home-line',
@@ -70,7 +71,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 主题类型
     type: 'nimbo',
     // 目录标题
-    outlineTitle: '快速导航大宋就是毒杀',
+    outlineTitle: '个人博客',
     // 主题色配置
     colors: {
       primary: '#ea4c89',
@@ -80,13 +81,13 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 标题，默认每个字分割
-      title: '咲夜(Sakuya)の的小站',
+      title: '咲夜Sakuyaの的小站',
       // 首页下方的动态云
       cloud: {
         enable: true,
       },
       // 标题类
-      // siteNameClass: 'text-2xl font-bold text-white',
+      siteNameClass: 'text-2xl font-bold text-white',
     },
     // 背景图片配置
     bg_image: {
@@ -96,7 +97,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       url: '/back/back.jpg',
       // 浅色模式
       dark: '/back/back.jpg',
-      // 透明度
+      // 图像不透明度
       opacity: 0.9,
     },
     // 短语配置
@@ -137,14 +138,20 @@ export default defineValaxyConfig<UserThemeConfig>({
         text: '首页',
         active: 'text-red-500',
       },
+      {
+        icon: 'i-ri-hq-fill',
+        link: '/links/',
+        text: '伙伴',
+        active: 'text-red-500',
+      },
     ],
     // 页面，显示在社交导航栏下方
     pages: [
       {
         name: '我的小伙伴们',
         url: '/links/',
-        icon: 'i-ri-men-line',
-        color: 'dodgerblue',
+        icon: 'i-ri-account-circle-fill',
+        color: 'black',
       },
     ],
     // 侧边栏配置
@@ -154,9 +161,10 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 页脚上部的动态云
       cloud: {
         enable: true,
+        
       },
       // 建站于
-      since: 2016,
+      since: 2025,
       // 网站上显示的图标配置
       icon: {
         // 是否启用
@@ -263,23 +271,56 @@ export default defineValaxyConfig<UserThemeConfig>({
         postprocess: (html) => { },
       },
     ],
-
+    // 配置 markdown-it
     config(md) {
       // You can configure the MarkdownItAsync instance here
       // Example: md.use(pluginName, options)
-    }
+    },
   },
   unocss: {
     safelist
   },
-  components: {},
+  components: {
+    // 实现引入第三方主题
+    resolvers: [ValaxyThemesResolver({ themes: ['yun'] })],
+  },
   vite: {
   },
   // 设置 valaxy-addon-waline 配置项
   addons: [
+    // 启用插件的通用组件
+    addonComponents(),
+    // 评论区
     addonWaline({
       // Waline 配置项，参考 https://waline.js.org/reference/client/props.html
       serverURL: 'https://boly-orpin.vercel.app/',
     }),
+    // Live2d看板娘
+    addonLive2d({
+      global: true,
+      live2DCollection: {
+        XiaoYun: {
+          message: '来自云游君的小云 ~',
+          models: ['https://cdn.jsdelivr.net/npm/@yunyoujun/live2d@latest/小云.model3.json'],
+        },
+        // https://github.com/fghrsh/live2d_api
+        Tia: {
+          message: '来自 Potion Maker 的 Tia 酱 ~',
+          models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json',
+          textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures',
+        },
+        Pio: {
+          message: '来自 Potion Maker 的 Pio 酱 ~',
+          models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json',
+          textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
+        },
+      },
+      enableLive2D: ['XiaoYun', 'Tia', 'Pio'],
+      randomCharacter: true,
+      randomSkin: true,
+      skipHello: true,
+      hideOnScreenSizes: 640,
+      debugger: false,
+    })
   ],
 })

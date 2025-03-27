@@ -23,6 +23,7 @@ declare module 'vue-router/auto-routes' {
     '/404': RouteRecordInfo<'/404', '/404', Record<never, never>, Record<never, never>>,
     '/about/': RouteRecordInfo<'/about/', '/about', Record<never, never>, Record<never, never>>,
     '/about/site': RouteRecordInfo<'/about/site', '/about/site', Record<never, never>, Record<never, never>>,
+    '/album': RouteRecordInfo<'/album', '/album', Record<never, never>, Record<never, never>>,
     '/archives/': RouteRecordInfo<'/archives/', '/archives', Record<never, never>, Record<never, never>>,
     '/categories/': RouteRecordInfo<'/categories/', '/categories', Record<never, never>, Record<never, never>>,
     '/links/': RouteRecordInfo<'/links/', '/links', Record<never, never>, Record<never, never>>,
@@ -30,6 +31,8 @@ declare module 'vue-router/auto-routes' {
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
     '/posts/alist': RouteRecordInfo<'/posts/alist', '/posts/alist', Record<never, never>, Record<never, never>>,
     '/posts/alist2': RouteRecordInfo<'/posts/alist2', '/posts/alist2', Record<never, never>, Record<never, never>>,
+    '/posts/domainssl': RouteRecordInfo<'/posts/domainssl', '/posts/domainssl', Record<never, never>, Record<never, never>>,
+    '/posts/ked': RouteRecordInfo<'/posts/ked', '/posts/ked', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
 }

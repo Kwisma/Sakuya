@@ -11,9 +11,7 @@ tags:
 cover: /posts/alist.png
 ---
 
-alist 头部美化代码
-
----
+## alist 头部美化代码
 
 ```html
 <!--Alist V3建议添加的，已经默认添加了，如果你的没有建议加上-->
@@ -376,3 +374,5 @@ textarea#comment-textarea:focus {
   }
 </style>
 ```
+
+<CodePen class="h-300px" name="Margin Collapse" id="WqXGpo" user="YunYouJun" tab="html,result" />

@@ -9,10 +9,13 @@
     "build:ssg": "valaxy build --ssg",
     "dev": "valaxy",
     "rss": "valaxy rss",
+    "new": "valaxy new",
     "serve": "vite preview"
   },
   "dependencies": {
     "valaxy": "0.22.17",
+    "valaxy-addon-components": "^0.1.0",
+    "valaxy-addon-live2d": "^0.3.0",
     "valaxy-addon-waline": "^0.2.0",
     "valaxy-theme-yun": "0.22.17"
   },

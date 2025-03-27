@@ -11,9 +11,7 @@ tags:
 cover: /posts/alist.png
 ---
 
-alist 正文美化代码
-
----
+## alist 正文美化代码
 
 ```html
 <!--延迟加载-->
@@ -169,4 +167,7 @@ var granimInstance = new Granim({
 
 <!--鼠标点击效果-->
 <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
+
 ```
+
+<CodePen class="h-300px" name="Margin Collapse" id="WqXGpo" user="YunYouJun" tab="html,result" />

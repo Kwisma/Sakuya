@@ -65,6 +65,17 @@ export default defineSiteConfig({
       // 社交链接的颜色
       color: 'orange',
     },
+    {
+      // 社交链接的名称
+      name: 'GitHub',
+      // 社交链接的 URL
+      link: 'https://github.com/Kwisma',
+      // 社交链接的图标
+      icon: 'i-ri-github-line',
+      // 社交链接的颜色
+      color: 'black',
+    },
+
   ],
   // 搜索功能
   search: {
@@ -154,15 +165,15 @@ export default defineSiteConfig({
     // 配置
     options: {
       // 图片预览的边距
-      margin: 16,
+      margin: 50,
       // 图片预览的背景颜色
-      background: '#ffff',
+      background: '#000',
       // 滚动偏移量
       scrollOffset: 40,
       // 图片预览的容器
-      container: '',
+      container: '#zoom-container',
       // 自定义模板
-      template: '',
+      template: '#zoom-container',
     },
   },
   // Vanilla LazyLoad 配置
