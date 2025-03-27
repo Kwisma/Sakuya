@@ -156,7 +156,7 @@ export default defineSiteConfig({
       // 图片预览的边距
       margin: 16,
       // 图片预览的背景颜色
-      background: '#00000000',
+      background: '#ffff',
       // 滚动偏移量
       scrollOffset: 40,
       // 图片预览的容器
