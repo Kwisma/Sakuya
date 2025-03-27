@@ -19,10 +19,7 @@ import YunCloud from 'valaxy-theme-yun/components/YunCloud.vue'
     </VCLiveTime>
     <div class="bootfmore"></div>
   </YunFooter>
-  <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
-    id="2568697963"></meting-js>
 </template>
-
 <style>
 .bootfmore {
   margin-bottom: 50px;
