@@ -14,8 +14,11 @@
   },
   "dependencies": {
     "valaxy": "0.22.17",
+    "valaxy-addon-algolia": "^0.2.0",
+    "valaxy-addon-artalk": "^0.1.2",
     "valaxy-addon-components": "^0.1.0",
     "valaxy-addon-live2d": "^0.3.0",
+    "valaxy-addon-twikoo": "^0.0.3",
     "valaxy-addon-waline": "^0.2.0",
     "valaxy-theme-yun": "0.22.17",
     "vite": "^5.0.0"

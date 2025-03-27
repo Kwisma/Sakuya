@@ -161,7 +161,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 页脚上部的动态云
       cloud: {
         enable: true,
-        
+
       },
       // 建站于
       since: 2025,
@@ -284,7 +284,43 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 实现引入第三方主题
     resolvers: [ValaxyThemesResolver({ themes: ['yun'] })],
   },
+  // 不要因死链接而导致构建失败
+  ignoreDeadLinks: true,
+  // `valaxy build` 的选项
+  build: {
+    // 忽略死链
+    ignoreDeadLinks: true,
+    // 启用 SSG 分页，将单独构建分页页面
+    ssgForPagination: true,
+  },
+  // 部署类型
+  deploy: {
+    type: 'gh-pages'
+  },
+  // 内部模块
+  modules: {
+    rss: {
+      // 启用 RSS
+      enable: true,
+      // 全文输出
+      fullText: true,
+    }
+  },
+  // Markdown 功能
+  features: {
+    // 启用 KaTeX
+    katex: true,
+  },
+
   vite: {
+    ssgOptions:{
+      // ViteSSGOptions 配置项
+      script: 'async', // 设置生成的脚本标签的类型，默认为 'async'
+      format: 'esm', // 设置生成的 HTML 格式化方式，可选 'minify' 或 'none'
+    }
+  },
+  vue:{
+    isCustomElement:[]
   },
   // 设置 valaxy-addon-waline 配置项
   addons: [
@@ -315,12 +351,7 @@ export default defineValaxyConfig<UserThemeConfig>({
           textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
         },
       },
-      enableLive2D: ['XiaoYun', 'Tia', 'Pio'],
-      randomCharacter: true,
-      randomSkin: true,
-      skipHello: true,
-      hideOnScreenSizes: 640,
-      debugger: false,
+      enableLive2D: 'all',
     })
   ],
 })
