@@ -31,7 +31,7 @@ export default defineSiteConfig({
     // 作者的网站
     link: 'https://www.mot.cloudns.biz',
     // 作者的头像
-    avatar: '/avatar/avatar.jpg',
+    avatar: '/avatar/avatar.webp',
     // 个人状态
     status: {
       // 状态的 Emoji 表示
@@ -45,7 +45,7 @@ export default defineSiteConfig({
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
   // 您网站的图标
-  favicon: '/avatar/avatar.jpg',
+  favicon: '/avatar/avatar.webp',
   // RSS源和图标
   feed: {
     // RSS 源的名称

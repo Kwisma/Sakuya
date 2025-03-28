@@ -9,7 +9,7 @@ tags:
  - 命令
  - ked
  - neno
-cover: /posts/ked.png
+cover: /posts/ked.webp
 ---
 
 ## 更新软件源

@@ -74,7 +74,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     outlineTitle: '个人博客',
     // 主题色配置
     colors: {
-      primary: '#ea4c89',
+      primary: '#0078E7',
     },
     // 网站上显示的横幅配置
     banner: {
@@ -87,16 +87,16 @@ export default defineValaxyConfig<UserThemeConfig>({
         enable: true,
       },
       // 标题类
-      siteNameClass: 'text-2xl font-bold text-white',
+      siteNameClass: 'text-white',
     },
     // 背景图片配置
     bg_image: {
       // 是否启用
       enable: true,
       // 图片地址
-      url: '/back/back.jpg',
+      url: '/back/back.webp',
       // 浅色模式
-      dark: '/back/back.jpg',
+      dark: '/back/back-y.webp',
       // 图像不透明度
       opacity: 0.9,
     },
@@ -151,7 +151,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         name: '我的小伙伴们',
         url: '/links/',
         icon: 'i-ri-account-circle-fill',
-        color: 'black',
+        color: 'Cyan',
       },
     ],
     // 侧边栏配置

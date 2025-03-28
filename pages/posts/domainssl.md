@@ -8,7 +8,7 @@ categories:
 tags:
  - 域名
  - 证书
-cover: /posts/ssl.png
+cover: /posts/ssl.webp
 ---
 
 ## 使用 acme.sh 设置 SSL 证书

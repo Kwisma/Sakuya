@@ -8,7 +8,7 @@ categories:
 tags:
  - 美化
  - 模板
-cover: /posts/alist.png
+cover: /posts/alist.webp
 ---
 
 ## alist 正文美化代码

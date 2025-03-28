@@ -4,14 +4,18 @@
 // sans: 非衬线字体：字体 abcd 123
 // mono: 等宽字体：字体 abcd 123
 :root {
+  // 白天模式下文章框的底色
+  --va-c-bg-light: rgba(255, 255, 255, 0.726);
+  // serif: 衬线字体：字体 abcd 123
   --va-font-serif: 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  // sans: 非衬线字体：字体 abcd 123
   --va-font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  // mono: 等宽字体：字体 abcd 123
   --va-font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-// 自定义光标
-// 替换鼠标光标样式。
-:root {
+  // 主页背景
+  --va-c-bg-soft: rgba(255, 255, 255, 0.9);
+  // 自定义光标
+  // 替换鼠标光标样式。
   --cursor-default: url('https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur');
   --cursor-pointer: url('https://cdn.yunyoujun.cn/css/md-cursors/link.cur');
   --cursor-text: url('https://cdn.yunyoujun.cn/css/md-cursors/text.cur');
@@ -37,21 +41,54 @@ input {
   cursor: var(--cursor-text), text;
 }
 
-// 亮色
+//主页标题
+.text-white {
+  color: rgb(31, 28, 28) !important
+}
+
+// 页眉渐变色
 .yun-page-header-gradient {
-  background-image: -moz-element();
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%);
+  background: linear-gradient(to right, rgba(255, 237, 170, 0.2) 0, rgba(255, 254, 173, 0.2) 100%);
+  // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%);
+}
+
+// 页脚渐变色
+.yun-footer-gradient {
+  height: 130px;
+  background: linear-gradient(to right, rgba(255, 237, 170, 0.2) 0, rgba(255, 254, 173, 0.2) 100%);
+}
+
+//顶栏背景
+.bg-transparent {
+  background-color: #ffffff !important;
 }
 
 // 覆盖 Dark Mode
 html.dark {
-  --va-c-bg-light: rgb(0, 0, 0);
+  // 黑夜模式下文章框的底色
+  --va-c-bg-light: rgba(59, 56, 56, 0.884);
+  // 主页背景
+  --va-c-bg-soft: rgba(0, 0, 0, 0.9);
 
-  .yun-page-header-gradient {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%);
+  //顶栏背景
+  .bg-transparent {
+    background-color: #020202 !important;
   }
 
+  //主页标题
+  .text-white {
+    color: rgb(255, 255, 255) !important
+  }
+
+  // 页眉渐变色
+  .yun-page-header-gradient {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.2) 100%);
+    // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%);
+  }
+
+  // 页脚渐变色
   .yun-footer-gradient {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 100%);
+    height: 130px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.2) 100%);
   }
 }
