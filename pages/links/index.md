@@ -18,11 +18,11 @@ aside: false
 
 ```json
 {
-    "url": "https://yuumi.link",
-    "avatar": "https://cdn.yuumi.link/images/settings/favicon.png",
-    "name": "Yuumi",
-    "blog": "-Yuumi's Blog-",
-    "desc": "続きを鳴らそう——",
+    "url": "https://www.mot.cloudns.biz",
+    "avatar": "https://www.mot.cloudns.biz/avatar/avatar.png",
+    "name": "Sakuya",
+    "blog": "-Sakuya Blog-",
+    "desc": "僕と契約して魔法少女になってよ!",
     "color": "#D69B54"
 }
 ```
