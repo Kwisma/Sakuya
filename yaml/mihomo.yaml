@@ -1,0 +1,2 @@
+proxies:
+  - {name: 🇵🇱 S16_vmess_argo_tls-波兰🇵🇱, server: www.visa.com.sg, port: 443, client-fingerprint: chrome, type: vmess, uuid: 99fe99c9-d62a-43a0-8b94-cd066638a9f2, alterId: 0, cipher: auto, tls: true, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/99fe99c9-d62a-43a0-8b94-cd066638a9f2-vm?ed=2048", headers: {Host: servtun.9logo.eu.org}}}

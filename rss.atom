@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.mot.cloudns.biz/</id>
+    <title>咲夜の个人博客</title>
+    <updated>2025-03-28T19:57:37.552Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>咲夜</name>
+        <email>d342jxc@gmail.com</email>
+        <uri>https://www.mot.cloudns.biz</uri>
+    </author>
+    <link rel="alternate" href="https://www.mot.cloudns.biz/"/>
+    <link rel="self" href="https://www.mot.cloudns.biz/rss.atom"/>
+    <subtitle>合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下</subtitle>
+    <logo>https://www.mot.cloudns.biz/avatar/avatar.webp</logo>
+    <icon>https://www.mot.cloudns.bizi-ri-rss-line</icon>
+    <rights>CC BY-NC-SA 4.0 2025 © 咲夜</rights>
+    <entry>
+        <title type="html"><![CDATA[alist正文美化]]></title>
+        <id>https://www.mot.cloudns.biz/posts/alist</id>
+        <link href="https://www.mot.cloudns.biz/posts/alist"/>
+        <updated>2025-03-24T11:33:33.000Z</updated>
+        <content type="html"><![CDATA[<h2>alist 正文美化代码</h2>
+<pre><code class="language-html">&lt;!--延迟加载--&gt;
+&lt;!--如果要写自定义内容建议都加到这个延迟加载的范围内--&gt;
+&lt;div id=&quot;customize&quot; style=&quot;display: none;&quot;&gt;
+    &lt;div&gt;
+  &lt;!--音乐播放器--&gt;
+        &lt;meting-js fixed=&quot;true&quot; autoplay=&quot;true&quot; theme=&quot;#409EFF&quot; list-folded=&quot;true&quot; server=&quot;netease&quot; type=&quot;playlist&quot; id=&quot;2568697963&quot;&gt;&lt;/meting-js&gt;
+
+
+  &lt;!--评论模块还有下面的script也是--&gt;
+  &lt;center&gt;
+   &lt;div class=&quot;newValine&quot; id=&quot;vcomments&quot;&gt;&lt;/div&gt;
+  &lt;/center&gt;
+  &lt;script&gt;
+   new Valine({
+    visitor: true,
+    el: '#vcomments',
+    avatar: 'wavatar',
+    appId: 'mqNCZUaZM1z4nPlpFSQBSGH7-gzGzoHsz',
+    appKey: '2umMHA8W4tTcXG2kTqroZ6xS',
+    MasterKey: 'sZBKcqA9XTFpQ7QMKB16UBIY',
+    placeholder: &quot;有什么问题欢迎评论区留言~么么哒&quot;
+   })
+  &lt;/script&gt;
+
+        &lt;br/&gt;
+        &lt;center class=&quot;dibu&quot;&gt;
+            &lt;div style=&quot; line-height: 20px;font-size: 9pt;font-weight: bold;&quot;&gt;
+                &lt;span&gt;
+                    &quot;
+                    &lt;span style=&quot;color: rgb(13, 109, 252); font-weight: bold;&quot; id=&quot;hitokoto&quot;&gt;
+                        &lt;a href=&quot;#&quot; id=&quot;hitokoto_text&quot;&gt;
+                            &quot;人生最大的遗憾,就是在最无能为力的时候遇到一个想要保护一生的人.&quot;
+                        &lt;/a&gt;
+                    &lt;/span&gt; &quot;
+                &lt;/span&gt;
+                &lt;p style=&quot;margin-left: 10rem;font-size: 8pt;&quot;&gt;
+                    &lt;small&gt;
+                        —— Anwen's Cloud
+                    &lt;/small&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div style=&quot;font-size: 13px; font-weight: bold;&quot;&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;https://qm.qq.com/q/Sg5y2WlO00&quot;
+                        target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fab fa-qq&quot; style=&quot;color:#409EFF&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        QQ |
+                    &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;mailto:d342jxc@gmail.com&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fa-duotone fa-envelope-open&quot; style=&quot;color:#409EFF&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        邮箱 |
+                    &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fas fa-edit&quot; style=&quot;color:#409EFF&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        博客 |
+                    &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fas fa-comment-lines&quot; style=&quot;color:#409EFF;&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        留言 |
+                    &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;!--后台入口--&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;/@manage&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-folder-gear&quot; style=&quot;color:#409EFF;&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        管理 |
+                    &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;!--版权，请尊重作者--&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;https://github.com/Xhofe/alist&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-copyright&quot; style=&quot;color:#409EFF;&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        Alist
+                    &lt;/a&gt;
+                &lt;/span&gt;
+    &lt;br /&gt;
+    &lt;!--添加一个访问量--&gt;
+    &lt;span&gt;
+                    本&quot;&lt;span style=&quot;color: rgb(13, 109, 252); font-weight: bold;&quot;&gt;&lt;a href=&quot;#&quot;&gt;目录&lt;/a&gt;&lt;/span&gt;&quot;访问量 &lt;span id=&quot;busuanzi_value_page_pv&quot; style=&quot;color: rgb(13, 109, 252); font-weight: bold;&quot;&gt;&lt;/span&gt; 次 本站总访问量 &lt;span id=&quot;busuanzi_value_site_pv&quot; style=&quot;color: rgb(13, 109, 252); font-weight: bold;&quot;&gt;&lt;/span&gt;                次 本站总访客数 &lt;span id=&quot;busuanzi_value_site_uv&quot; style=&quot;color: rgb(13, 109, 252); font-weight: bold;&quot;&gt;&lt;/span&gt; 人
+                &lt;/span&gt;
+                &lt;br /&gt;
+    &lt;!--添加备案信息--&gt;
+                &lt;span class=&quot;nav-item&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;https://beian.miit.gov.cn/#/Integrated/index&quot; target=&quot;_blank&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-shield-check&quot; style=&quot;color:#409EFF;&quot; aria-hidden=&quot;true&quot;&gt;
+                        &lt;/i&gt;
+                        冀ICP备2222000777号
+                    &lt;/a&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/center&gt;
+        &lt;br /&gt;
+        &lt;br /&gt;
+    &lt;/div&gt;
+
+
+
+    &lt;!--一言API--&gt;
+    &lt;script src=&quot;https://v1.hitokoto.cn/?encode=js&amp;select=%23hitokoto&quot; defer&gt;&lt;/script&gt;
+&lt;!--延迟加载范围到这里结束--&gt;
+&lt;/div&gt;
+&lt;!--延迟加载配套使用JS--&gt;
+&lt;script&gt;
+    let interval = setInterval(() =&gt; {
+        if (document.querySelector(&quot;.footer&quot;)) {
+            document.querySelector(&quot;#customize&quot;).style.display = &quot;&quot;;
+            clearInterval(interval);
+        }
+    }, 200);
+&lt;/script&gt;
+
+&lt;!-- 渐变背景初始化,如果要使用渐变背景把下面的那一行注释去掉即可--&gt;
+&lt;!-- 下面的几行都是渐变的一套,自定义头部内还有一个关联的自定义CSS --&gt;
+&lt;!--&lt;canvas id=&quot;canvas-basic&quot;&gt;&lt;/canvas&gt; --&gt;
+&lt;script src=&quot;https://npm.elemecdn.com/granim@2.0.0/dist/granim.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var granimInstance = new Granim({
+    element: '#canvas-basic',
+    direction: 'left-right',
+    isPausedWhenNotInView: true,
+    states : {
+        &quot;default-state&quot;: {
+            gradients: [
+                ['#a18cd1', '#fbc2eb'],
+                 ['#fff1eb', '#ace0f9'],
+                 ['#d4fc79', '#96e6a1'],
+                 ['#a1c4fd', '#c2e9fb'],
+                 ['#a8edea', '#fed6e3'],
+                 ['#9890e3', '#b1f4cf'],
+                 ['#a1c4fd', '#c2e9fb'],
+                 ['#fff1eb', '#ace0f9']
+
+            ]
+        }
+    }
+});
+&lt;/script&gt;
+
+&lt;!--鼠标点击效果--&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js&quot;&gt;&lt;/script&gt;
+
+</code></pre>
+<CodePen class="h-300px" name="Margin Collapse" id="WqXGpo" user="YunYouJun" tab="html,result" /><br/><p>访问 <a href="https://www.mot.cloudns.biz/posts/alist" target="_blank">https://www.mot.cloudns.biz/posts/alist</a> 查看原文。</p>]]></content>
+        <author>
+            <name>咲夜</name>
+            <email>d342jxc@gmail.com</email>
+            <uri>https://www.mot.cloudns.biz</uri>
+        </author>
+        <published>2025-03-28T19:55:31.329Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[alist头部美化]]></title>
+        <id>https://www.mot.cloudns.biz/posts/alist2</id>
+        <link href="https://www.mot.cloudns.biz/posts/alist2"/>
+        <updated>2025-03-24T11:33:39.000Z</updated>
+        <content type="html"><![CDATA[<h2>alist 头部美化代码</h2>
+<pre><code class="language-html">&lt;!--Alist V3建议添加的，已经默认添加了，如果你的没有建议加上--&gt;
+&lt;script src=&quot;https://polyfill.io/v3/polyfill.min.js?features=String.prototype.replaceAll&quot;&gt;&lt;/script&gt;
+
+&lt;!--引入字体，全局字体使用--&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://npm.elemecdn.com/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css&quot; /&gt;
+
+&lt;!--评论系统使用的js--&gt;
+&lt;script src='https://unpkg.com/valine/dist/Valine.min.js'&gt;&lt;/script&gt;
+
+&lt;!--不蒜子计数器--&gt;
+&lt;script async src=&quot;https://busuanzi.icodeq.com/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Font6，自定义底部使用和看板娘使用的图标和字体文件--&gt;
+&lt;link type='text/css' rel=&quot;stylesheet&quot; href=&quot;https://npm.elemecdn.com/font6pro@6.3.0/css/fontawesome.min.css&quot; media='all'&gt;
+&lt;link href=&quot;https://npm.elemecdn.com/font6pro@6.3.0/css/all.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;!--音乐播放器所用的文件--&gt;
+&lt;!-- require APlayer --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css&quot;&gt;
+&lt;script src=&quot;https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js&quot;&gt;&lt;/script&gt;
+&lt;!-- require MetingJS --&gt;
+&lt;script src=&quot;https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;style&gt;
+/* 去除通知栏 右上角 X */
+ .notify-render .hope-close-button {
+    display: none;
+}
+
+/* 此选项两处CSS 在v3.31.0中已优化 滚动显示 和 右下角设置网格模式尺寸大小 */
+/* 文字超长自动换行 */
+/*.name-box .name {
+    white-space: unset !important;
+    overflow: unset !important;
+}*/
+/* 缩略图图片变大 代码中的160px 自己改 现在是注释状态若需要自行解除注释 */
+/*.obj-box &gt; div {
+grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
+}
+.obj-box &gt; div .item-thumbnail{
+  height: 100px;
+}*/
+
+/*
+  图片API用法点进去都会有食用说明的,API来自网络不保证实效性稳定性自己测试
+  樱花：https://www.dmoe.cc
+  夏沫：https://cdn.seovx.com
+  搏天：https://api.btstu.cn/doc/sjbz.php
+  姬长信：https://github.com/insoxin/API
+  小歪：https://api.ixiaowai.cn/
+  保罗：https://api.paugram.com
+  墨天逸：https://api.mtyqx.cn
+  岁月小筑：https://img.xjh.me
+  东方Project：https://img.paulzzh.com
+  */
+
+/*白天背景图*/
+ .hope-ui-light {
+    background-image: url(&quot;http://pic.rmb.bdstatic.com/bjh/7569b014a1abafd5481298763300ae1d.png&quot;) !important;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+    background-position-x:center;
+}
+/*夜间背景图*/
+ .hope-ui-dark {
+    background-image: url(&quot;http://pic.rmb.bdstatic.com/bjh/ebe942a9de49856f389c65f25a338335.png&quot;) !important;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+    background-position-x:center;
+}
+/*主列表白天模式透明*/
+ .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-igScBhH-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+/*主列表夜间模式透明*/
+ .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-iigjoxS-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+/*readme白天模式透明*/
+ .hope-c-PJLV.hope-c-PJLV-ikSuVsl-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+/*readme夜间模式透明*/
+ .hope-c-PJLV.hope-c-PJLV-iiuDLME-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+
+/*顶部右上角切换按钮透明*/
+ .hope-ui-light .hope-c-ivMHWx-hZistB-cv.hope-icon-button {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.hope-ui-dark .hope-c-ivMHWx-hZistB-cv.hope-icon-button {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+
+/*右下角侧边栏按钮透明 第一个是白天 第二个是夜间*/
+ .hope-ui-light .hope-c-PJLV-ijgzmFG-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.hope-ui-dark .hope-c-PJLV-ijgzmFG-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+
+/*白天模式代码块透明*/
+ .hope-ui-light pre {
+    background-color: rgba(255, 255, 255, 0.1)!important;
+}
+/*夜间模式代码块透明*/
+ .hope-ui-dark pre {
+    background-color: rgba(255, 255, 255, 0)!important;
+}
+
+/*左侧侧边栏目录*/
+/*白天模式*/
+ .hope-ui-light .hope-c-PJLV-ieGWMbI-css {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+/*夜间模式*/
+ .hope-ui-dark .hope-c-PJLV-ieGWMbI-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+
+/* 返回顶部 */
+ .hope-c-PJLV-ihVEsOa-css {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+.hope-ui-dark .hope-c-PJLV-ihVEsOa-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+
+/*正常情况未使用吸附功能*/
+/*顶部*/
+ .hope-c-PJLV-ikaMhsQ-css {
+    background: rgba(255, 255, 255, 0) !important;
+}
+/*导航条*/
+/*白天模式*/
+ .hope-ui-light .hope-c-PJLV-idaeksS-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+/*夜间模式*/
+ .hope-ui-dark .hope-c-PJLV-idaeksS-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+/* 吸附到页面顶部 */
+/*顶部*/
+ .hope-c-PJLV-icWrYmg-css {
+    background: rgba(255, 255, 255, 0) !important;
+}
+/*导航条*/
+ .hope-c-PJLV-icKsjdm-css::after {
+    background: rgba(255, 255, 255, 0) !important;
+}
+/*白天模式*/
+ .hope-ui-light .hope-c-PJLV-icKsjdm-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+/*夜间模式*/
+ .hope-ui-dark .hope-c-PJLV-icKsjdm-css {
+    background-color:rgb(0 0 0 / 50%) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+
+/*仅吸附导航栏*/
+/*导航条*/
+ .hope-c-PJLV-ifdXShc-css::after {
+    background: rgba(255, 255, 255, 0) !important;
+}
+/*白天模式*/
+ .hope-ui-light .hope-c-hrsMRY {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+/*夜间模式*/
+ .hope-ui-dark .hope-c-hrsMRY {
+    background-color:rgb(0 0 0 / 50%) !important;
+    border-radius: var(--hope-radii-xl) !important;
+}
+
+/*底部CSS，.App .table这三个一起的*/
+ dibu {
+    border-top: 0px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.App {
+    min-height: 85vh;
+}
+.table {
+    margin: auto;
+}
+/*去掉底部*/
+ .footer {
+    display: none !important;
+}
+/*全局字体*/
+ * {
+    font-family:LXGW WenKai
+}
+* {
+    font-weight:bold
+}
+body {
+    font-family: LXGW WenKai;
+}
+
+/*以下为评论系统专用*/
+/*适配大小契合度*/
+ .newValine {
+    width: min(96%, 940px);
+    flex-direction: column;
+    row-gap: var(--hope-space-2);
+    border-radius: var(--hope-radii-xl);
+    padding: var(--hope-space-2);
+    box-shadow: var(--hope-shadows-lg);
+}
+/*评论区 - 白天模式透明度*/
+ .hope-ui-light .newValine {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+/*评论区 - 夜间模式透明度*/
+ .hope-ui-dark .newValine {
+    background-color:rgb(0 0 0 / 50%) !important;
+}
+/*输入栏里面跳舞的小人背景图*/
+ .vedit {
+    background-image:url(&quot;https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif&quot;);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:right bottom;
+    transition:all 0.25s ease-in-out 0s;
+}
+textarea#comment-textarea:focus {
+    background-position-y:120px;
+    transition:all 0.25s ease-in-out 0s;
+}
+
+/*渐变背景CSS*/
+ #canvas-basic {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -999;
+}
+
+/*音乐播放器进一步进行隐藏*/
+/* 需要就加不需要就不用加 */
+ .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+    left: -66px !important;
+}
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+    left: 0 !important;
+}
+&lt;/style&gt;
+
+&lt;!--看板娘 -自定义大小，隐藏对话框和对话框高度--&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+  #waifu #live2d {
+    height: 350px!important;
+    width: 350px!important;
+  }
+  #waifu-tips {
+    top: -60px;
+    /*display:none !important;隐藏对话框*/
+  }
+&lt;/style&gt;
+
+&lt;!--看板娘加载指定模型--&gt;
+&lt;script&gt;
+  localStorage.setItem('modelId', '7');
+  localStorage.setItem('modelTexturesId', '3');
+&lt;/script&gt;
+
+&lt;!--以下四个两个主用两个备用的,选一条使用即可--&gt;
+&lt;!--自己选左右--&gt;
+&lt;!--&lt;script src=&quot;https://api.itggg.cn/live2dnew/left/index.js&quot;&gt;&lt;/script&gt;--&gt;
+&lt;script src=&quot;https://api.itggg.cn/live2dnew/right/index.js&quot;&gt;&lt;/script&gt;
+
+&lt;!--备用的，自己选左右--&gt;
+&lt;script src=&quot;https://luluossfile.lulufind.com/work/teacher_u20221017ce7b5991_1666420843832_19934968_file.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://luluossfile.lulufind.com/work/teacher_u20221017bb6d7454_1666420849979_19584065_file.js&quot;&gt;&lt;/script&gt;
+
+&lt;style&gt;
+/*白天模式 搜索主体+毛玻璃*/
+.hope-ui-light .hope-c-PJLV-iiBaxsN-css{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
+}
+
+/*白天模式 搜索栏输入框+毛玻璃*/
+.hope-ui-light .hope-c-kvTTWD-hYRNAb-variant-filled{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
+}
+
+/*白天模式 搜索按钮+毛玻璃*/
+.hope-ui-light .hope-c-PJLV-ikEIIxw-css{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
+   padding: var(--hope-space-1)!important;
+}
+
+/*夜间模式搜索主体+毛玻璃*/
+.hope-ui-dark .hope-c-PJLV-iiBaxsN-css{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+}
+
+/*夜间模式搜索栏+毛玻璃*/
+.hope-ui-dark .hope-c-kvTTWD-hYRNAb-variant-filled{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+}
+
+/*夜间模式 搜索按钮+毛玻璃*/
+.hope-ui-dark .hope-c-PJLV-ikEIIxw-css{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+    padding: var(--hope-space-1)!important;
+}
+&lt;/style&gt;
+
+&lt;!--较为个性化的鼠标指针样式，可结合个人需要自行修改--&gt;
+&lt;style&gt;
+  body {
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221021b3a89013_1666841028833_10660845_file.cur), default;
+  }
+  select{
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u2021090299b56677_1666842679271_10490748_file.cur), pointer;
+  }
+  button,a:hover{
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221017ac9f1124_1666842626270_11086578_file.cur), pointer;
+  }
+  input{
+    cursor:url(http://luluossfile.lulufind.com/work/teacher_u2021090299b56677_1666842633386_14976764_file.cur), text;
+  }
+  textarea,input:focus{
+    cursor:url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842640146_15845280_file.cur), text;
+  }
+  code{
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221021b3a89013_1666842646779_15864973_file.cur), default;
+  }
+  pre&gt;code{
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842653500_10010236_file.cur), default;
+  }
+&lt;/style&gt;
+</code></pre>
+<CodePen class="h-300px" name="Margin Collapse" id="WqXGpo" user="YunYouJun" tab="html,result" /><br/><p>访问 <a href="https://www.mot.cloudns.biz/posts/alist2" target="_blank">https://www.mot.cloudns.biz/posts/alist2</a> 查看原文。</p>]]></content>
+        <author>
+            <name>咲夜</name>
+            <email>d342jxc@gmail.com</email>
+            <uri>https://www.mot.cloudns.biz</uri>
+        </author>
+        <published>2025-03-28T19:55:31.329Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Let’s Encrypt 免费申请泛域名 SSL 证书]]></title>
+        <id>https://www.mot.cloudns.biz/posts/domainssl</id>
+        <link href="https://www.mot.cloudns.biz/posts/domainssl"/>
+        <updated>2025-03-27T11:18:39.000Z</updated>
+        <content type="html"><![CDATA[<h2>使用 <a href="http://acme.sh">acme.sh</a> 设置 SSL 证书</h2>
+<p>本指南提供了使用 <code>acme.sh</code> 脚本设置 SSL 证书的分步说明，其中 Let's Encrypt 为默认证书颁发机构 (CA)。它包括用于安装、配置和颁发根域和通配符域证书的命令。</p>
+<h2>步骤概述</h2>
+<ol>
+<li><strong>安装 <a href="http://acme.sh">acme.sh</a></strong>：下载并安装 <code>acme.sh</code> 脚本。提供用于接收通知的电子邮件地址。</li>
+</ol>
+<pre><code class="language-bash">curl https://get.acme.sh | sh -s email=d342jxc@gmail.com
+</code></pre>
+<ol start="2">
+<li><strong>设置默认 CA</strong>：配置 <code>acme.sh</code> 使用 Let's Encrypt 作为默认 CA。</li>
+</ol>
+<pre><code class="language-bash">acme.sh --set-default-ca --server letsencrypt
+</code></pre>
+<ol start="3">
+<li><strong>别名配置</strong>：为<code>acme.sh</code>添加别名，以简化命令使用并重新加载shell配置。</li>
+</ol>
+<pre><code class="language-bash">echo 'alias acme.sh=~/.acme.sh/acme.sh' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<ol start="4">
+<li><strong>Cloudflare API 凭证</strong>：添加 Cloudflare API 凭证（<code>CF_Key</code> 和 <code>CF_Email</code>）以启用基于 DNS 的域验证。</li>
+</ol>
+<pre><code class="language-bash">export CF_Key=&quot;xxx&quot;
+export CF_Email=&quot;xxx@gmail.com&quot;
+</code></pre>
+<ol start="5">
+<li><strong>颁发证书</strong>：使用 <code>--issue</code> 命令通过 Cloudflare DNS 验证为根域和通配符子域生成 SSL 证书。</li>
+</ol>
+<pre><code class="language-bash">acme.sh --issue --dns dns_cf -d example.com -d *.example.com
+</code></pre>
+<ol start="6">
+<li><strong>安装证书</strong>：将生成的证书安装到指定路径，并为Nginx Web服务器配置重新加载命令。</li>
+</ol>
+<pre><code class="language-bash">acme.sh --install-cert -d 'example.com' \
+--key-file       /etc/nginx/ssl/example.com/example.com.key  \
+--fullchain-file /etc/nginx/ssl/example.com/example.com.crt \
+--reloadcmd     &quot;service nginx force-reload&quot;
+</code></pre>
+<pre><code class="language-bash">acme.sh --install-cert -d '*.example.com' \
+--key-file       /etc/nginx/ssl/example.com/example.com.key  \
+--fullchain-file /etc/nginx/ssl/example.com/example.com.crt \
+--reloadcmd     &quot;service nginx force-reload&quot;
+</code></pre>
+<h2>注意事项</h2>
+<ul>
+<li>将 <code>xxx</code> 和 <code>xxx@gmail.com</code> 替换为您的实际 Cloudflare API 密钥和电子邮件地址。</li>
+<li>将 <code>example.com</code> 替换为您的实际域名。</li>
+<li>确保密钥和证书文件的指定路径与您的 Nginx 配置相匹配。</li>
+<li><code>--reloadcmd</code> 选项可确保在证书续订后自动重新加载 Nginx。</li>
+</ul>
+<p>此设置可确保根域和所有子域的安全 HTTPS 连接。</p>
+<br/><p>访问 <a href="https://www.mot.cloudns.biz/posts/domainssl" target="_blank">https://www.mot.cloudns.biz/posts/domainssl</a> 查看原文。</p>]]></content>
+        <author>
+            <name>咲夜</name>
+            <email>d342jxc@gmail.com</email>
+            <uri>https://www.mot.cloudns.biz</uri>
+        </author>
+        <published>2025-03-28T19:55:31.329Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[KED neno 常用指令]]></title>
+        <id>https://www.mot.cloudns.biz/posts/ked</id>
+        <link href="https://www.mot.cloudns.biz/posts/ked"/>
+        <updated>2025-03-27T11:02:39.000Z</updated>
+        <content type="html"><![CDATA[<h2>更新软件源</h2>
+<pre><code class="language-bash">sudo pkcon refresh &amp;&amp; sudo pkcon update
+</code></pre>
+<h2>垃圾清理</h2>
+<pre><code class="language-bash">sudo apt autoremove
+</code></pre>
+<pre><code class="language-bash">sudo apt-get --fix-broken install
+</code></pre>
+<h2>pkcon 取消代理</h2>
+<p><a href="https://www.jianshu.com/p/4bd3c3be978f">原文参考地址</a></p>
+<p>原来这个服务把代理藏在一个Sqlite的数据库里，在这里：</p>
+<p>/var/lib/PackageKit/transactions.db</p>
+<ul>
+<li>安装数据库可视化工具</li>
+</ul>
+<pre><code class="language-bash">sudo apt install sqlitebrowser
+</code></pre>
+<ul>
+<li>编辑数据库</li>
+</ul>
+<pre><code class="language-bash">sudo sqlitebrowser /var/lib/PackageKit/transactions.db
+</code></pre>
+<ul>
+<li>删除代理proxy</li>
+<li>最后重启pkcon</li>
+</ul>
+<pre><code class="language-bash">sudo systemctl restart packagekit.service
+</code></pre>
+<h2>修改为root登录</h2>
+<pre><code class="language-bash">sudo nano /etc/pam.d/sddm
+</code></pre>
+<p>将第一个注释，第二个取消注释</p>
+<blockquote>
+<p>#auth    required        pam_succeed_if.so user != root quiet_success<br>
+auth    sufficient      pam_succeed_if.so user ingroup nopasswdlogin</p>
+</blockquote>
+<h2>安装中文语包和繁体包</h2>
+<pre><code class="language-bash">sudo apt-get install language-pack-gnome-zh-hans language-pack-kde-zh-hans language-pack-zh-hans language-pack-gnome-zh-hant language-pack-kde-zh-hant language-pack-zh-hant
+</code></pre>
+<h2>fcitx</h2>
+<pre><code class="language-bash">sudo apt install fcitx5 fcitx5-chewing fcitx5-chinese-addons fcitx5-rime
+</code></pre>
+<h2>安装语言支持</h2>
+<pre><code class="language-bash">sudo apt-get install language-selector-gnome
+</code></pre>
+<h2>ui</h2>
+<pre><code class="language-bash">sudo apt-get install fcitx-ui-qimpanel
+</code></pre>
+<br/><p>访问 <a href="https://www.mot.cloudns.biz/posts/ked" target="_blank">https://www.mot.cloudns.biz/posts/ked</a> 查看原文。</p>]]></content>
+        <author>
+            <name>咲夜</name>
+            <email>d342jxc@gmail.com</email>
+            <uri>https://www.mot.cloudns.biz</uri>
+        </author>
+        <published>2025-03-28T19:55:31.329Z</published>
+    </entry>
+</feed>
