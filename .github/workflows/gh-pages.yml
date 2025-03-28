@@ -39,7 +39,7 @@ jobs:
         run: npm install -g wrangler
 
       - name: 🚀 Deploy to Cloudflare Pages
-        run: wrangler pages deploy ./dist --project-name blog --branch main
+        run: npx wrangler deploy --name blog --compatibility-date 2025-01-08 --assets=./dist
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
