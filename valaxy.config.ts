@@ -81,7 +81,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 标题，默认每个字分割
-      title: '咲夜Sakuyaの的小站',
+      title: ['咲','夜','Sakuya','の','的','小','站'],
       // 首页下方的动态云
       cloud: {
         enable: true,
@@ -176,9 +176,9 @@ export default defineValaxyConfig<UserThemeConfig>({
         // 图标颜色
         color: 'aqua',
         // 文章链接
-        url: '/archives',
+        url: '/',
         // 图标标题
-        title: '档案',
+        title: '回到首页',
       },
       // 框架和主题来源信息显示
       powered: false,
