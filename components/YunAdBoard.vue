@@ -6,7 +6,7 @@ const { t } = useI18n()
 <template>
   <YunCard>
     <RouterLink to="/about/adb">
-      {{ t('post.adb') }}
+      {{ t('about.adb') }}
     </RouterLink>
   </YunCard>
 </template>
