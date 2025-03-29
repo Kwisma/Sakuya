@@ -35,12 +35,12 @@ export default defineSiteConfig({
     // 个人状态
     status: {
       // 状态的 Emoji 表示
-      emoji: '👨‍💻',
+      emoji: '🩷',
       // 当鼠标悬浮在图标上时显示
       message: '时光匆匆，珍惜当下',
     },
     // 作者的个人简介
-    intro: '热爱生活，热爱代码',
+    intro: '热爱二次元，喜欢分享生活点滴与技术心得。',
   },
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
