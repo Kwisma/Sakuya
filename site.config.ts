@@ -75,7 +75,16 @@ export default defineSiteConfig({
       // 社交链接的颜色
       color: 'black',
     },
-
+    {
+      // 社交链接的名称
+      name: 'telegram',
+      // 社交链接的 URL
+      link: 'https//t.me/KDYgMJqHBwsi755auLZD6nN477C7hQXQ',
+      // 社交链接的图标
+      icon: 'i-ri-telegram-line',
+      // 社交链接的颜色
+      color: 'black',
+    }
   ],
   // 搜索功能
   search: {

@@ -3,10 +3,10 @@ title: 关于此站
 icon: i-ri-information-line
 nav: false
 date: 2025-03-28 19:24:19
-cover: https://cdn.yuumi.link/images/settings/yuumi.png
+cover: /back/xiaoyuan.webp
 ---
 
-## 未解决问题：
+## 未解决问题
 
 - 暂时没有
 

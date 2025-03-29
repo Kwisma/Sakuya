@@ -36,7 +36,7 @@
   // 页脚渐变色
   .yun-footer-gradient {
     height: 130px;
-    background: linear-gradient(to right, rgba(228, 170, 255, 0.2) 0, rgba(87, 14, 90, 0.096) 100%);
+    background: linear-gradient(to right, rgba(228, 170, 255, 0.089) 0, rgba(87, 14, 90, 0.048) 100%);
   }
 
   //顶栏背景
@@ -94,4 +94,8 @@ button {
 
 input {
   cursor: var(--cursor-text), text;
+}
+
+text-red-500 {
+  color: #ff0000;
 }

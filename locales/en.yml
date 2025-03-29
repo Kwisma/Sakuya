@@ -2,3 +2,5 @@ post:
   meta:
     text: Total views of this post
     ci: times
+about:
+  adb: Advertisement section

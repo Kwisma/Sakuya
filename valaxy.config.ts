@@ -81,7 +81,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 标题，默认每个字分割
-      title: ['咲','夜','Sakuya','の','的','小','站'],
+      title: ['咲', '夜', 'Sakuya', 'の', '的', '小', '站'],
       // 首页下方的动态云
       cloud: {
         enable: true,
@@ -139,10 +139,10 @@ export default defineValaxyConfig<UserThemeConfig>({
         active: 'text-red-500',
       },
       {
-        icon: 'i-ri-hq-fill',
+        icon: 'i-ri-group-line',
         link: '/links/',
         text: '伙伴',
-        active: 'text-red-500',
+        active: 'text-red-400',
       },
     ],
     // 页面，显示在社交导航栏下方
@@ -151,7 +151,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         name: '我的小伙伴们',
         url: '/links/',
         icon: 'i-ri-account-circle-fill',
-        color: 'Cyan',
+        color: 'dodgerblue',
       },
     ],
     // 侧边栏配置
@@ -313,14 +313,14 @@ export default defineValaxyConfig<UserThemeConfig>({
   },
 
   vite: {
-    ssgOptions:{
+    ssgOptions: {
       // ViteSSGOptions 配置项
       script: 'async', // 设置生成的脚本标签的类型，默认为 'async'
       format: 'esm', // 设置生成的 HTML 格式化方式，可选 'minify' 或 'none'
     }
   },
-  vue:{
-    isCustomElement:[]
+  vue: {
+    isCustomElement: []
   },
   // 设置 valaxy-addon-waline 配置项
   addons: [

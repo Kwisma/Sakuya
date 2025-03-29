@@ -2,12 +2,13 @@
 title: 关于我
 icon: i-ri-heart-line
 date: 2025-03-28 19:24:19
-cover: https://cdn.yuumi.link/images/settings/yuumi.png
+cover: /back/xiaoyuan.webp
 ---
 
 > ## Sakuya
+>
 > ---
-> **憧憬成为魔法少女吧！**
+> **为世间的美好而战**
 
 🌸东之魔法大学毕业
 
