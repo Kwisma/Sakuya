@@ -1,2 +1,4 @@
-button:
-  about: 关于
+post:
+  meta:
+    text: 本文总阅读量
+    ci: 次

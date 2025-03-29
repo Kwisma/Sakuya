@@ -1,2 +1,4 @@
-button:
-  about: About
+post:
+  meta:
+    text: Total views of this post
+    ci: times

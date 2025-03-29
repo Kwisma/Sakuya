@@ -21,29 +21,6 @@
   --cursor-default: url('https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur');
   --cursor-pointer: url('https://cdn.yunyoujun.cn/css/md-cursors/link.cur');
   --cursor-text: url('https://cdn.yunyoujun.cn/css/md-cursors/text.cur');
-}
-
-body {
-  cursor: var(--cursor-default), auto;
-}
-
-a {
-  cursor: var(--cursor-pointer), auto;
-
-  &:hover {
-    cursor: var(--cursor-pointer), auto;
-  }
-}
-
-button {
-  cursor: var(--cursor-pointer), pointer;
-}
-
-input {
-  cursor: var(--cursor-text), text;
-}
-
-:root {
 
   //主页标题
   .text-white {
@@ -52,14 +29,14 @@ input {
 
   // 页眉渐变色
   .yun-page-header-gradient {
-    background: linear-gradient(to right, rgba(255, 237, 170, 0.2) 0, rgba(255, 254, 173, 0.2) 100%);
+    background: linear-gradient(to right, rgba(170, 245, 255, 0.2) 0, rgba(173, 243, 255, 0.2) 100%);
     // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%);
   }
 
   // 页脚渐变色
   .yun-footer-gradient {
     height: 130px;
-    background: linear-gradient(to right, rgba(255, 237, 170, 0.2) 0, rgba(255, 254, 173, 0.2) 100%);
+    background: linear-gradient(to right, rgba(228, 170, 255, 0.2) 0, rgba(87, 14, 90, 0.096) 100%);
   }
 
   //顶栏背景
@@ -97,4 +74,24 @@ html.dark {
     height: 130px;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.2) 100%);
   }
+}
+
+body {
+  cursor: var(--cursor-default), auto;
+}
+
+a {
+  cursor: var(--cursor-pointer), auto;
+
+  &:hover {
+    cursor: var(--cursor-pointer), auto;
+  }
+}
+
+button {
+  cursor: var(--cursor-pointer), pointer;
+}
+
+input {
+  cursor: var(--cursor-text), text;
 }
