@@ -275,6 +275,29 @@ export default defineValaxyConfig<UserThemeConfig>({
     addonWaline({
       // Waline 配置项，参考 https://waline.js.org/reference/client/props.html
       serverURL: 'https://boly-orpin.vercel.app/',
+      locale: {
+        level0: '炼体',
+        level1: '炼气',
+        level2: '筑基',
+        level3: '金丹',
+        level4: '元婴',
+        level5: '化神',
+        placeholder: "填写qq邮箱或点击登录，可以展示个人头像~详情请见【留言板】板块",
+      },
+      comment: true,
+      pageview: true,
+      highlighter: true,
+      texRenderer: true,
+      reaction: [],
+      emoji: [
+        '//unpkg.com/@waline/emojis@1.2.0/alus',
+        '//unpkg.com/@waline/emojis@1.2.0/bilibili',
+        '//unpkg.com/@waline/emojis@1.2.0/bmoji',
+        '//unpkg.com/@waline/emojis@1.2.0/qq',
+        '//unpkg.com/@waline/emojis@1.2.0/tieba',
+        '//unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+        '//unpkg.com/@waline/emojis@1.2.0/weibo',
+      ],
     }),
     // Live2d看板娘
     addonLive2d({
