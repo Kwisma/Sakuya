@@ -73,7 +73,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 烟花颜色
-      colors: ['#ff0000', '#00ff00', '#0000ff'],
+      colors: ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#8b00ff'],
     },
     // 导航栏 位于页面右上角
     nav: [
@@ -266,6 +266,14 @@ export default defineValaxyConfig<UserThemeConfig>({
   },
   vue: {
     isCustomElement: []
+  },
+  groupIcons: {
+    customIcon: {
+      nodejs: 'vscode-icons:file-type-node',
+      playwright: 'vscode-icons:file-type-playwright',
+      typedoc: 'vscode-icons:file-type-typedoc',
+      eslint: 'vscode-icons:file-type-eslint',
+    },
   },
   // 设置 valaxy-addon-waline 配置项
   addons: [
