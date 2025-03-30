@@ -1,7 +1,7 @@
 post:
   meta:
-    text: Total views of this post
-    ci: times
+    pv: Total post views
+    pv-z: times
 about:
   adb: Advertisement space for rent
   pv: Total site visits

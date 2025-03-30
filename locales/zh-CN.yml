@@ -1,7 +1,7 @@
 post:
   meta:
-    text: 本文总阅读量
-    ci: 次
+    pv: 本文总阅读量
+    pv-z: 次
 about:
   adb: 广告位招租
   pv: 本站总访问量

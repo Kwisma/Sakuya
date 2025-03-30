@@ -7,62 +7,7 @@ import { addonLive2d } from 'valaxy-addon-live2d'
 const safelist = [
   'i-ri-home-line',
 ]
-/**
- * 定义使用特定主题及其设置的 Valaxy 博客配置。
- *
- * @template UserThemeConfig - 用户定义的主题配置的类型。
- *
- * @property theme - 指定要使用的主题名称。
- * @property themeConfig - 包含与所选主题相关的配置选项。
- * @property themeConfig.banner - 网站上显示的横幅配置。
- * @property themeConfig.banner.enable - 决定是否启用横幅。
- * @property themeConfig.banner.title - 横幅上显示的标题。
- * @property themeConfig.pages - 自定义页面及其相关配置的数组。
- * @property themeConfig.pages[].name - 自定义页面的名称。
- * @property themeConfig.pages[].url - 自定义页面的 URL 路径。
- * @property themeConfig.pages[].icon - 与自定义页面关联的图标。
- * @property themeConfig.pages[].color - 与自定义页面关联的颜色。
- * @property themeConfig.footer - 网站底部区域的配置。
- * @property themeConfig.footer.since - 网站自某年开始活跃。
- * @property themeConfig.footer.beian - ICP 备案信息的配置。
- * @property themeConfig.footer.beian.enable - 决定是否显示 ICP 备案信息。
- * @property themeConfig.footer.beian.icp - ICP 备案号。
- * @property markdown - Markdown 渲染器的配置。
- * @property markdown.theme - 指定 Markdown 渲染的浅色和深色模式的主题样式。
- * @property markdown.theme.light - 浅色模式使用的主题。
- * @property markdown.theme.dark - 深色模式使用的主题。
- * @property markdown.blocks - 自定义 Markdown 提示块（如提示、警告、危险等）的样式和内容。
- * @property markdown.blocks.tip - “提示”块的配置。
- * @property markdown.blocks.tip.icon - “提示”块显示的图标。
- * @property markdown.blocks.tip.text - “提示”块的默认文本。
- * @property markdown.blocks.tip.langs - “提示”块的语言特定文本。
- * @property markdown.blocks.warning - “警告”块的配置。
- * @property markdown.blocks.warning.icon - “警告”块显示的图标。
- * @property markdown.blocks.warning.text - “警告”块的默认文本。
- * @property markdown.blocks.danger - “危险”块的配置。
- * @property markdown.blocks.danger.icon - “危险”块显示的图标。
- * @property markdown.blocks.danger.text - “危险”块的默认文本。
- * @property markdown.blocks.info - “信息”块的配置。
- * @property markdown.blocks.info.text - “信息”块的默认文本。
- * @property markdown.codeTransformers - 用于处理代码块的代码转换器数组。
- * @property markdown.codeTransformers[].name - 代码转换器的名称。
- * @property markdown.codeTransformers[].preprocess - 在代码高亮处理之前预处理原始输入代码的函数。
- * @property markdown.codeTransformers[].tokens - 转换代码标记列表的函数。
- * @property markdown.codeTransformers[].root - 转换整个 HAST 树的函数。
- * @property markdown.codeTransformers[].pre - 转换 `<pre>` 元素的函数。
- * @property markdown.codeTransformers[].code - 转换 `<code>` 元素的函数。
- * @property markdown.codeTransformers[].line - 转换每个 `<span class="line">` 元素的函数。
- * @property markdown.codeTransformers[].span - 转换每个 `<span>` 元素的函数。
- * @property markdown.codeTransformers[].postprocess - 转换最终 HTML 字符串的函数。
- * @property markdown.config - 配置 Markdown 解析器的函数。
- * @property unocss - UnoCSS 的配置。
- * @property unocss.safelist - UnoCSS 的安全类名列表。
- * @property components - 自定义组件的配置。
- * @property vite - Vite 的配置。
- * @property addons - 用于扩展 Valaxy 功能的插件数组。
- * @property addons[].addonWaline - Waline 评论系统的配置。
- * @property addons[].addonWaline.serverURL - Waline 后端的服务器 URL。
- */
+
 export default defineValaxyConfig<UserThemeConfig>({
   // 主题名称
   theme: 'yun',
@@ -352,6 +297,6 @@ export default defineValaxyConfig<UserThemeConfig>({
         },
       },
       enableLive2D: 'all',
-    })
+    }),
   ],
 })
