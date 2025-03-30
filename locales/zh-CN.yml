@@ -3,4 +3,9 @@ post:
     text: 本文总阅读量
     ci: 次
 about:
-  adb: 广告板块
+  adb: 广告位招租
+  pv: 本站总访问量
+  pv-z: 次
+  uv: 本站访客数
+  uv-z: 人次
+  time: 本站已运行

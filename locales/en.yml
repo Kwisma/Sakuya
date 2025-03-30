@@ -3,4 +3,9 @@ post:
     text: Total views of this post
     ci: times
 about:
-  adb: Advertisement section
+  adb: Advertisement space for rent
+  pv: Total site visits
+  pv-z: times
+  uv: Total site visitors
+  uv-z: visits
+  time: The site has been running
