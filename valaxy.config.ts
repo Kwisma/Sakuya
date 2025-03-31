@@ -107,13 +107,13 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 页面，显示在社交导航栏下方
     pages: [
       {
-        name: '友情链接',
+        name: '我的小伙伴们',
         url: '/links/',
         icon: 'i-ri-account-circle-fill',
         color: 'dodgerblue',
       },
       {
-        name: '老婆列表',
+        name: '我的老婆',
         url: '/girls/',
         icon: 'i-ri-women-line',
         color: 'hotpink',
