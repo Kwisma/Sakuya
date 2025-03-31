@@ -296,15 +296,9 @@ export default defineValaxyConfig<UserThemeConfig>({
       pageview: true,
       highlighter: true,
       texRenderer: true,
-      reaction: [],
+      reaction: true,
       emoji: [
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/alus',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/bilibili',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/bmoji',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/qq',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/tieba',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/tw-emoji',
-        'https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo',
+        'https://kwisma.github.io/alus/info.json',
       ],
     }),
     // Live2d看板娘
