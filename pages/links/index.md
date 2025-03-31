@@ -3,7 +3,7 @@ title: 我的小伙伴们
 keywords: 链接
 icon: i-ri-open-arm-line
 description: 咲夜の小伙伴们
-links: /links.json
+links: /links/links.json
 random: true
 nav: false
 toc: false
