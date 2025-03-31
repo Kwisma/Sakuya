@@ -25,7 +25,6 @@ useScriptTag('https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js')
     <a href="mailto:me@yunyoujun.cn" target="_blank">
       {{ t('about.adb') }}
     </a>
-    <div class="bootfmore"></div>
     <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
       id="2568697963"></meting-js>
   </YunFooter>
@@ -35,7 +34,7 @@ useScriptTag('https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js')
 // <!-- require APlayer -->
 @import url("https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css");
 
-.bootfmore {
+meting-js {
   margin-bottom: 50px;
 }
 </style>
