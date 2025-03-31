@@ -383,7 +383,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         'https://github.elemecdn.com/@waline/emojis@1.0.1/tw',
         'https://github.elemecdn.com/@waline/emojis@1.0.1/weibo',
       ],
-      cdn: '//github.elemecdn.com/',
+      // 浏览量
+      pageview: true,
+      // 评论数
+      comment: true,
+      //cdn
+      cdn: 'https://github.elemecdn.com/@waline/emojis@1.0.1/alus',
     }),
     // Live2d看板娘
     addonLive2d({
