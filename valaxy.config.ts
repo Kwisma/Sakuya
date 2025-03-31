@@ -16,7 +16,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 主题类型
     type: 'nimbo',
     // 目录标题
-    outlineTitle: '个人博客',
+    outlineTitle: '幻夜三响の个人博客',
     // 主题色配置
     colors: {
       primary: '#0078E7',
@@ -26,7 +26,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 标题，默认每个字分割
-      title: ['咲', '夜', 'Sakuya', 'の', '的', '小', '站'],
+      title: ['幻', '夜', '三', '响', 'の', '的', '小', '站'],
       // 首页下方的动态云
       cloud: {
         enable: true,
@@ -62,7 +62,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 网站公告配置
     notice: {
       // 是否启用
-      enable: true,
+      enable: false,
       // 是否在页面中隐藏
       hideInPages: true,
       // 公告内容
@@ -126,7 +126,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         title: '回到首页',
       },
       // 框架和主题来源信息显示
-      powered: false,
+      powered: true,
       // ICP 备案信息的配置。
       beian: {
         enable: true,

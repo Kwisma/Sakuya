@@ -17,15 +17,15 @@ export default defineSiteConfig({
   // 网站的完整 URL，用于生成 RSS 和静态站点
   url: 'https://www.mot.cloudns.biz',
   // 网站主标题
-  title: '咲夜の个人博客',
+  title: '幻夜三响の个人博客',
   // 网站副标题
-  subtitle: '如果生活还没能改变，那你已经失败了',
+  subtitle: '如果生活没能改变，那就改变生活',
   // 网站的描述信息，用于 SEO
-  description: '合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下',
+  description: '步行千里，始于足下',
   // 作者信息
   author: {
     // 作者的名字
-    name: '咲夜',
+    name: 'Phantom Night',
     // 作者的邮箱
     email: 'd342jxc@gmail.com',
     // 作者的网站
@@ -40,7 +40,7 @@ export default defineSiteConfig({
       message: '时光匆匆，珍惜当下',
     },
     // 作者的个人简介
-    intro: '热爱二次元，喜欢分享生活点滴与技术心得。',
+    intro: '热爱生活，喜欢分享生活点滴与技术心得。',
   },
   // 是否在文章中显示最后更新时间
   lastUpdated: true,

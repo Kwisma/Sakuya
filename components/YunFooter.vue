@@ -4,6 +4,10 @@ import YunFooter from 'valaxy-theme-yun/components/YunFooter.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 useScriptTag('https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js')
+// <!-- require APlayer -->
+useScriptTag('https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js')
+// <!-- require MetingJS -->
+useScriptTag('https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js')
 </script>
 <template>
   <YunFooter>
@@ -22,10 +26,15 @@ useScriptTag('https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js')
       {{ t('about.adb') }}
     </a>
     <div class="bootfmore"></div>
+    <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
+      id="2568697963"></meting-js>
   </YunFooter>
 
 </template>
-<style>
+<style lang="scss">
+// <!-- require APlayer -->
+@import url("https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css");
+
 .bootfmore {
   margin-bottom: 50px;
 }
