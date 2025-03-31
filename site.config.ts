@@ -128,7 +128,7 @@ export default defineSiteConfig({
     //文章的主题
     type: 'bilibili',
     // 摘要的格式类型
-    excerpt_type: 'md',
+    excerpt_type: 'html',
     // 是否启用 APlayer 音乐播放器
     aplayer: true,
   },

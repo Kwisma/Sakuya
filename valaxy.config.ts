@@ -6,7 +6,21 @@ import { addonLive2d } from 'valaxy-addon-live2d'
 // add icons what you will need
 const safelist = [
   'i-ri-home-line',
+  'i-ri-qq-line',
+  'i-ri-wechat-pay-line',
+  'i-ri-alipay-line',
 ]
+const colors = ['purple', 'green', 'blue', 'dark']
+colors.forEach((c) => {
+  safelist.push(...[
+    `border-${c}-300`,
+    `text-${c}-600`,
+    `hover:bg-${c}-600`,
+    `dark:text-${c}-300`,
+    `focus:ring-${c}-300`,
+  ])
+})
+
 
 export default defineValaxyConfig<UserThemeConfig>({
   // 主题名称
