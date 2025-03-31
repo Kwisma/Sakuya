@@ -298,7 +298,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       texRenderer: true,
       reaction: true,
       emoji: [
-        'https://kwisma.github.io/alus/info.json',
+        'https://kwisma.github.io/alus',
       ],
     }),
     // Live2d看板娘
