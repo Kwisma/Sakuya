@@ -79,9 +79,19 @@ export default defineSiteConfig({
       // 社交链接的名称
       name: 'telegram',
       // 社交链接的 URL
-      link: 'https//t.me/KDYgMJqHBwsi755auLZD6nN477C7hQXQ',
+      link: 'https://t.me/KDYgMJqHBwsi755auLZD6nN477C7hQXQ',
       // 社交链接的图标
       icon: 'i-ri-telegram-line',
+      // 社交链接的颜色
+      color: 'black',
+    },
+    {
+      // 社交链接的名称
+      name: 'E-Mail',
+      // 社交链接的 URL
+      link: 'mailto:admin@mot.cloudns.com',
+      // 社交链接的图标
+      icon: 'i-ri-mail-line',
       // 社交链接的颜色
       color: 'black',
     }
@@ -141,25 +151,25 @@ export default defineSiteConfig({
   },
   // 赞助 / 打赏
   sponsor: {
-    enable: false,
+    enable: true,
     title: '我很可爱，请给我钱！',
     description: '如果你也想支持我，想让我有动力写更多的文章，请考虑赞助我！',
     methods: [
       {
         name: '支付宝',
-        url: 'https://cdn.yunyoujun.cn/img/donate/alipay-qrcode.jpg',
+        url: '/qrcode/alipay.webp',
         color: '#00A3EE',
         icon: 'i-ri-alipay-line',
       },
       {
         name: 'QQ 支付',
-        url: 'https://cdn.yunyoujun.cn/img/donate/qqpay-qrcode.png',
+        url: '/qrcode/qqpay.webp',
         color: '#12B7F5',
         icon: 'i-ri-qq-line',
       },
       {
         name: '微信支付',
-        url: 'https://cdn.yunyoujun.cn/img/donate/wechatpay-qrcode.jpg',
+        url: '/qrcode/wechatpay.webp',
         color: '#2DC100',
         icon: 'i-ri-wechat-pay-line',
       },
