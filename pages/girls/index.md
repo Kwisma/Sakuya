@@ -1,7 +1,6 @@
 ---
 title: Lovely Girls
-date: 2019-01-07 11:17:35
-updated: 2022-05-12 11:17:35
+date: 2025-03-25 19:33:33
 # - name:
 #   avatar:
 #   from:
