@@ -138,7 +138,7 @@ export default defineSiteConfig({
   },
   // cdn 配置
   cdn: {
-    prefix: 'https://jsd.onmicrosoft.cn/'
+    prefix: 'https://jsd.onmicrosoft.cn/npm/'
   },
   // 文章底部版权信息
   license: {
