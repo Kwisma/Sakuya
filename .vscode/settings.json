@@ -1,5 +1,17 @@
 {
-  "cSpell.words": ["valaxy", "valaxyjs"],
+  "cSpell.words": [
+    "aplayer",
+    "bilibili",
+    "dodgerblue",
+    "hidpi",
+    "Lazyload",
+    "qqpay",
+    "qrcode",
+    "valaxy",
+    "valaxyjs",
+    "wechat",
+    "wechatpay"
+  ],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested",
   "i18n-ally.localesPaths": "locales",
