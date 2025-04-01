@@ -30,6 +30,3 @@ public/rss.atom
 
 # valaxy rss
 public/rss.json
-
-.valaxy
-.vscode
