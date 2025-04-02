@@ -17,15 +17,15 @@ export default defineSiteConfig({
   // 网站的完整 URL，用于生成 RSS 和静态站点
   url: 'https://www.mot.cloudns.biz',
   // 网站主标题
-  title: '幻夜三响の个人博客',
+  title: '悠梦君の的小站',
   // 网站副标题
   subtitle: '如果生活没能改变，那就改变生活',
   // 网站的描述信息，用于 SEO
-  description: '步行千里，始于足下',
+  description: '如果因为终有一死就放弃挣扎，那人类的一生也没有意义',
   // 作者信息
   author: {
     // 作者的名字
-    name: 'Phantom Night',
+    name: '悠梦君',
     // 作者的邮箱
     email: 'd342jxc@gmail.com',
     // 作者的网站
@@ -35,12 +35,12 @@ export default defineSiteConfig({
     // 个人状态
     status: {
       // 状态的 Emoji 表示
-      emoji: '🩷',
+      emoji: '🤔',
       // 当鼠标悬浮在图标上时显示
-      message: '时光匆匆，珍惜当下',
+      message: '思考',
     },
     // 作者的个人简介
-    intro: '热爱生活，喜欢分享生活点滴与技术心得。',
+    intro: '',
   },
   // 是否在文章中显示最后更新时间
   lastUpdated: true,

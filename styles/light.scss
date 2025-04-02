@@ -23,7 +23,8 @@
 
   //顶栏背景
   .bg-transparent {
-    background-color: #ffffff;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
   }
 
   //主页标题
@@ -55,6 +56,7 @@
 
   // 首页语录
   .say {
+    border-top: var(--va-border-width) solid var(--va-c-text-light);
     border-radius: 5px;
     /* 可选的圆角效果 */
     animation: border-marquee 5s linear infinite;

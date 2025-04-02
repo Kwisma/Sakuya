@@ -23,7 +23,8 @@ html.dark {
 
   //顶栏背景
   .bg-transparent {
-    background-color: #000000;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
   }
 
   //主页标题
@@ -55,6 +56,7 @@ html.dark {
 
   // 首页语录
   .say {
+    border-top: var(--va-border-width) solid var(--va-c-text-light);
     border-radius: 5px;
     /* 可选的圆角效果 */
     animation: border-marquee 5s linear infinite;

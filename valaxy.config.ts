@@ -30,7 +30,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 主题类型
     type: 'nimbo',
     // 目录标题
-    outlineTitle: '幻夜三响の个人博客',
+    outlineTitle: '悠梦君の个人博客',
     // 主题色配置
     colors: {
       primary: '#0078E7',
@@ -40,7 +40,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 标题，默认每个字分割
-      title: ['幻', '夜', '三', '响', 'の', '的', '小', '站'],
+      title: ['悠', '梦', '君', 'の', '的', '小', '站'],
       // 首页下方的动态云
       cloud: {
         enable: true,
