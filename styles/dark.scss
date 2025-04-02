@@ -1,20 +1,29 @@
 // 覆盖 Dark Mode
 html.dark {
-  // 黑夜模式下文章框的底色
-  --va-c-bg-light: rgba(59, 56, 56, 0.884);
-  // 主页背景
-  // --va-c-bg-soft: rgba(0, 0, 0, 0.9);
+  // 作者名
   --va-c-text: rgb(255, 255, 255);
 
+  // 滑动顶栏背景
+  .yun-nav-menu.play {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+  }
+
   // 主页背景
-  .bg-\$va-c-bg-soft {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(50px);
+  .yun-fullscreen-menu {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+  }
+
+  // 文章框的底色
+  .yun-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
   }
 
   //顶栏背景
   .bg-transparent {
-    background-color: #020202;
+    background-color: #000000;
   }
 
   //主页标题
@@ -32,5 +41,25 @@ html.dark {
   .yun-footer-gradient {
     height: 130px;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.2) 100%);
+  }
+
+  // 评论框小人物
+  .wl-editor {
+    background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    transition: all 0.25s ease-in-out 0s;
+    filter: invert(1);
+  }
+
+  // 首页语录
+  .say {
+    border-radius: 5px;
+    /* 可选的圆角效果 */
+    animation: border-marquee 5s linear infinite;
+    /* 设置跑马灯动画 */
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
   }
 }

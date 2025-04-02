@@ -1,56 +1,30 @@
-// 覆盖默认的字体。
-
-// serif: 衬线字体：字体 abcd 123
-// sans: 非衬线字体：字体 abcd 123
-// mono: 等宽字体：字体 abcd 123
+// 覆盖 light Mode
 :root {
+  // 作者名
+  --va-c-text: rgb(0, 0, 0);
 
-  // 白天模式下文章框的底色
-  --va-c-bg-light: rgba(255, 255, 255, 0.726);
-  // serif: 衬线字体：字体 abcd 123
-  --va-font-serif: 'Noto Serif SC',
-  STZhongsong,
-  STKaiti,
-  KaiTi,
-  Roboto,
-  serif;
-  // sans: 非衬线字体：字体 abcd 123
-  --va-font-sans: Inter,
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Roboto,
-  Oxygen,
-  Ubuntu,
-  Cantarell,
-  "Fira Sans",
-  "Droid Sans",
-  "Helvetica Neue",
-  sans-serif;
-  // mono: 等宽字体：字体 abcd 123
-  --va-font-mono: Menlo,
-  Monaco,
-  Consolas,
-  "Courier New",
-  monospace;
   // 滑动顶栏背景
-  --va-c-bg: #ffffffb4;
-  // // 主页背景
-  // --va-c-bg-soft: rgb(0, 0, 0);
-  // 自定义光标
-  // 替换鼠标光标样式。
-  --cursor-default: url('https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur');
-  --cursor-pointer: url('https://cdn.yunyoujun.cn/css/md-cursors/link.cur');
-  --cursor-text: url('https://cdn.yunyoujun.cn/css/md-cursors/text.cur');
-
-  // 主页背景
-  .bg-\$va-c-bg-soft {
+  .yun-nav-menu.play {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);
   }
 
-  // 作者名
-  --va-c-text: rgb(0, 0, 0);
+  // 主页背景
+  .yun-fullscreen-menu {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+  }
+
+  // 文章框的底色
+  .yun-card {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+  }
+
+  //顶栏背景
+  .bg-transparent {
+    background-color: #ffffff;
+  }
 
   //主页标题
   .text-white {
@@ -69,8 +43,23 @@
     background: linear-gradient(to right, rgba(228, 170, 255, 0.089) 0, rgba(87, 14, 90, 0.048) 100%);
   }
 
-  //顶栏背景
-  .bg-transparent {
-    background-color: #ffffff;
+  // 评论框小人物
+  .wl-editor {
+    background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    transition: all 0.25s ease-in-out 0s;
+    filter: invert(0);
+  }
+
+  // 首页语录
+  .say {
+    border-radius: 5px;
+    /* 可选的圆角效果 */
+    animation: border-marquee 5s linear infinite;
+    /* 设置跑马灯动画 */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
   }
 }

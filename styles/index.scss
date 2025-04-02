@@ -1,3 +1,9 @@
+:root {
+  --cursor-default: url('https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur');
+  --cursor-pointer: url('https://cdn.yunyoujun.cn/css/md-cursors/link.cur');
+  --cursor-text: url('https://cdn.yunyoujun.cn/css/md-cursors/text.cur');
+}
+
 body {
   cursor: var(--cursor-default), auto;
 }
@@ -18,6 +24,60 @@ input {
   cursor: var(--cursor-text), text;
 }
 
-text-red-500 {
-  color: #ff0000;
+// 跑马灯
+@keyframes border-marquee {
+  0% {
+    border-color: #fab7fa;
+    /* 紫色 */
+  }
+
+  10% {
+    border-color: #b7edfa;
+    /* 浅蓝色 */
+  }
+
+  20% {
+    border-color: #5686ee;
+    /* 深蓝色 */
+  }
+
+  30% {
+    border-color: #96b42a;
+    /* 绿色 */
+  }
+
+  40% {
+    border-color: #4e30b8;
+    /* 深紫色 */
+  }
+
+  50% {
+    border-color: #ffb347;
+    /* 橙色 */
+  }
+
+  60% {
+    border-color: #f7a7ff;
+    /* 浅紫色 */
+  }
+
+  70% {
+    border-color: #ff6f61;
+    /* 红色 */
+  }
+
+  80% {
+    border-color: #7cdb99;
+    /* 绿色 */
+  }
+
+  90% {
+    border-color: #ffcc00;
+    /* 黄色 */
+  }
+
+  100% {
+    border-color: #4f8ff7;
+    /* 蓝色 */
+  }
 }
