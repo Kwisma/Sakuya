@@ -18,3 +18,15 @@ node_modules
 *.log
 
 components.d.ts
+
+# valaxy fuse
+public/fuse-list.json
+
+# valaxy rss
+public/rss.xml
+
+# valaxy rss
+public/rss.atom
+
+# valaxy rss
+public/rss.json
