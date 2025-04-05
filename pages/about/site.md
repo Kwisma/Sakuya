@@ -3,7 +3,7 @@ title: 关于此站
 icon: i-ri-information-line
 nav: false
 date: 2025-03-28 19:24:19
-cover: /back/xiaoyuan.webp
+cover: /img/back/xiaoyuan.webp
 ---
 
 ## 未解决问题

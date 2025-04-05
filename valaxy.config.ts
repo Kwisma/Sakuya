@@ -53,9 +53,9 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 是否启用
       enable: true,
       // 图片地址
-      url: '/back/back.webp',
+      url: '/img/back/back.webp',
       // 浅色模式
-      dark: '/back/back-y.webp',
+      dark: '/img/back/back-y.webp',
       // 图像不透明度
       opacity: 0.9,
     },

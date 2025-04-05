@@ -20,7 +20,7 @@ aside: false
 ```json
 {
     "url": "https://www.mot.cloudns.biz",
-    "avatar": "https://www.mot.cloudns.biz/avatar/avatar.png",
+    "avatar": "https://www.mot.cloudns.biz/img/avatar/avatar.png",
     "name": "Sakuya",
     "blog": "-Sakuya Blog-",
     "desc": "僕と契約して魔法少女になってよ!",

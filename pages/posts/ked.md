@@ -2,13 +2,15 @@
 layout: post
 date: 2025-03-27 19:02:39
 title: KED neno 常用指令
-excerpt: 整理
+excerpt: 本文总结了 KED 系统中常用的指令，包括软件更新、垃圾清理、代理设置、语言包安装等操作。
 categories:
- - 教程
+ - 系统优化
 tags:
- - 指令
  - Linux
-cover: /posts/ked.webp
+ - 指令
+ - 系统优化
+ - 软件管理
+cover: /img/posts/ked.webp
 ---
 
 ## 更新软件源

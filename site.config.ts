@@ -31,7 +31,7 @@ export default defineSiteConfig({
     // 作者的网站
     link: 'https://www.mot.cloudns.biz',
     // 作者的头像
-    avatar: '/avatar/avatar.webp',
+    avatar: '/img/avatar/avatar.webp',
     // 个人状态
     status: {
       // 状态的 Emoji 表示
@@ -45,7 +45,7 @@ export default defineSiteConfig({
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
   // 您网站的图标
-  favicon: '/avatar/avatar.webp',
+  favicon: '/img/avatar/avatar.webp',
   // RSS源和图标
   feed: {
     // RSS 源的名称
@@ -157,19 +157,19 @@ export default defineSiteConfig({
     methods: [
       {
         name: '支付宝',
-        url: '/qrcode/alipay.webp',
+        url: '/img/qrcode/alipay.webp',
         color: '#00A3EE',
         icon: 'i-ri-alipay-line',
       },
       {
         name: 'QQ 支付',
-        url: '/qrcode/qqpay.webp',
+        url: '/img/qrcode/qqpay.webp',
         color: '#12B7F5',
         icon: 'i-ri-qq-line',
       },
       {
         name: '微信支付',
-        url: '/qrcode/wechatpay.webp',
+        url: '/img/qrcode/wechatpay.webp',
         color: '#2DC100',
         icon: 'i-ri-wechat-pay-line',
       },

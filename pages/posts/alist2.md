@@ -4,11 +4,13 @@ date: 2025-03-24 19:33:39
 title: alist头部美化
 excerpt: 美化 Alist 网页头部的模板，包含多个功能模块和样式配置，旨在增强页面的视觉效果和交互性
 categories:
- - 教程
+ - Alist
 tags:
- - 美化
- - alist
-cover: /posts/alist.webp
+ - Alist
+ - 网页美化
+ - 前端开发
+ - 教程
+cover: /img/posts/alist.webp
 ---
 
 ## 功能
@@ -169,7 +171,6 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
  .hope-ui-light pre {
     background-color: rgba(255, 255, 255, 0.1)!important;
 }
-/*夜间模式代码块透明*/
  .hope-ui-dark pre {
     background-color: rgba(255, 255, 255, 0)!important;
 }
@@ -181,67 +182,67 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
 }
 /*夜间模式*/
  .hope-ui-dark .hope-c-PJLV-ieGWMbI-css {
-    background-color:rgb(0 0 0 / 50%) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
 }
 
 /* 返回顶部 */
  .hope-c-PJLV-ihVEsOa-css {
-    background: rgba(255, 255, 255, 0.5) !important;
+    background: rgba(255, 255, 255, 0.5) !重要;
 }
 .hope-ui-dark .hope-c-PJLV-ihVEsOa-css {
-    background-color:rgb(0 0 0 / 50%) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
 }
 
 /*正常情况未使用吸附功能*/
 /*顶部*/
  .hope-c-PJLV-ikaMhsQ-css {
-    background: rgba(255, 255, 255, 0) !important;
+    background: rgba(255, 255, 255, 0) !重要;
 }
 /*导航条*/
 /*白天模式*/
  .hope-ui-light .hope-c-PJLV-idaeksS-css {
-    background-color: rgba(255, 255, 255, 0.5) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color: rgba(255, 255, 255, 0.5) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 /*夜间模式*/
  .hope-ui-dark .hope-c-PJLV-idaeksS-css {
-    background-color:rgb(0 0 0 / 50%) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 /* 吸附到页面顶部 */
 /*顶部*/
  .hope-c-PJLV-icWrYmg-css {
-    background: rgba(255, 255, 255, 0) !important;
+    background: rgba(255, 255, 255, 0) !重要;
 }
 /*导航条*/
  .hope-c-PJLV-icKsjdm-css::after {
-    background: rgba(255, 255, 255, 0) !important;
+    background: rgba(255, 255, 255, 0) !重要;
 }
 /*白天模式*/
  .hope-ui-light .hope-c-PJLV-icKsjdm-css {
-    background-color: rgba(255, 255, 255, 0.5) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color: rgba(255, 255, 255, 0.5) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 /*夜间模式*/
  .hope-ui-dark .hope-c-PJLV-icKsjdm-css {
-    background-color:rgb(0 0 0 / 50%) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 
 /*仅吸附导航栏*/
 /*导航条*/
  .hope-c-PJLV-ifdXShc-css::after {
-    background: rgba(255, 255, 255, 0) !important;
+    background: rgba(255, 255, 255, 0) !重要;
 }
 /*白天模式*/
  .hope-ui-light .hope-c-hrsMRY {
-    background-color: rgba(255, 255, 255, 0.5) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color: rgba(255, 255, 255, 0.5) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 /*夜间模式*/
  .hope-ui-dark .hope-c-hrsMRY {
-    background-color:rgb(0 0 0 / 50%) !important;
-    border-radius: var(--hope-radii-xl) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
+    border-radius: var(--hope-radii-xl) !重要;
 }
 
 /*底部CSS，.App .table这三个一起的*/
@@ -261,7 +262,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
 }
 /*去掉底部*/
  .footer {
-    display: none !important;
+    display: none !重要;
 }
 /*全局字体*/
  * {
@@ -286,11 +287,11 @@ body {
 }
 /*评论区 - 白天模式透明度*/
  .hope-ui-light .newValine {
-    background-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: rgba(255, 255, 255, 0.5) !重要;
 }
 /*评论区 - 夜间模式透明度*/
  .hope-ui-dark .newValine {
-    background-color:rgb(0 0 0 / 50%) !important;
+    background-color:rgb(0 0 0 / 50%) !重要;
 }
 /*输入栏里面跳舞的小人背景图*/
  .vedit {
@@ -321,10 +322,10 @@ textarea#comment-textarea:focus {
 /*音乐播放器进一步进行隐藏*/
 /* 需要就加不需要就不用加 */
  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-    left: -66px !important;
+    left: -66px !重要;
 }
 .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-    left: 0 !important;
+    left: 0 !重要;
 }
 </style>
 
@@ -336,7 +337,7 @@ textarea#comment-textarea:focus {
   }
   #waifu-tips {
     top: -60px;
-    /*display:none !important;隐藏对话框*/
+    /*display:none !重要;隐藏对话框*/
   }
 </style>
 
@@ -358,40 +359,40 @@ textarea#comment-textarea:focus {
 <style>
 /*白天模式 搜索主体+毛玻璃*/
 .hope-ui-light .hope-c-PJLV-iiBaxsN-css{
-   background-color: rgba(255,255,255,0.2)!important;
-   backdrop-filter: blur(10px)!important;
+   background-color: rgba(255,255,255,0.2)!重要;
+   backdrop-filter: blur(10px)!重要;
 }
 
 /*白天模式 搜索栏输入框+毛玻璃*/
 .hope-ui-light .hope-c-kvTTWD-hYRNAb-variant-filled{
-   background-color: rgba(255,255,255,0.2)!important;
-   backdrop-filter: blur(10px)!important;
+   background-color: rgba(255,255,255,0.2)!重要;
+   backdrop-filter: blur(10px)!重要;
 }
 
 /*白天模式 搜索按钮+毛玻璃*/
 .hope-ui-light .hope-c-PJLV-ikEIIxw-css{
-   background-color: rgba(255,255,255,0.2)!important;
-   backdrop-filter: blur(10px)!important;
-   padding: var(--hope-space-1)!important;
+   background-color: rgba(255,255,255,0.2)!重要;
+   backdrop-filter: blur(10px)!重要;
+   padding: var(--hope-space-1)!重要;
 }
 
 /*夜间模式搜索主体+毛玻璃*/
 .hope-ui-dark .hope-c-PJLV-iiBaxsN-css{
-    background-color: rgb(0 0 0 / 10%)!important;
-    backdrop-filter: blur(10px)!important;
+    background-color: rgb(0 0 0 / 10%)!重要;
+    backdrop-filter: blur(10px)!重要;
 }
 
 /*夜间模式搜索栏+毛玻璃*/
 .hope-ui-dark .hope-c-kvTTWD-hYRNAb-variant-filled{
-    background-color: rgb(0 0 0 / 10%)!important;
-    backdrop-filter: blur(10px)!important;
+    background-color: rgb(0 0 0 / 10%)!重要;
+    backdrop-filter: blur(10px)!重要;
 }
 
 /*夜间模式 搜索按钮+毛玻璃*/
 .hope-ui-dark .hope-c-PJLV-ikEIIxw-css{
-    background-color: rgb(0 0 0 / 10%)!important;
-    backdrop-filter: blur(10px)!important;
-    padding: var(--hope-space-1)!important;
+    background-color: rgb(0 0 0 / 10%)!重要;
+    backdrop-filter: blur(10px)!重要;
+    padding: var(--hope-space-1)!重要;
 }
 </style>
 

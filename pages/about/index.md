@@ -2,7 +2,7 @@
 title: 关于我
 icon: i-ri-heart-line
 date: 2025-03-28 19:24:19
-cover: /back/xiaoyuan.webp
+cover: /img/back/xiaoyuan.webp
 ---
 
 > ## Sakuya

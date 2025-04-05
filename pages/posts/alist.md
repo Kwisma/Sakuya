@@ -4,11 +4,13 @@ date: 2025-03-24 19:33:33
 title: alist正文美化
 excerpt: 用于美化 Alist 正文的模板，包含多个功能模块和脚本，增强页面的交互性和视觉效果
 categories:
- - 教程
+ - Alist
 tags:
+ - Alist
  - 美化
- - alist
-cover: /posts/alist.webp
+ - 前端
+ - 教程
+cover: /img/posts/alist.webp
 ---
 
 ## 功能
@@ -167,7 +169,6 @@ cover: /posts/alist.webp
     <br />
     <!--添加一个访问量-->
     <span>
-                    本"<span style="color: rgb(13, 109, 252); font-weight: bold;"><a href="#">目录</a></span>"访问量 <span id="busuanzi_value_page_pv" style="color: rgb(13, 109, 252); font-weight: bold;"></span> 次 本站总访问量 <span id="busuanzi_value_site_pv" style="color: rgb(13, 109, 252); font-weight: bold;"></span>                次 本站总访客数 <span id="busuanzi_value_site_uv" style="color: rgb(13, 109, 252); font-weight: bold;"></span> 人
                 </span>
                 <br />
     <!--添加备案信息-->

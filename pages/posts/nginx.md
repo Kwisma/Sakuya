@@ -2,14 +2,19 @@
 layout: post
 date: 2025-04-05 17:18:39
 title: cf worker 伪装nginx
-excerpt: 基于 Cloudflare Workers 的 JavaScript 脚本，伪装成一个 Nginx 服务器
 categories:
- - 教程
+ - 伪装
 tags:
- - 代码
- - nginx
- - workers
+ - Cloudflare
+ - Worker
+ - Nginx
 ---
+
+## 前言
+
+Cloudflare Worker 是一种强大的边缘计算服务，能够通过 JavaScript 编写自定义逻辑来处理请求。本教程将展示如何使用 Cloudflare Worker 模拟 Nginx 的默认页面，以实现伪装效果。
+
+<!-- more -->
 
 ## cloudflare worker 伪装nginx代码
 

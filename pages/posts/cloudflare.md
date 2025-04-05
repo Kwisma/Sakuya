@@ -1,16 +1,21 @@
 ---
 layout: post
 date: 2025-04-05 17:25:39
-title: cf worker 伪装nginx
-excerpt: 基于 Cloudflare Workers 的 JavaScript 脚本，伪装成一个 Nginx 服务器
+title: cloudflare 批量脚本
 categories:
- - 教程
+ - Cloudflare
 tags:
- - 代码
- - nginx
- - workers
-cover: /posts/ssl.webp
+ - Cloudflare
+ - DNS
+ - 脚本
+ - 自动化
 ---
+
+## 前言
+
+在使用 Cloudflare 管理域名时，批量操作 DNS 记录是一项常见需求。本文将介绍如何通过简单的脚本实现批量删除和添加 DNS 记录，帮助您更高效地管理域名解析。
+
+<!-- more -->
 
 ## 令牌 和 区域ID 获取方法
 
