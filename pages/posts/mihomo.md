@@ -1,46 +1,66 @@
-# clash Linux安装
+---
+layout: post
+date: 2025-04-05 21:13:06
+title: mihomo安装与配置指南
+categories:
+ - 教程
+tags:
+ - mihomo
+ - Linux
+ - 配置
+ - 代理
 
-下载[clash](https://github.com/Dreamacro/clash)
+---
+
+## 前言
+
+本文将详细介绍如何在Linux系统上安装和配置mihomo工具，包括设置服务、配置面板以及代理的使用方法，帮助您快速上手。
+
+<!-- more -->
+
+# mihomo Linux安装
+
+下载[mihomo](https://github.com/MetaCubeX/mihomo/)
 
 ```text
-wget https://github.com/Dreamacro/clash/releases/download/v1.12.0/clash-linux-amd64-v1.12.0.gz
+wget https://github.com/MetaCubeX/mihomo/releases/download/v1.19.4/mihomo-linux-amd64-v1.19.4.gz
 ```
 
 解压
 
 ```text
-gzip -d clash-linux-amd64-v1.12.0.gz
+gzip -d mihomo-linux-amd64-v1.19.4.gz
 ```
 
-移动到/usr/local/bin/clash并重命名
+移动到/usr/local/bin/mihomo并重命名
 
 ```text
-mv clash-linux-amd64-v1.12.0 /usr/local/bin/clash
+mv mihomo-linux-amd64 /usr/local/bin/mihomo
 ```
 
 给执行权限
 
 ```text
-chmod +x /usr/local/bin/clash
+chmod +x /usr/local/bin/mihomo
 ```
 
 设置成服务
 
 ```text
-vim /etc/systemd/system/clash.service
+vim /etc/systemd/system/mihomo.service
 ```
 
 ```text
 [Unit]
-Description=clash service
+Description=mihomo service
 After=network.target
- 
+
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/clash
+ExecStart=/usr/local/bin/mihomo
 Restart=on-failure # or always, on-abort, etc
- 
+
 [Install]
 WantedBy=multi-user.target
 ```
@@ -49,19 +69,19 @@ WantedBy=multi-user.target
 
 ```text
 systemctl daemon-reload
-systemctl enable clash
+systemctl enable mihomo
 ```
 
 启动
 
 ```text
-service clash start
+service mihomo start
 ```
 
 ## 配置面板
 
 ```text
-cd ~/.config/clash
+cd ~/.config/mihomo
 ```
 
 下载面板，解压，重命名
@@ -95,20 +115,20 @@ vim /etc/profile
 全局代理(开关版)
 
 ```text
-alias kclash="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
-alias gclash="unset  http_proxy  https_proxy  all_proxy"
+alias kmihomo="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
+alias gmihomo="unset  http_proxy  https_proxy  all_proxy"
 ```
 
 开启代理
 
 ```text
-kclash
+kmihomo
 ```
 
 关闭代理
 
 ```text
-gclash
+gmihomo
 ```
 
 全局代理
@@ -135,17 +155,17 @@ env|grep -i proxy
 查看服务状态
 
 ```text
-service clash status
+service mihomo status
 ```
 
 重启服务
 
 ```text
-service clash restart
+service mihomo restart
 ```
 
 停止服务
 
 ```text
-service clash stop
+service mihomo stop
 ```

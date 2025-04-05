@@ -38,6 +38,8 @@ declare module 'vue-router/auto-routes' {
     '/posts/fonts': RouteRecordInfo<'/posts/fonts', '/posts/fonts', Record<never, never>, Record<never, never>>,
     '/posts/hysteria2': RouteRecordInfo<'/posts/hysteria2', '/posts/hysteria2', Record<never, never>, Record<never, never>>,
     '/posts/ked': RouteRecordInfo<'/posts/ked', '/posts/ked', Record<never, never>, Record<never, never>>,
+    '/posts/mihomo': RouteRecordInfo<'/posts/mihomo', '/posts/mihomo', Record<never, never>, Record<never, never>>,
+    '/posts/mihomo2,': RouteRecordInfo<'/posts/mihomo2,', '/posts/mihomo2,', Record<never, never>, Record<never, never>>,
     '/posts/nginx': RouteRecordInfo<'/posts/nginx', '/posts/nginx', Record<never, never>, Record<never, never>>,
     '/posts/proxy': RouteRecordInfo<'/posts/proxy', '/posts/proxy', Record<never, never>, Record<never, never>>,
     '/posts/sfm': RouteRecordInfo<'/posts/sfm', '/posts/sfm', Record<never, never>, Record<never, never>>,
