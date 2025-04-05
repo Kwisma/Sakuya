@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 21:38:16
 title: 防止 DNS 和 WebRTC 泄露的配置指南
 categories:
- - 网络安全
+ - 教程
 tags:
  - DNS
  - WebRTC
