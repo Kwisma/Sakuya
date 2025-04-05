@@ -59,8 +59,6 @@ Valine 评论系统：通过引入 `Valine.min.js`，为页面添加了基于 `L
 
 ## alist 头部美化代码
 
-源码：[点击这里](/alist/头部.html)
-
 ```html
 <!--Alist V3建议添加的，已经默认添加了，如果你的没有建议加上-->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>

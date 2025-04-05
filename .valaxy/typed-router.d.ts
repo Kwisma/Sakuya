@@ -33,8 +33,14 @@ declare module 'vue-router/auto-routes' {
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
     '/posts/alist': RouteRecordInfo<'/posts/alist', '/posts/alist', Record<never, never>, Record<never, never>>,
     '/posts/alist2': RouteRecordInfo<'/posts/alist2', '/posts/alist2', Record<never, never>, Record<never, never>>,
+    '/posts/cloudflare': RouteRecordInfo<'/posts/cloudflare', '/posts/cloudflare', Record<never, never>, Record<never, never>>,
     '/posts/domainssl': RouteRecordInfo<'/posts/domainssl', '/posts/domainssl', Record<never, never>, Record<never, never>>,
+    '/posts/fonts': RouteRecordInfo<'/posts/fonts', '/posts/fonts', Record<never, never>, Record<never, never>>,
+    '/posts/hysteria2': RouteRecordInfo<'/posts/hysteria2', '/posts/hysteria2', Record<never, never>, Record<never, never>>,
     '/posts/ked': RouteRecordInfo<'/posts/ked', '/posts/ked', Record<never, never>, Record<never, never>>,
+    '/posts/nginx': RouteRecordInfo<'/posts/nginx', '/posts/nginx', Record<never, never>, Record<never, never>>,
+    '/posts/proxy': RouteRecordInfo<'/posts/proxy', '/posts/proxy', Record<never, never>, Record<never, never>>,
+    '/posts/sfm': RouteRecordInfo<'/posts/sfm', '/posts/sfm', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
 }

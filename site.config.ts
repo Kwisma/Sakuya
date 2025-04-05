@@ -354,7 +354,7 @@ export default defineSiteConfig({
     salt: new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
   },
   // 代码块限高
-  codeHeightLimit: 0,
+  codeHeightLimit: 200,
   // 重定向
   redirects: {
     // 是否使用 Vue Router 进行重定向

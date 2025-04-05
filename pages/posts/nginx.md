@@ -18,7 +18,7 @@ Cloudflare Worker 是一种强大的边缘计算服务，能够通过 JavaScript
 
 ## cloudflare worker 伪装nginx代码
 
-```javascript
+```js
 const html = `
 <!DOCTYPE html>
 <html>

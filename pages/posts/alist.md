@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2025-03-24 19:33:33
-title: alist正文美化
+title: alist自定义美化
 excerpt: 用于美化 Alist 正文的模板，包含多个功能模块和脚本，增强页面的交互性和视觉效果
 categories:
  - Alist
@@ -74,8 +74,6 @@ cover: /img/posts/alist.webp
 这种交互设计可以增加用户的操作反馈，提升用户体验。
 
 ## alist 正文美化代码
-
-源码：[点击这里](/alist/自定义.html)
 
 ```html
 <!--延迟加载-->
