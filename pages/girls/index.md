@@ -7,7 +7,7 @@ date: 2025-03-25 19:33:33
 #   url:
 #   reason:
 # https://github.com/YunYouJun/girls
-# girls: https://cdn.jsdelivr.net/gh/YunYouJun/wives@gh-pages/girls.json
+# girls: https://jsd.onmicrosoft.cn/gh/YunYouJun/wives@gh-pages/girls.json
 icon: i-ri-women-line
 girls: /girls/girls.json
 random: true

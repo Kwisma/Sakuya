@@ -8,6 +8,7 @@ tags:
  - Linux
  - 代理
  - 网络配置
+ - mihomo
 ---
 
 ## 前言

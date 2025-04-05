@@ -1,3 +1,47 @@
+---
+layout: post
+date: 2025-04-05 22:16:20
+title: 图片格式转换为 WebP
+categories:
+ - 教程
+tags:
+ - Node.js
+ - Sharp
+ - WebP
+ - 图片优化
+
+---
+
+## 前言
+
+本文介绍如何使用 Node.js 和 Sharp 库将常见图片格式（如 .jpg、.png、.gif 等）转换为高效的 WebP 格式，以减少图片体积并提升加载速度。
+
+<!-- more -->
+
+## 图片转换脚本
+
+将（如 .jpg、.png、.gif 等）图片格式转换成webp格式的图片
+
+## 使用
+
+将[源码](#源码)保存为 webp.js
+
+安装依赖
+
+> package.json 为`"type": "module"`类型
+
+```bash
+npm install sharp
+```
+
+执行代码
+
+```bash
+node webp.js 输入图片目录 输出图片目录
+```
+
+## 源码
+```js
 import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp';
@@ -78,3 +122,4 @@ console.log(`输出目录: ${outputDir}`);
 console.log(`质量设置: ${quality}\n`);
 
 processDirectory(inputDir, outputDir, quality);
+```

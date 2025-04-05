@@ -10,6 +10,7 @@ tags:
  - 指令
  - 系统优化
  - 软件管理
+ - KED neno
 cover: /img/posts/ked.webp
 ---
 

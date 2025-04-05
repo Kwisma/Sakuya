@@ -5,6 +5,7 @@ title: 防止 DNS 和 WebRTC 泄露的配置指南
 categories:
  - 教程
 tags:
+ - mihomo
  - DNS
  - WebRTC
  - 隐私保护
@@ -18,7 +19,6 @@ tags:
 <!-- more -->
 
 ## 防止 DNS 泄露
-
 全部dns路由国外,仅包含在`RULE-SET:CN,Private`的dns路由国内以防止 DNS 泄露，您可以通过以下配置启用增强的 DNS 模块。以下是配置项的简要说明：
 
 - `enable`: 启用 DNS 模块。
@@ -102,5 +102,5 @@ tun:
 
 ## 完整配置
 
-完整配置文件: [点击这里](/mihomo/Mihomo.yaml)
+完整配置文件: [点击这里](https://jsd.onmicrosoft.cn/gh/Kwisma/MarketNest@main/vpn/mihomo/Mihomo.yaml)
 

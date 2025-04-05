@@ -396,17 +396,17 @@ export default defineValaxyConfig<UserThemeConfig>({
       live2DCollection: {
         XiaoYun: {
           message: '来自云游君的小云 ~',
-          models: ['https://cdn.jsdelivr.net/npm/@yunyoujun/live2d@latest/小云.model3.json'],
+          models: ['https://jsd.onmicrosoft.cn/npm/@yunyoujun/live2d@latest/小云.model3.json'],
         },
         // https://github.com/fghrsh/live2d_api
         Tia: {
           message: '来自 Potion Maker 的 Tia 酱 ~',
-          models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json',
+          models: 'https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json',
           textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures',
         },
         Pio: {
           message: '来自 Potion Maker 的 Pio 酱 ~',
-          models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json',
+          models: 'https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json',
           textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
         },
       },

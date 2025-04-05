@@ -293,7 +293,7 @@ body {
 }
 /*输入栏里面跳舞的小人背景图*/
  .vedit {
-    background-image:url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+    background-image:url("https://jsd.onmicrosoft.cn/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
     background-size:contain;
     background-repeat:no-repeat;
     background-position:right bottom;
