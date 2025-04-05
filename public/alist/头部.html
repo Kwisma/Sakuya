@@ -1,65 +1,3 @@
----
-layout: post
-date: 2025-03-24 19:33:39
-title: alist头部美化
-excerpt: 美化 Alist 网页头部的模板，包含多个功能模块和样式配置，旨在增强页面的视觉效果和交互性
-categories:
- - 教程
-tags:
- - 美化
- - alist
-cover: /posts/alist.webp
----
-
-## 功能
-
-1. 基础功能的引入
-
-Polyfill 支持：通过 `<script>` 标签引入了 `polyfill.io`，为 `String.prototype.replaceAll` 提供兼容性支持，确保在旧版浏览器中也能正常运行。
-
-全局字体：引入了 LXGW WenKai（霞鹜文楷）字体，设置为全局字体，提升页面的美观性和一致性。
-
-2. 评论系统和统计功能
-
-Valine 评论系统：通过引入 `Valine.min.js`，为页面添加了基于 `LeanCloud` 的无后端评论功能，方便用户互动。
-
-不蒜子计数器：通过 `busuanzi.pure.mini.js`，实现了页面访问量和访客统计功能，动态显示页面的访问数据。
-
-3. 图标和音乐播放器
-
-`Font6` 图标库：引入了 `Font Awesome` 图标库，提供丰富的图标支持，用于自定义底部和看板娘功能。
-
-音乐播放器：通过引入 `APlayer` 和 `MetingJS`，为页面添加了音乐播放功能，支持多种音乐平台（如网易云音乐），并提供了高度可定制的播放器界面。
-
-4. 样式美化
-
-背景图：为白天和夜间模式分别设置了不同的背景图片，并通过 `CSS` 实现了背景的固定、覆盖和居中显示。
-
-透明效果：为主列表、代码块、评论区、侧边栏等多个模块设置了透明背景，分别适配白天和夜间模式，提升页面的层次感。
-
-毛玻璃效果：为搜索栏和按钮添加了毛玻璃效果（`backdrop-filter: blur`），增强了视觉体验。
-
-鼠标指针样式：自定义了鼠标指针样式，为不同的元素（如按钮、输入框、代码块）设置了个性化的光标。
-
-5. 动态功能
-
-看板娘：通过引入 `Live2D` 模型，为页面添加了一个虚拟角色（看板娘）。代码中设置了模型的大小、对话框位置，并加载了指定的模型和纹理。
-
-渐变背景：通过 `#canvas-basic` 元素设置了全屏渐变背景，提升了页面的动态效果。
-
-隐藏功能：提供了隐藏通知栏、底部版权信息和音乐播放器的选项，用户可以根据需求启用或禁用这些功能。
-
-6. 代码注释和扩展性
-
-图片 API：代码中列出了多个图片 API 的使用示例，用户可以根据需求选择不同的图片来源，用于背景或其他用途。
-
-注释说明：代码中包含了大量注释，详细说明了每个功能模块的用途和配置方法，方便用户理解和修改。
-
-## alist 头部美化代码
-
-源码：[点击这里](/alist/头部.html)
-
-```html
 <!--Alist V3建议添加的，已经默认添加了，如果你的没有建议加上-->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>
 
@@ -102,7 +40,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
 .obj-box > div .item-thumbnail{
   height: 100px;
 }*/
-
+ 
 /*
   图片API用法点进去都会有食用说明的,API来自网络不保证实效性稳定性自己测试
   樱花：https://www.dmoe.cc
@@ -115,7 +53,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
   岁月小筑：https://img.xjh.me
   东方Project：https://img.paulzzh.com
   */
-
+ 
 /*白天背景图*/
  .hope-ui-light {
     background-image: url("http://pic.rmb.bdstatic.com/bjh/7569b014a1abafd5481298763300ae1d.png") !important;
@@ -197,7 +135,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
  .hope-c-PJLV-ikaMhsQ-css {
     background: rgba(255, 255, 255, 0) !important;
 }
-/*导航条*/
+/*导航条*/ 
 /*白天模式*/
  .hope-ui-light .hope-c-PJLV-idaeksS-css {
     background-color: rgba(255, 255, 255, 0.5) !important;
@@ -407,18 +345,15 @@ textarea#comment-textarea:focus {
     cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221017ac9f1124_1666842626270_11086578_file.cur), pointer;
   }
   input{
-    cursor:url(http://luluossfile.lulufind.com/work/teacher_u2021090299b56677_1666842633386_14976764_file.cur), text;
+    cursor:url(http://luluossfile.lulufind.com/work/teacher_u2021090299b56677_1666842633386_14976764_file.cur), text;	
   }
   textarea,input:focus{
-    cursor:url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842640146_15845280_file.cur), text;
+    cursor:url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842640146_15845280_file.cur), text;	
   }
   code{
-    cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221021b3a89013_1666842646779_15864973_file.cur), default;
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u20221021b3a89013_1666842646779_15864973_file.cur), default;	
   }
   pre>code{
-    cursor: url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842653500_10010236_file.cur), default;
+    cursor: url(http://luluossfile.lulufind.com/work/teacher_u202210176ba36766_1666842653500_10010236_file.cur), default;	
   }
 </style>
-```
-
-<CodePen class="h-300px" name="Margin Collapse" id="WqXGpo" user="YunYouJun" tab="html,result" />

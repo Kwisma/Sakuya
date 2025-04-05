@@ -4,11 +4,10 @@ date: 2025-03-27 19:02:39
 title: KED neno 常用指令
 excerpt: 整理
 categories:
- - ked neno
+ - 教程
 tags:
- - 命令
- - ked
- - neno
+ - 指令
+ - Linux
 cover: /posts/ked.webp
 ---
 

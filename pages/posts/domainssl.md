@@ -4,10 +4,11 @@ date: 2025-03-27 19:18:39
 title: Let’s Encrypt 免费申请泛域名 SSL 证书
 excerpt: 使用 Let’s Encrypt 免费申请泛域名 SSL 证书，并实现自动续期的快速指令
 categories:
- - 证书
+ - 教程
 tags:
  - 域名
  - 证书
+ - 指令
 cover: /posts/ssl.webp
 ---
 
@@ -73,3 +74,49 @@ acme.sh --install-cert -d '*.example.com' \
 - `--reloadcmd` 选项可确保在证书续订后自动重新加载 Nginx。
 
 此设置可确保根域和所有子域的安全 HTTPS 连接。
+
+
+## 反向代理
+
+```conf
+location / {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $http_host;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header Range $http_range;
+    proxy_set_header If-Range $http_if_range;
+    proxy_redirect off;
+    proxy_pass https://bangumi.tv;
+    # the max size of file to upload
+    client_max_body_size 20000m;
+}
+location ^~ /xui {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $http_host;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header Range $http_range;
+    proxy_set_header If-Range $http_if_range;
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:1000;
+    # the max size of file to upload
+    client_max_body_size 20000m;
+}
+location ^~ /alist {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $http_host;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header Range $http_range;
+    proxy_set_header If-Range $http_if_range;
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:5244;
+    # the max size of file to upload
+    client_max_body_size 20000m;
+}
+
+```

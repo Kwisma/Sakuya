@@ -1,0 +1,1354 @@
+# mihomo (Clash Meta) 懒人配置
+# 版本：v1.19.3
+# 作者：Kwisma
+# 频道：https://t.me/Marisa_kristi
+# 配置：https://github.com/Kwisma/MarketNest/blob/main/vpn/mihomo/Mihomo.yaml
+# Github：https://github.com/Kwisma
+# 修改自官方示例规则 https://wiki.metacubex.one/example/#meta
+# 不理解的地方建议对照 虚空终端 (Clash Meta) Docs 进行理解
+# 虚空终端 (Clash Meta) Docs 地址: https://wiki.metacubex.one
+# 转载请保留此注释
+
+# 延迟检测 URL
+p: &p
+  type: http
+  interval: 3600 # 更新provider的时间
+  header: # 自定义 http 请求头
+    User-Agent:
+      - meta;clash.meta;Clash/v1.18.0;clash
+  health-check: # 健康检查 (延迟测试)
+    enable: true
+    url: https://www.gstatic.com/generate_204 # 健康检查测试地址
+    interval: 300 # 健康检查间隔
+    timeout: 5000 # 健康检查超时时间
+# 配置代理提供者
+proxy-providers:
+  # 第一个代理提供者
+  provider1:
+    <<: *p # 继承通用配置
+    url: "https://etc.mesa.ip-ddns.com/9g4C1UAZeaBQD86WfCV0"
+    path: ./proxies/provider1.yaml
+
+# URL 测试配置
+u: &u
+  type: url-test # 测试类型
+  tolerance: 1 # 自动选择切换容差
+  strategy: consistent-hashing # 负载均衡策略
+  lazy: true # 懒惰状态
+  use:
+    - provider1 # 使用第一个代理提供者
+
+port: 7892 # HTTP 代理端口
+socks-port: 7891 # SOCKS5 代理端口
+mixed-port: 7890 # HTTP/SOCKS 混合代理端口
+redir-port: 9797 # 重定向端口，用于透明代理
+tproxy-port: 9898 # TProxy 端口，支持 TUN 模式
+allow-lan: true # 允许局域网设备连接代理
+bind-address: "*" # 绑定地址，默认为所有 IP 地址
+authentication:
+  - "username:password" # HTTP/SOCKS 代理认证，格式为 用户名:密码
+skip-auth-prefixes:
+  - 127.0.0.1/8 # 跳过本地地址的认证
+  - ::1/128 # 跳过 IPv6 本地地址的认证
+lan-allowed-ips:
+  - 0.0.0.0/0 # 允许局域网访问的 IP 地址范围 (IPv4)
+  - ::/0 # 允许局域网访问的 IP 地址范围 (IPv6)
+lan-disallowed-ips:
+  - 192.168.0.3/32 # 局域网禁止访问的特定 IP 地址
+
+# always 开启，强制匹配所有进程
+# strict 默认，由 Clash 判断是否开启
+# off 不匹配进程，推荐在路由器上使用此模式
+find-process-mode: strict
+mode: rule # 工作模式为规则模式
+geodata-mode: true # 更改 geoip 使用文件，mmdb 或者 dat，可选 true/false,true为 dat
+# standard：标准加载器
+# memconservative：专为内存受限 (小内存) 设备优化的加载器 (默认值)
+geodata-loader: memconservative
+geox-url: # Geo 数据库配置，用于地理位置和 ASN 匹配
+  geoip: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat" # GeoIP 数据库
+  geosite: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat" # GeoSite 数据库
+  mmdb: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb" # MaxMind GeoLite2 数据库
+  asn: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb" # ASN 数据库
+geo-auto-update: true # 开启自动更新 Geo 数据库
+geo-update-interval: 24 # Geo 数据库更新间隔 (单位: 小时)
+global-ua: clash.meta # 自定全局 UA
+etag-support: true # 外部资源下载的 ETag 支持
+log-level: info # 日志等级
+ipv6: true # 启用 IPv6
+tls: # TLS 相关配置
+  certificate: string # TLS 证书
+  private-key: string # TLS 私钥
+  custom-certifactes: # 自定义证书
+    - |
+      -----BEGIN CERTIFICATE-----
+      format/pem...
+      -----END CERTIFICATE-----
+
+external-controller: 0.0.0.0:9093 # 外部控制端口
+external-controller-tls: 0.0.0.0:9443 # TLS 外部控制端口
+secret: "" # 控制接口密钥
+external-controller-cors: # CORS 配置
+  allow-origins:
+    - "*" # 允许所有来源
+  allow-private-network: true # 允许私有网络访问
+#external-controller-unix: mihomo.sock  # Unix Socket 控制接口
+#external-controller-pipe: \\.\pipe\mihomo  # Windows 管道接口
+unified-delay: true # 开启统一延迟时
+tcp-concurrent: true # 启用 TCP 并发连接
+external-ui: ui # 外部 UI 目录
+external-ui-name: xd # 外部 UI 名称
+external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" # 外部 UI 下载链接
+external-doh-server: /dns-query # 外部 DoH 服务器
+#interface-name:  # 使用的网络接口名称
+#routing-mark:  # 路由标记
+global-client-fingerprint: chrome # 全局客户端指纹为 Chrome
+disable-keep-alive: true # 启用 Keep-Alive
+keep-alive-idle: 15 # Keep-Alive 空闲时间 (单位: 秒)
+keep-alive-interval: 15 # Keep-Alive 间隔时间 (单位: 秒)
+experimental: # 实验性功能配置
+  quic-go-disable-gso: true # 禁用 QUIC 协议中的 GSO (Generic Segmentation Offload) 功能
+# hosts:  # 本地 DNS 解析配置
+profile:
+  store-selected: true # 存储已选择的代理组
+  store-fake-ip: true # 存储 Fake IP 地址
+
+# 网络时间协议 (NTP) 设置
+ntp:
+  enable: true # 启用 NTP 功能
+  write-to-system: false # 将同步的时间写入系统时钟
+  server: ntp.ntsc.ac.cn # NTP 服务器地址
+  port: 123 # NTP 服务器端口，默认使用 123 端口
+  interval: 30 # 同步时间的间隔 (单位: 分钟)
+
+# sniffer 配置：用于检测和处理不同协议的流量
+sniffer:
+  enable: true # 是否启用 sniffer 侦测功能，默认关闭
+  force-dns-mapping: true # 强制映射 DNS 解析，即使有 IP 地址，仍将尝试解析域名
+  parse-pure-ip: true # 尝试将纯 IP 流量解析为域名，便于流量规则的匹配
+  override-destination: false # 是否覆盖目标地址（在某些情况下可能会破坏流量）
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880] # 对 HTTP 流量进行嗅探的端口范围，常用于网站和应用
+      override-destination: true # 覆盖目标地址以强制流量走代理或规则匹配
+    TLS:
+      ports: [443, 8443] # 对 HTTPS 流量的端口进行嗅探，通常用于加密连接
+    QUIC:
+      ports: [443, 8443] # 对 QUIC 协议的流量进行嗅探，QUIC 常用于改进 HTTPS 连接的速度
+  force-domain:
+    - +.v2ex.com # 对指定域名强制解析，即使 IP 地址已缓存或已知
+  skip-domain:
+    - Mijia.Cloud.com # 跳过指定域名，不对其进行嗅探处理（如智能家居流量）
+  skip-src-address:
+    - 192.168.0.3/32 # 跳过来源 IP 地址，不对其进行嗅探
+  skip-dst-address:
+    - 192.168.0.3/32 # 跳过目标 IP 地址，不对其进行嗅探
+
+# tun 配置：用于启用 TUN 模式，优化流量路由和 IP 设置
+tun:
+  exclude-package: []
+  enable: true # 启用 TUN 模式，用于透明代理
+  stack: gvisor # 使用空间网络栈处理流量，可用值： system/gvisor/mixed
+  auto-route: true # 自动根据流量选择最佳路由
+  auto-redirect: true # 自动配置 iptables/nftables 以重定向 TCP 连接
+  auto-detect-interface: true # 自动检测并使用适当的网络接口
+  dns-hijack:
+    - any:53 # 劫持所有 53 端口的 DNS 请求
+    - tcp://any:53 # 劫持所有 TCP 53 端口的 DNS 请求
+  device: utun0 # 指定 TUN 设备名称，默认为 utun0
+  mtu: 9000 # 设置最大传输单元 (MTU)，提高网络吞吐量
+  strict-route: true # 强制使用严格路由，避免流量被错误路由
+  gso: true # 启用通用分段卸载 (GSO)，提高网络性能
+  gso-max-size: 65536 # 设置 GSO 最大分段大小为 65536 字节
+  udp-timeout: 300 # 设置 UDP 超时时间为 300 秒，优化 NAT 映射
+  iproute2-table-index: 2022 # 使用指定的路由表索引 (iproute2)
+  iproute2-rule-index: 9000 # 设置路由规则的索引 (iproute2)
+  endpoint-independent-nat: false # 禁用基于端点的 NAT 独立性
+
+# DNS 配置：控制 DNS 查询行为，支持增强模式和假 IP 功能
+# 查询 DNS 是否支持 H3 指令:
+#  curl https://1.1.1.1/dns-query --http3-only -vI
+#  q www.baidu.com @https://1.1.1.1/dns-query --http3
+dns:
+  enable: true # 启用 DNS 模块
+  prefer-h3: true # DOH 优先使用 http/3
+  use-hosts: true # 使用配置中的 hosts 文件条目
+  use-system-hosts: true # 使用系统的 hosts 文件条目
+  respect-rules: true # dns 连接遵守路由规则，需配置 proxy-server-nameserver
+  listen: 0.0.0.0:1053 # 本地 DNS 监听端口，默认是 1053 端口
+  ipv6: true # 启用 IPv6 DNS 解析，避免 IPv6 地址的解析请求
+  default-nameserver:
+    - tls://223.5.5.5:853 # 阿里 DNS 解析 DNS 域名
+    - tls://223.6.6.6:853 # 阿里 DNS 解析 DNS 域名
+  enhanced-mode: fake-ip # 启用增强模式 redir-host or fake-ip
+  fake-ip-range: 10.10.10.1/16 # fake-ip 池设置
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - RULE-SET:Lan
+    - RULE-SET:Private
+    - +.media.dssott.com
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - ntp.ntsc.ac.cn
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time-ios.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - ntp.*.cn
+    - ntp1.*.cn
+    - ntp2.*.cn
+    - ntp3.*.cn
+    - ntp4.*.cn
+    - ntp5.*.cn
+    - ntp6.*.cn
+    - ntp7.*.cn
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - +.music.163.com
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - +.y.qq.com
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - +.music.migu.cn
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - +.qq.com
+    - +.tencent.com
+    - +.srv.nintendo.net
+    - "*.n.n.srv.nintendo.net"
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - "*.*.xboxlive.com"
+    - xbox.*.microsoft.com
+    - xnotify.xboxlive.com
+    - +.battlenet.com.cn
+    - +.wotgame.cn
+    - +.wggames.cn
+    - +.wowsgame.cn
+    - +.wargaming.net
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - heartbeat.belkin.com
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "*.router.asus.com"
+    - mesu.apple.com
+    - swscan.apple.com
+    - swquery.apple.com
+    - swdownload.apple.com
+    - swcdn.apple.com
+    - swdist.apple.com
+    - lens.l.google.com
+    - stun.l.google.com
+    - na.b.g-tun.com
+    - "*.square-enix.com"
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.ff14.sdo.com"
+    - ff.dorado.sdo.com
+    - "*.mcdn.bilivideo.cn"
+    - shark007.net
+    - Mijia Cloud
+    - +.cmbchina.com
+    - +.cmbimg.com
+    - local.adguard.org
+    - +.sandai.net
+    - +.n0808.com
+    - +.services.googleapis.cn
+    - +.xn--ngstr-lra8j.cn
+    - +.mijia.tech
+    - +.mi.com
+    - +.xiaomi.net
+    - time.is
+    - +.wechat.com
+    - +.weixin.qq.com
+    - localhost.work.weixin.qq.com
+    - "*.microsoftonline.com"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - +.steamcontent.com
+    - time.windows.com
+    - +.cmpassport.com
+    - +.logon.battle.net
+    - +.logon.battlenet.com.cn
+    - +.pingan.com.cn
+  nameserver:
+    - "https://cloudflare-dns.com/dns-query" # Cloudflare DNS over H3
+    - "https://dns.google/dns-query" # Google DNS over H3
+    - "https://doh.dns.sb/dns-query" # SB DNS over H3
+    - "https://public.dns.iij.jp/dns-query" # IIJ DNS over H3
+  proxy-server-nameserver: # 用于节点域名解析 DNS 服务器
+    - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
+  direct-nameserver: #  用于直连出口域名解析的 DNS 服务器
+    - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
+  nameserver-policy:
+    RULE-SET:CN,Private:
+      - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
+
+pr: &pr { type: select, proxies: [🚀节点选择, 🎯全球直连, ☑️ 手动切换, ♻️自动选择, ⚡️均衡负载, 🔯故障转移, 🇭🇰香港, 🇹🇼台湾, 🇯🇵日本, 🇺🇸美国, 🇸🇬新加坡, 🇬🇧英国, 🇩🇪德国, 🇫🇷法国, 🇨🇦加拿大, 🇦🇺澳大利亚, 🇰🇷韩国, 🇷🇺俄罗斯, 🇳🇱荷兰, 🇮🇳印度, 🇲🇾马来西亚, 🇵🇱波兰, 🇪🇪爱沙尼亚, 🇦🇪阿联酋, 🇳🇬尼日利亚, 🇧🇬保加利亚, 🇸🇨塞舌尔, 🇪🇸西班牙, 🇻🇳越南, 🇸🇽荷属圣马丁, 🇲🇴澳门, 🇵🇭菲律宾, 🇹🇭泰国, 🇲🇳蒙古, 🇫🇮芬兰, 🇸🇪瑞典, 🇦🇹奥地利, 🇧🇷巴西, 🇰🇿哈萨克斯坦, 🇮🇱以色列, 🇦🇪阿拉伯联合酋长国,  🇨🇭瑞士, 🌐其它地区] }
+proxies:
+  - name: "🇨🇳中国"
+    type: direct
+  - name: "🚫拒绝连接"
+    type: reject
+proxy-groups:
+  - { name: 🚀节点选择, type: select, proxies: [♻️自动选择, ☑️ 手动切换, ⚡️均衡负载, 🔯故障转移, 🇨🇳中国, 🇭🇰香港, 🇹🇼台湾, 🇯🇵日本, 🇺🇸美国, 🇸🇬新加坡, 🇬🇧英国, 🇩🇪德国, 🇫🇷法国, 🇨🇦加拿大, 🇦🇺澳大利亚, 🇰🇷韩国, 🇷🇺俄罗斯, 🇳🇱荷兰, 🇮🇳印度, 🇲🇾马来西亚, 🇵🇱波兰, 🇪🇪爱沙尼亚, 🇦🇪阿联酋, 🇳🇬尼日利亚, 🇧🇬保加利亚, 🇸🇨塞舌尔, 🇪🇸西班牙, 🇻🇳越南, 🇸🇽荷属圣马丁, 🇲🇴澳门, 🇵🇭菲律宾, 🇹🇭泰国, 🇲🇳蒙古, 🇫🇮芬兰, 🇸🇪瑞典, 🇦🇹奥地利, 🇧🇷巴西, 🇰🇿哈萨克斯坦, 🇮🇱以色列, 🇦🇪阿拉伯联合酋长国,  🇨🇭瑞士, 🌐其它地区] }
+
+  - { name: ☑️ 手动切换, <<: *u, type: select }
+
+  - { name: 🚫广告拦截, type: select, proxies: [🚫拒绝连接, 🚀节点选择] }
+
+  - { name: 🚫泄漏拦截, type: select, proxies: [🚫拒绝连接, 🚀节点选择] }
+
+  - { name: 🎯全球直连, type: select, proxies: [🇨🇳中国, 🚀节点选择] }
+
+  - { name: ♻️自动选择, <<: *u, tolerance: 1, type: url-test }
+
+  - { name: ⚡️均衡负载, <<: *u, strategy: round-robin, type: load-balance }
+
+  - { name: 🔯故障转移, <<: *u, type: fallback }
+
+  # 应用分组
+  - { name: Apple, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC5UlEQVR4Aa1XQ3hkQRjc+ynX2OZtbfu+tm3b1nlt27a9O4qNS5xxbdd+cTKvXydT31fJoPuvmvf6/ejw86dBlX6CwwQXCq6t5cLaz/xV4+ld6F8r9NdgsCAjIwf5+UUoLCwBydf8jN+JNQbBddzjDQM+gocErRSyWm2QgWu4lntq9/q01UAfwYKCgmK43W6ognu4lzEE+6oamCboLC0tR3vBGIwlOF2vgZm5uQWoqamBXrhcLpw5cxZ79uxFKxCxrGBMxpYZ6Eu33KAXNDp+/AQEBgbzv8Y6Kxi7+e1ofuAKVS/7zp27KE7i6dNnem5HAbVaM3CYh0YF/PWRkdEUpxHoQe3BPNTcQJCgTc9pT0tLh8VigdPpBLFv3368evVKBC7A16/fkJmZKX06qCXo39jAej67Wnjx4iVGjBiJ0NBwBAeHYsCAgTh48BCuXLmCKVOmIioqBrwS4eGRGDduPMxmMzyBWtRsbMCglWSePXuOkJAwCuhmnz79YLVaPSUrGjDWGQhgCvWEyspKdOrURUk8JiYO799/0Exg1KQ2DQxjHveEO3fuKomTPBcyUJPaNLCQxcQTNm3arGzAYDBABmoK7UU0sE7rAC5dukxJPCgoRPy6DMhATWpLDWzbtl35Cty//0DBgOQW3LhxU9nAsGEj4HA4dN0CySHkwvy6bKfECRMmISsrS34IZY8hMXnyFAZV5rFjx6WPoa5E9PnzZ2XxpKQUlJaWaiUik1IqXrBgkZKB06fPwBOKiv4fwA3Ni5FdK3NVVFSgd+++usRnzJilXIzII7JynJOTAxaa7t17Yt68+bh37z6+fPmKCxcuYvToMejVqzdWrVrNMi0rx4cVGxIFKDQkCi2ZAhRaMklTavWqeF6epCltxuneasvLyurb8lmqg0lfLw4m/dozmh0RtBUV6R/NuJZ7avf6eGs4ZeIwMoVmZrYcTvkZv+MarlUZTlUZIDi8diRfX8uFtZ8FqMb7Bx+2VJbBTrlcAAAAAElFTkSuQmCC" }
+  - { name: PikPak, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAZlBMVEUwbv8sbP8nav8iaP8eZv8ZZP8QYf9Xhf9Zhv+as/+xxP/J1f/n7f/2+f////+MqP+Hpf81cf+ovf/r8P/R3P+5yv+ftv97nf9He//f5//a4//G0//M1//T3f8ATP8AWv8ASf+AoP+uMD/lAAAAqElEQVR4AcWSBRLEIAwA0Vogdff/P/JcmHrHuiMkWRzIxdAnZAbjQloWtR9Qy5KCM8M5rgdKI/oBolbguc7fhvhBSPwQ0o/jEeo4SbO8sKwiz9JEaYz4R8qygroGaJIHDTzjqpQfacU4I7ZOyBaNZiKbrjGaiYQejGYikyExmonEGD/N6d1iDVpDvSLTou+LdCoVzlBfyce5HDn5IIp8QiGMD8ImUHIVd+m+Fmzm65GkAAAAAElFTkSuQmCC" }
+  - { name: Google, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAzFBMVEVHcEz////////+/v77+/vx8fL9/f309fX+/v739/f////09PXOz8/5+vr8/P3////////29vf///////84qlf8wAdGiPX8/PzsUUTqQjQsqFLrSj3S3/w6g/TqPCs0gPQgpUf85+bv9P+63sL62Nb+8ef4ycbw+PJkunkeePP81HXwgGv0jhzc5/3o9efX7N5Fr19Uj/WQy562zPr2trL94KDzoJrzoJv80Gjyl5H94qgyh9v7xzihsSp+wYV1sE5ZtXBmmvUynoWKrvzKDGT6AAAAE3RSTlMAW+TTeBLcHLMt1WsKzfUznkBIxSDAuAAAAUZJREFUKJFtktligkAMRUFZxKVuDMOAggpu1apVu+/t//9TkxBU1PsySQ4hlyGadpTd0fWOrV2R3eqyWhe80j1RpYCc7pmcI2tyaZimQw6bOTMplU9hpKIofJSUmgwtTCYq9EFhqKIJ5lbGdGIRAGhUQLNX6wRLOA2Y8vdpuvfVOJtaOjhdhL56yYrjU8cGFsRSLc4/x+DPfxBiSZN6LMlXUYXzVghBT8/7pPkdxFX28yzEO8HYI8U9dlQudMZx3AeInWWe+SrExxrhCLTre3E+M3P7FXznLn887z53a2PwGbjBLLvUP2jcYUC/FYdOA9d1g22SbN1fbizT9bUxXA+QguB4G2GlfbIFqw1i0GCzKmzDDQ1LZgPQLKHk5rAJpmSj0ykH0jxArW4V79yqF1bMkEckjYvFrTWIy0btApFsx7m68Ff1D4OdMHbngtKsAAAAAElFTkSuQmCC" }
+  - { name: Disney, <<: *pr, icon: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nys3NTc3Nzc3MCs1NTA3LTc3Ny03Nzc3NysuNS03KzUtLSs3NTUtNTctKzc1LS03N//AABEIABwAHAMBIgACEQEDEQH/xAAYAAEBAAMAAAAAAAAAAAAAAAAGBQACB//EACYQAAICAQQCAAcBAAAAAAAAAAECAxEEAAUSITFREyMyQUJhoQb/xAAXAQADAQAAAAAAAAAAAAAAAAABBAUD/8QAHBEAAgEFAQAAAAAAAAAAAAAAAAECBBESITED/9oADAMBAAIRAxEAPwDkpjrW8OPLMxWGJ5GAshFJP81Z2raV3CRo7yA4Bb5UAcAAX2Sw9HVXJ/ze7rjQtjzPIHcgQ46OqRjuj4HfRsVY/Lu6b4T4ttXBxBBIPRHketaEaaHZN4yYWxdxxMnKkMbNjy/CdpI2VS4HIgWpAriT0SCB5BIvEyOVZSGBogiiDohuKkx58Ni8J4kgqQQCCCKIIPR1jZ25rfDOyUBrpJCoFeKA8ac7jg49Gk0cysaJSaXTGCeyBGsnF4sj5u4bjnxwJkZUziFGUW5PLlysn903G/QA1HbDa+hpKkKH7axoI7+nWTSQ351MpPZ//9k=" }
+  - { name: Bahamut, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAqFBMVEX////l8/Ocz9ZetL84prRFqbZOrrtuu8aFxc663OLy+/zJ5+sao7MGmakckZ8niZbZ7vHz8/PV1dXBwcGnp6iMi4x2dnh2cXJmX2BjZGZVbXI6e4YAhpZcqrb8/Py6urpXWFpeX2FnXFw/dn6DgoRUYGPq6urS0tJbXF6vrq+hoaJEj5q0tLVLS07k5OSYmJnHx8hpipCPrrI+YGWfn6B/mJw4UVeTk5SHTxhtAAABEUlEQVR4AcWR1WLDIBRAb90FuaQKyRY32Bb5/z9b3fvcg3Nw4DM0mq12u93pdlu9fnPQePLDUX88mUxns9l0Mu7Pr4JQxlFYixPL1XqzHZyl3EVCFdrO8sji63sODxD3bL2mH5BHazvhYeZ6GNnqQaplrKylE4ZJmtEHl+87WKaNDu3s5xeeSSVoJ0wJyLt5qdKC5zlmwvobwjPSFFr5rBzBO2iF2rxx3KYAPrtZDuQ+30dS+4eGf3a6FloEHBVyHrgaU8y5lReu2UsblrCUro6LiEVRKmpBDNJIBPsTOJHgsV/UtRFS10wx9MOAs2W+kwyVSinTyk0LUujcoAIknBfwhLGC/RcezvcMRTei8Dn+AXj2IETchTBOAAAAAElFTkSuQmCC" }
+  - { name: YouTubeMusic, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAllBMVEUAAAD/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/ADP/BDb/F0X/GUf/fZf/zNb/+/z/+vv/AzX/fJb/9ff/rb3/UXT/DT3/u8n/0Nn/L1n/tMP/Cjv/dpH/Bjj/IE3/////2+L/THD/t8X/KFP/jaT/Dz//6e3/ZIP/AjX/J1L/GEaLdxWzAAAAEXRSTlMAE2Ok0vP/Lqf6DZf+K9s48eoeiQYAAAEFSURBVHgBhZMDgsRQDEB/ldq2u9b9D7fIL1d5M3UMdiCIkqwAKLIkCuwnqqbDjq6p7IphWnDBMg12wnbgB47NdlwPfsFzd/3jux8E/iGx2jA2+2EUJ2maxFG4eeFxmIBkeVFWAUBQlUWeAWJifjz+umk7WOnapua5fGWrcf2mH2Bn6BtuQ2NM4PXJW/y+S7Q5r5jARB5f0X2dx2n3UvBIRSbhNSq/zvNycwsrZYQXicl4jSsusCx394BUMV5kpmB9kmATWJKHR/gkSLBiCgN8SoELIE/PLwCQog7QAqSLH0G+XoOk0zwX6u23QpGlJptFt5scGHrkyKGlx55eHGr1iOUl1v8DtTono2oD9lEAAAAASUVORK5CYII=" }
+  - { name: Hulu, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAdVBMVEUiIiIiGyIiHiIiJSInXSUlQiQlTCQnWCUkNyM/9DQxnCshBiEiHyIgACE3wS884zIkNSM+7jMkOyMlRSQ1ui483jIjMiM+7DM96DMypSweACA4xi81ti05zTAvkSohDyEuiCkoXSUqcCctgighEyEsfCghGCKGuFjyAAAAn0lEQVR4Ae2PhQ3AIBAA4evu7sb+IxYn3aHohQsv6B9yYDAM+Oss29EWXO9jwQ/CKKZ3jGJI0izhoGRehH4egVPivErqJqHQVlp2fVEMY1+PQ0DlmE1jGPigfs72Qt/mMeyYbNJxLXIt15F9oD+FpD8L+lMVNKbZOBVF1zCoKWSbamU/tvO64dmv9qZAnn0vdXM3RuRG8X3fMQNEQbl/vDigDNvGADe+AAAAAElFTkSuQmCC" }
+  - { name: TVB, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAw1BMVEVHcEz2+fn7+/vX4+XW4uPd4ub6/P35+flQbXR8jpL0+Pm8zdEbOz0AAADP2d79/f3x9vf/+Pby+fz////y+vv6/P1Qq2Pk9Pnh9Pxt0PNDn1hOpGDFKCqO1+7S6uFFqlns9femHCBdye19AAGVERRJwem5xtC5ISXTNDvd7+3QKzLN2NyhsLhTud9XtGyx18C02MKJpp643sdymYeA1PBbpcWVjZSFu9VyS1Frvo1tMDWAzK0wkEavxcKIa3OZxtuGQkxoQqEPAAAAE3RSTlMA4R16Xf2CN0A3tZkNFtyrqw6tD2qJFAAAAVRJREFUKJGl0tlygjAUgOGooB2X6ZKERcACoaGyVQq4a/v+T9WcRAV7638Dk49lIAehR+uPOvXvZEyxjF6Pzzcfmj6s6Pxns/nhS+VDZW8WYNrkdu3Ztp1v9FaHJmAG5AEK5lI1hF6JQJKFtucpDO0wP8F7ibgRkOfK6lBmNzrgAPUAG3F5WNcf18IGcIyIQL5YQou2VBfYQ1RgWewOh0Px3mZkAonEqjCK3c4wjMKQOY5TSoTHVkY3B6raO+/WoXl5w/I4/9cxuz2Wl9/Q6gtaiU5VKhG+0/qNkyT5VIkzNzpj+SljQM6C2HUTVxUHLAV8QRogWbMgiGOAOA4ilsl/K/68KdDHaxYFqkgZpr7YMk1uGeZ7xiIRY9tU7hgZwYYOJGLKz9v9frtOL5MyUKOgLYlaIJZ1GSLsa9chmk50n1BKfdOEA/H1ybQ7gLOnTrOHJ/0PWMVAGYSMs6AAAAAASUVORK5CYII=" }
+  - { name: Niconico, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAiElEQVR4AWP4jwfQXvIDnMKUPMlwEkLtx6azDCS8n6EMu53dDHv2MHRj2HlbT0FZWdVUmZdX2VRVWVlB7zaSZJmwMgioAgGYIVyGLCmpigIkR6JkM4MkUFpZEgiUgVKSDM1Ikt+76+oYFPSa6+qa9RQY6uq6v6PFyjqGFyDqBcM6ElMCAgysJAApRESPrajriwAAAABJRU5ErkJggg==" }
+  - { name: AbemaTV, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABHklEQVR4AbXQIYyDMBjF8eczO7ecX1IvsDVVmJn6zOBJkDiQsyQoFL6KpJqksg6JmcQnVe/g7jIacnN3P/s33/fwJ9LhircWLniLZItNzxIHKVcaEE9ywkHFjXdcGRxY7iocBO7UofWMKmI5BHkrf4m97rr6JklO40SGJPDjFe+kr+bM9IB/ZjUfYf/TOX2uHWYAkgxI4ldmsZBUW8TdaOBB2tekIIO9LicA1fV7qh4/RlUp4NbouV9IAP2M10FJaCXZCn4JxhEhGvfSknNGGp35rQuS2A1eyjzFKsvzAs1UIKJwWpsWSBSgEYPrmrFrTJs6Z4e2c4j5YhidMU7YUtuh8IhNmR1zb+pkrO+jzSbEFKQoz5dCSnGREgr/6RMAI95h1xarvgAAAABJRU5ErkJggg==" }
+  - { name: TikTok, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAhFBMVEVHcEwbFyAbFR8bFR4gFBsiExkbFiAeFB0kEhgbFiAnERYrAAAuDxIHoJsLAQAC//ed+/e/2NmsACMVERL/////A0gEEhPyrr1XAA8Jv7j/zNfYADgcPT3/6O9T+/S8/vvZ+vmKAibZP2X/S3YA7eT+epYcFR4aFiD5bYsagX2WX23/cpIvOAPpAAAACnRSTlMAb8Hw//9f//+MVnReTQAAAX5JREFUeAFdkwdiwjAQBOWGAgruvTtNKf//X9Yn7gwsnRmvbRVF8fwgDKO7hGHge4pz0iHhF45TQn1y/HzwC4UcMs5yvGBRjg6tiTM2CCm7oTWu74G/misSH4anfCcQRUySplle4JcTfBUQd8JlF8qyrGqpCBQXEL4JTXuRil3gAhZgxMag4l4AFwHJOlypE+QSRXDBldI5RABDDqEf6ifBjNeuM7swDc2doEkA75J5WXMS8nh7e3eCXKT5SFYUVzEJRRHH0cNdmA7gTnATJkJ0GffjP6uKhaeBisx13nlOtykN4BC+YISmS1G/YQpYkPlmYYEALg3EIXwpq3WozRXCd4yCHwg9BpELrLJfMF5GnKL8jcHx5W8rgIl/QdgNbboSST8+wKeqjoRbFZARxlnJqbbi4IHyretgo6/yGpQ4kK88y8Zv0/fNO27WYeLWU8qSAaWO221r6+KGidt941hRbF1bjU/B9qSQs2UFElHG9gzMHRyBfDxvf/sU3v7/p6c6d0XDWZwAAAAASUVORK5CYII=" }
+  - { name: YouTube, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC" }
+  - { name: Twitter, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAA/0lEQVR4AbXPIazCMACE4d+L2qoZFEGSIGcRc/gJJB5XMzGJmK9EN0HMi+qaibkKVF1txdQe4g0YzPK5yyWXHL9TaPNQ89LojH87N1rbJcXkMF4Fk31UMrf34hm14KUeoQxGArALHTMuQD2cAWQfJXOpgTbksGr9ng8qluShJTPhyCdx63POg7rEim95ZyR68I1ggQpnCEGwyPicw6hZtPEGmnhkycqOio1zm6XuFtyw5XDXfGvuau0dXHzJp8pfBPuhIXO9ZK5ILUCdSvLYMpc6ASBtl3EaC97I4KaFaOCaBE9Zn5jUsVqR2vcTJZO1DdbGoZryVp94Ka/mQfE7f2T3df0WBhLDAAAAAElFTkSuQmCC" }
+  - { name: Discord, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAASFBMVEVHcExYZPFXZPJXZPFXZPFXZPFXZPFXZPFYZPJYZfJYZPJXZfFWY/JhbfNsd/OSmvbS1fv////x8/6pr/hQXvLl5/2Bi/XAxfpYg8U1AAAADHRSTlMADzmFwOT8YtP/sloPkm6kAAABAklEQVR4AYWTBbLFIAxFcXs4lf3vFEg1X2+9JzITIZco40IqJQVnlGBRbewtoxFmziI59rCPRGhIfn5hiLKDYSkJkemZz98689IB9YlCjPMlxnBgr4ejgTebcqltqJacLFBDCQPHJZWX0gIOjHB4Lusbrgu4ciKQI3IVRALMGGaAkqgZNdQRK4U8foc0MtQw46oDbmC9pBkQomwHlBPOlOsW9lL2sK1XUknETNnKpNOl5slKm1AQfsFaxw2eF+RQBB9HwLq3PedxG3CPMyc7yufDqF6b5Q2+jfoFf5SPaH/WPXhQuCqvn5bNVqEXR1GzkST7e0wwxeyX0fSO/T/Uf65DBzQNHUMopTvLAAAAAElFTkSuQmCC" }
+  - { name: Spotify, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEL0lEQVR4AWIgFsjdSeKRu51kKXcL0Hs5ANmxhFH4xbY1q2fbtm3PnWe/mIXYtm3bto21Ylur71QmqcndmTWqTt3p7t/qXvN/Y585DCzle7Ogb+3x/Z8RZj4h2gwLzoDiygi2UDDX2PvjEWPPjwkg2QMJ0ByGdjY8JgZXyrLigHBfEYR8auw11yD0qhRkElfhXYWMjwMirMKZVV4JL7qg+KyEZQfIOIOsjgHhVoUMKYe4JpgEc6IE5BASkTkuIMxXPW3l5AzCiWLKFWAE0XWPhPKksEOYlBvKHZHoYERahVJ7H2p+lqGcZ78mTqPrI//QV6ZiV7sQXwAxWL0OzLB7vTe57AZPD9YDwQSwBP7d0B7NSMdAuwL+ik7vLScj37vZawxehTCYWVDGiLIK14z7KZ9/5GpF/1zQiLCKQ1MF2gcUSQxqB5Yj56RXi0L3wzXlEb6SEM9xes3he9kfYFYpI9T3FLLb4vG+VF1FRCnIEoQfIqaXw4CLGh62cUU5D2T9LPgCpj/5bUgKmrHfmPX/rH9E0VvyHqWVjYifCjoNCYr5NR/0QdC2QPYJh56D8Dym8P/vP145DIOhL5iN9ZEqTpDoUVRJ4BIg/+YOtRoy/7ENKnKjyw7+np/9Xg6+BNZ/3aLCykDlJthGHAax8ETzGyel4LzL0Eqy74TxKHmHFi8WEGYVYT3EScfZQBmw1EPpSV1AELUAX+GR0nA3CCKkAZyFsHc/4X+ZPVPjFiwiCoedBslwu4Mmsz7nVwcLlILNbrcah38HRGbuEsGgEjJKabW74GI6k3GdlwFXOPw+IPrnQnhbC5oXwI+gIULb4GV70EKKwBcofQK6KgGRPxVwGFMWGV9At1IR8TbAOwXxnM1HQCjfCl1SGvVxCrqd0A/HoG9QXqNWlJVPhgSEmTU5X+thwAIZMDTDc5yQgjNSCE5rnco7BprdDWrXmhhTnb1VbjIxdoBS8J/HKyfR9moENE3Bt+A1Jt5TPLse5fdJCvA19r4HLaGbpag5DEoQP9ikyecSOU3DP8kVgmgZF4K9nN12PafVQ335uMWKUJillV/Gb+larKtEmvnsyVcIw+7QDNArSnWUTmsfxIFHuYapXAaOC8EhhP0kzzVOwTiwDGwC28Bmez0aNEHYq0SlnIzBkAoaMpKRRgdMh7749cvI9AoTSMjgNXseoRsCQs16yj0dUUT970F7BZ3f3fwSol1y6tGBrK0oH4Wi4x7eL8PICv4Pko9V4XnwIDmFrve9nmQd8+BJ1pYCLuT1T0gFFVuuGUBaeAOUT3Oe6+ksI3LhWT4aB6tm9B8TRaJDjtQEE1NhT89z95oINT+0u+NK5hXDoxuRgsNzcp7FPwZMRY1bhM3UYHHOBY+5cVBDRgPMbrWc+UNYCYx5TBMO6Dm+EKwH68ACMECznZnyqCZcRuWmAMFguk4gWsrvAAAAAElFTkSuQmCC" }
+  - { name: Telegram, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAeFBMVEX////7/v+13fh2w/I5sO8Qp+1twPKq2Pfw+P2My/QpqeoAourU6/q74Pid0vQoqOno9PwAoeZfue0npeVwverI5PcAn+Tf8PstqeeQy/BBrugAneB+xO0lo+EAmOAkoN1KruR1veYkod4wo9sjoNwAl9eTyutcsuGUqcVdAAABAElEQVR4AazPVWKAMBAE0EWCu0OgaOj9b1gGl98+LMtE6R9IsqIypmq68Y1Mxpi1YMxWXrGD5MBsl25c23qwvds4ZM9UPtfzv+xgD83n/9CHaB+IaheHYZJ6+JHlBHJ4RQVOmYZolwRJvMuilEAPUVUEVQwhr7GH2iEyY+AEPAZdwpniJaNom8dYwyaOE4LyJ8enaRDyNSyapUrcwCl4gNrgDXAJRbK1Fw6Bs4UFgd42u24dKW9hTdc00HIdK7doYxro2+HAO4NGNNqOAEOHU8unFl/h0M4V7YuY6TSL6UH0dCOL9ooe4yD4FeKIOofe8nkUi7F2/oYj7XJwMBKdzgHYOCTeRThq/wAAAABJRU5ErkJggg==" }
+  - { name: OpenAI, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABEElEQVR4AbTJIWyDQACG0d+rWsxENQ6Jwi0YFLIWRTKFxecc6pIzJzF4QTKDT23lSby5BPUt6ZJe2i1ze/aJP/x/+ly5/z2PU7ne1rIYm4/tR9YDsNeaFqP3l9wFx6AJgPLylLN6rrpEcBaiQko6dR/YDq4659po55SL8D1ujI0MLGpbl/K84nr8SWbSCBj5lNrvWewQCy1wU0gZsDV+ABi603nHtI9sJ0KW9d/paCxBjwy6wawyQiwdg2VPiZeBY5S10j3XjJRNoxWMqn20DB4tKeeWTUWhDfqJsX9rSRl0gLUQe20McpCSSwWAUxdBgaek0rQ6lQEwFS/JZ1cNebWFrVaElInLlNmv0TNpYgIAMy6KDbFgKo8AAAAASUVORK5CYII=" }
+  - { name: GitHub, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAb1BMVEX////4+Pi3ubtvcnZNUVU+Q0cpLjLr6+x3en0sMTYkKS59gIORk5aUl5n8/Pzw8PFTV1tbX2Pc3d5DSEzn5+g3PECLjpFKTlKFh4qxs7XCxMUuMze/wcLh4uPV1tZzd3o/Q0jOz9CmqKpjZ2qfoaTxAyfNAAABPUlEQVR4AW3TBYKDMBQE0AltAgzuzur9z7ibH5oKfWjc4UEFl6s2Rl8vgcJZGMX04iTEM5UaPomzHA+KkidVAa/WfKNpffMd32oKCHUlWfb27Q19ZSMVrNHGTMDckMtQLqSegdXGpvi3Sf93W9UudRby2WzsEgL4oMvwoqY1AsrQNfFipbXkCGh1BV6oT1pfRwvfOJlo9ZA5NAonStbmB1pawBuDTAgkX4MzV/eC2H3e0C7lk1aBEzd+7SpigJOZVoXx+J5UxzADil+8+KZYoRaK5y2WZxSdgm0j+dakzkIc2kzT6W3IcFnDTzdt4sKbWMqkpNl229IMsfMmg6UaMsJXmv4qCMXDoI4mO5oADwyFDnGoO3KI0jSHQ6E3eJum5TP4Y+EVyUOGXHZjgWd7ZEwOJzZRjbPQt7mF8P4AzsYZpmkFLF4AAAAASUVORK5CYII=" }
+  - { name: Facebook, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAgVBMVEUAAAAQcP8IZf8IZ/8JZv8HZf8IZv8IZv8IaP8JZ/8HZv8IZv8FZf8YcP9FjP+TvP/g7P/////R4/9Vlf8QYP+Es/9kn/8IZv8nef8JZf8AYP/v9f/Q4v/B2P9GjP8HZv+yz//Q4/83g/8HZv/g6/+Dsv8HZf/n7//////////e6//ZLyHjAAAAK3RSTlMAEGCfz+//XyCQj98w/////////xD//6D/kBD/////7////8///5Cgz+/vONkvXQAAAPJJREFUeAF9kkUCwzAMBGVSGMrM3P//rxBaB+e6s0YREFJpw2y0cgS1cT3DQLmNWPjcwK/XA24RWIuEdg4j7OtHUX0NYedxko5+jCeZMc0En8FsVDDHSd1WDoFdIlogX46awopozWA+ythsd7s9ZxymJBkcs3wcMZC0YHDKhDNbKLowuGYC21zINIWUbQ7EwwJT7YogqgTTKaTY4tIp7HDIRadwwzVlKVyv11HG9cekFBxam8FbTInuQ4LCd3cL2Uzd+4UV/VkHfUIgMLRdQuBi7JsCxh5rQEAfrO9NYSWojruwBOOhDoR8PF+j0fuipNX+AmbCIviMIiwCAAAAAElFTkSuQmCC" }
+  - { name: Netflix, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAS1BMVEVHcEzVBhLkCBPbBxKwBQ6xBg/FBhCtBQ7oCBPiBxLkCBOlBA7iBxTkCBPxCBSXAw3kCBOUAw3lCBJtAAuDAQynBQ6xBg+xBRDjBxJ6RmETAAAAGXRSTlMA//+Xgf////9NuP9m0xr/gn7zcf/MtjhOS7LcjwAAAMtJREFUeAF10MESgzAIRVFUCVZqMTW2/f8v7RjYtMNjlcUZbgaKGcZrpus5cx/6nTL2wUCWDm4YeGOFgNlXYKD+iTsG/s0NAolvPhBg88ZOFQAtfcWTquRALBpVEYhzH5YDNvYGBNo6WM4mOZDmjdI0B2zqK5ohEA1FQJufe2iSA2lnNDQHbMezAzYIpmgAoPXRwWKSA6nkjaIQ7GMfywFXioZKDmaiLRoQ3L2BAXmDMVj9FALBzVdg4I2x/IPzNc3z+3p+9n1at4F8vruuDABTzZR7AAAAAElFTkSuQmCC" }
+  - { name: Cloudflare, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAATlBMVEVHcEz5rk34nET5nET3lDf1hSf0gB/0gB31hCf2iS70hCj3iTH5s2Hxiyz6rkb7slD6sU36rEH0fx32jz31kD/3kD30hCn7s076s1H7skd58tzvAAAAGnRSTlMAGlsqQ9T//+xrjb4NFenZff/+5unXqJevNXrcovAAAACLSURBVHgB3czFAYBQDAPQfktw1/0HxR0m4B3bJPJXSmsj36wDCc+XDwGICRnKi8aOwe0R+X6Ei1hOBiRO96oj7vwkzfYn7gibT4xMfAeAp+mn81k0bxYAvbKqyrquwzBspkqbpnneSkDMvGYRTLSIytouyRPxiB2LAkBR2D5fCd5svj/jN1GrSP5jBDuBCe5alxRHAAAAAElFTkSuQmCC" }
+  - { name: Adobe, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAY1BMVEX////+9fX+9/b96+vpAAD4xsXyjYrqEADqAADuVlL2s7HyhoPsNS/61tb2rq3wbGjrIxzrLyn1pqTzmJb60tHvZmP3vLv4wcDzk5HtRkL73t3xeXb97ezsQTzuWlb62djqGQ+7TL0FAAAAwElEQVR4AbWQVQLDMAxDF06GZab7n3KxyvBblWy9gNLH/WLci10zISF1CbU0XtZdQmkgKS7Yc4avC/i2ZqJn9pFmht8T/NHEd0CRwiNjNFFGMT7JAY4uE/Sx6QHayXQWg3Ysm5fLURQ7WFpvBfMSxm5ZNcahskCZbWANh1PZIFK7Mg5Wj02HSNUCI8Bv//l4T00jZw2GJEm+GxsOgrGzZD7/jwgIB59l0ymSGeZzbMV8JBQZoPj0qz4eNmRQtpv0B4L4C2q5kuOCAAAAAElFTkSuQmCC" }
+  - { name: Docker, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAALVBMVEVHcEwdY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+0dY+32uDi8AAAADnRSTlMAyR0P3pCjV9LpuHIxPoqV2p0AAACoSURBVCiRrdHZEoMgDAXQbITV/P/nVlCLBdqHjncmL5wh0QDwRDhn/xXJLP6HrM7Np6paa41mxnut245IRh299+9qY8wOSBIpBAEJgSWkEkVBzHLD0NrZ2VqKGVYUTY4uvGZuFZ21IDAR0Ecx+AMZEmLAXnukQhTHAGKryPm1Szxfx/24CGWF5VpPnK2vf5sMb2sfp95t1PFJt/6ziWAKZUVM6nmm5/MCKYgPErAn/OwAAAAASUVORK5CYII=" }
+  - { name: AppleTV, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAApElEQVR4Ae3OIQiDUBSF4T/bXrSzYrDbjYLwmr2XZavJaHoWk81ejPa4anbBbjuDXVwZdhj76s+9HH6R41oQl1I1gFfgSxirdhoiCgWIHYBzmF1vSytJ8aISZnlrjbWDrNN8p9IIx44ZLT6wtxwbuQZMOC/x6oFJDEoxhcxma8lVrxunzeITrxlgX9VxyizmICmFXor4KIckCR5I2t7Brav5M7wAY4hvgRY0N4EAAAAASUVORK5CYII=" }
+  - { name: IMDB, <<: *pr, icon: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJC4xJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3NTU3Nzc1Nzc3Nzc3Nzc1LTUyKzUwNTU3Nzc3NTUxLS04Ny00NTU1NTgtNTU3Nv/AABEIABwAHAMBEQACEQEDEQH/xAAaAAACAgMAAAAAAAAAAAAAAAAABgQFAQMH/8QAJBAAAgEDAwQDAQAAAAAAAAAAAQIDAAQRBQYxEhMhQUNRkSL/xAAbAQABBQEBAAAAAAAAAAAAAAAAAQIDBAUHBv/EACYRAAIBAwIFBQEAAAAAAAAAAAABEQIDBDFRBRIhodETImHB4RX/2gAMAwEAAhEDEQA/AHmuaG+FAgUAFJICpvnWb7SXshYTCPuwXjvlFbJjgZ05HpgDWzwrFtZCr9RTDXdlbIuVURyik28txiC6Z7gRvb2eCe0nmcSxBmHjjpkFar4ZiSmlq+0PwVlkXCyj3hqtlOWumF5DbPfLKuFjaRYmUKcgcjJ4xmq9XDLFxNULlb5Y+JkesipPq51OiIwdFceAwB815yqmKmti+uqkh6npFhqpjN/AJe2sip/TDAdSrcH2CRU1jKvY8q24n6GVW6a9SLPtfRZ0dJbFWV1KsO4wyCUJ9/caflSriWVTHu0/fI12LexrfaWhPCsTWOUXr+V8nrILZOcnOBzTv6eUnPN22E9C3sXYAAAAwAMAVQbbcsm06IzQAUAFABQB/9k=" }
+  - { name: AmazonPrimeVideo, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAilBMVEUFeP8AdP8Ad/9fov8Aev8gf/8rhf+01/82if8Adv9wq//N4//f7f+Gtv+oyf+w0v91sP/S5v/l8f+81//q9f+Fs/9ppf/X6f8Acv/B1v+Cuf/K3f+Iu/98sf++2f9Bj/9jnf+TwP+yzf9zqP9Rmf+jzP8Ab/8Aaf+cxP9Tnf/G3P9Mlf////8Abf8vOGooAAABHElEQVR4AcWPVXbEMAwAJVOjOA2Dl8IM9z9eGbyv/d8xewwSPBpk8B+MvVcu3seP1R0SBagnh0mUhBLIes7V3rOvn4IwipM0ywstf++aLFHpKRPR+cIjfvGuhYu/8lZW8cl9k2V9qd9kU5ElvSJrO1He2vrUn3Idqd9n8TaQEYreY33DSCIrESlx7Mtx6uZxNMyMCLYMYF58tSatszbmduFoSSiWuI/a2ff11Qu9PhXs1xo/aTd9yd3A84eznnZpSVz2vC9unm7nUjtRuRLYbEJW1DuK1RXK2n4VmDMSI0BiDEl018q+iTxRx5sCYGREOLcGLIybJrnC40CnS2Z/Qbizyk/3D3RnNoR7yECV39xeIgLBHxihMcjgsbwCDZYVxYRdCUMAAAAASUVORK5CYII=" }
+  - { name: Amazon, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAllBMVEVHcEz////////////////////////9/f7///////////////////////////////8AAAADBQX29vb/owD/+vG2trbZ2dmZmZn/26n/8d3v7+//9eb/yHpISUn/1Zr/48GmpqY+Pz8jIyP/rxb/u0oxMjJsbW3j4+PAwcH/6Mj/wGHMzMx7fHxfYGDFxcX/tC0NDg6Li4slqlgLAAAAD3RSTlMAooK1rWYj+jfodsRYfMGCSs7OAAABRElEQVQokW2T2XqDIBCFSZsE0w1EUEFi3Jfsff+XK6ttUubG4fzMcZxvBABEa4j+BVxHQMXbH4UQ8nvaqLqFpFOmgqWLTwReXSayPTaxr3z1Cvh7Z4tijO/MSTvgEmb0vsFxjGtf6qH2rFMi9po+w0vTxJN6XkMQkXEkUIgwRCJl2XBpgvB07m27AZjW5huHc6hSdYnv1SjSABRa+1biKQCZ1q4qyXSSPsJKaxVCY28sHqF5Vc9Og24X+1LfkBX97KdHyKyKh6rBOINPQ5guevRMIFYziCinFvKSmuESuySQINolyZEbSMvW4iXoTA8dd7Z525a8cBdowfP2WEp1tGsyH5Okk/lBRS6Vp+T5rNdkba/nCrtoZY6Q9lmByLXND6W83W6dLOfCKlCt9Wbn26BFsbxZmX7old++vP/7H+DX5xaAHw4uN1n/ebb2AAAAAElFTkSuQmCC" }
+  - { name: Instagram, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAABWVBMVEVyHVFHcEx0Fvp8Fv1yFP1/FfyLCOyfBOmtAeS7AuDHAd3UANjZAs7rD6xyFvzjANTqAMHoA7l2F/yPFfx8GPmfD/zFF/XVWujoZuLyZt3pRt/yGdHyA8j1AKTViPj/9Pr////8g9f9A7r3DZz5vO794Pf+ruj9B6uzFPv7JLv+AJr+BI/+YMP/1vD+AIThG+n9GZn/vd3/YZz+AXP+GoT/r8r+AmT/b5z+HHH+I3f+G2P/ur7+FFD+Klb+fYv/wcr+LUf+LWX+AFn+Nzr+Ohz+RT7+inP+Si7/ztD+TxL/zbv+Wy//9fH+WgL+c1X+ZyX+PUv+Bzv+VXD+cxr/6eL+aQT+eAX+nDj+gwD+gxH+fSL+rYn+jwD+iwL+XhX/3rn/1bH9ZR/+lwP+nwH+xHH8ZC3+qAH+sAD+wAP+x1P+zGb+pl79mQn+uAD9J3T+ygD9O1n8pRL9twuaEkMNAAAAc3RSTlMBAF3G///////////GW9j//9nY/1r///////////7//////8b/////////////////////////////////////////////////////////////////////////////////xf///1v////////Y/9j/2VzGSus+GgAAAeNJREFUeAFFjEWiU0EQRc/tqu74V9wZ4TBiB6wG3wpzVoQ7zHCXeELypHH+KVchJAESaEs0IUv0Zv+7fwLgSAOk9ZFghcnfDw4AAg18cyhWCKNVob9NCZjQLWVrEGhJbJGDoCBpMwCrJTETAKBWgdeRGb4dmJW56PdI/KU1K4X15N+AFsW0+3/WVm7Pa0Pmu4Fh7HcbRIjMIhr3FItUGAH4SNZKjK32YjKpK3Iv0yUY0b8g0Vs0oK+8wbeyMBAQwVeo44R1z7XWq6rqpn5jiTmAeQO3iceg9zkYzKvc71iEmMFbqCJJ4tDcKFrLjX5D/MEdq8GpIUUgd/tgGboTgiUDPDZ44SXNpr0gWRcAgqEmEPJRNVPOxYaOth0oAHdCxWoOzslH+RCvlafYMgFUHvAIHoCjz16io80BrH/j0AAcJ9KWKkhn5sRyGjsDtr/sqyrsWNO1cW9/cDNLZgHLSzVvn+wMq9qbKKwy7TiIaKTW56pzW6Oa+N1OKEQdvvl2RyOE4DEOZurd1cHNeab27tyjOPfhFlucXP04ovF97B6jTOzdJwFLaNAff7N6c8incH1VpiSR67q2VgjzUU7JgbMTiQtFKmgAsCAuczlflmVZn7iGBFc1awB/p4tqUS3LDb8OPwBrSrZIO/KHZwAAAABJRU5ErkJggg==" }
+  - { name: LastFM, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAANlBMVEVHcEzjGyPjGyPjGyPjGyPjGyPjEhziChbiAALoVlrqa23mPULyqKr////76Oj2xMX51tfui42SLFQ8AAAABnRSTlMAEJzp/0HNHKlUAAAA0ElEQVR4AYyQgQrDIAxEbZuaMzZV//9nl1CFzeHYAfrg6amGELb9oK8c+xYsJy1y2j5aZgv7Wu7hWMsj0I/8JyPHQTF+SiBJAlwhS2K8SVzquUAx3Z2GRFEtlw+Aam1Gwl3GrNoANNVkaFTKI3spfL61kFWS6UhDFq0Yi6paSuZZer2gudYcp1q23goGkl+3S5bnQiLtAasqQxKqP6Vqdbgvf1TjIf1UT2M/YfoEs5wkgw2QxQjTx78GC242RMCTH594kwneBIY3aeJN1HizAwAMihJgGrnmbgAAAABJRU5ErkJggg==" }
+  - { name: PayPal, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAZlBMVEVHcEwANosAU7UAMIcAL4cAMIcAMIYAMIcAMIcAMIYAL4UAMIcALIIAIm0AKHUAMIgAGmIAatcAceEAHGQAcOAAb+AAQJoAcuQAYcsATq4AcOAAcOAAcOAAcOAAcOAAcOAAWcAAcOD0W4C6AAAAInRSTlMAEwyCxKlj3f8l8pf///9B/64p///D/////0da1EvylOvca5eJkwAAAM5JREFUeAGN0gUSxCAQRNEQd3fP/S+5mVkGW/3lvJKGwvorxrPfmONSnv+CQShzIwPjUCmwdQy1Es0iHQOmog9HacbL40LFBLGksqpW0AXMy4aXtx0TZuNNMsKyH9pK7nkiWTO2bWsTFnhNsnIabpzF2FjZ00wttBA6ODbH+nZAFHs9wH6EOLUrGYObpOPQKm1yLKJqlaWNTRXaD1tiCEnqFtt49h7Pl/qOmc+eTtpG4wOdcoeWze46wEMHykZc3mN9aW+mt+2A1vvm/XXsAzpXFwDh0r4MAAAAAElFTkSuQmCC" }
+  - { name: Microsoft, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAABnRSTlMAAAAAAABupgeRAAAAWklEQVR4AWP4FKBEJPrip8wABrV7GOp3EYtGhgWjFoxaMGrBqAXf/OSIRD995CEWVO9hqN1FLBoOYNlnotF3iI7/O4lHQOVL3hONPo9agB2NWjBqwagFoxYAAB2zMZ7bQW2tAAAAAElFTkSuQmCC" }
+  - { name: Scholar, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAk1BMVEVHcEz////////L2vX+///E1vRzpvplic/1+f6sxvVZlPY9g/UzZsBQe8qfteHv9P2VsedEiPfq8f6DrvhBhfQ2acN5mdXf6/5pnPTK2/omYcH////l7v2jwvq5zfJ0o/fw9P2dwf4tfPNdjuGQq912p/tPgNSZr998rPzv9PuMtf2ixf+gw/+oyP/G3P/E2v/h6//5/rGiAAAAMXRSTlMAAQ5rHon/+zLB/P//+71O2f9s6f//66/+3v8DQO2e8Fb////////7/4T//////tmVtHyq0wAAAQtJREFUeAF101WWwyAAQNG4QSXu7p79r25gSnMgbd/vjaAcE89zPxNEUfhlkqyosvTdNN0A8HbXvtnjaQATwtvz8WmWbQLHhC50PetqfuCgEKJuPkNSCABBXBRKJ8VJioBCFz6T+D0722QR5b1mLGU5IRpdNZPw7AJACAAA4ZuhimZclBUhM1CUIKhdwlFTcHGRAoDNaJUWp3Tw3/oifi0bQmNoSUOH56prZJZZAMzTkLoQD4ckyHbQKmdt7cn01o0T08jRFfNCNRcMWguDFoOPlcHLlm4lhdt1P2fqRf+CWjifRnaT6rGvJaZy3R8cf8E48Tc0qnXzyT6zCYl1HFZCrQ1zFfg45ulP/gHS1CtqwZl9IgAAAABJRU5ErkJggg==" }
+  - { name: Intel, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcBAMAAACAI8KnAAAALVBMVEVHcEwAbLkAa7cAbLkAabYAaLUAabYAarcAabYAabYAaLUAaLYAabYAaLYAaLZHNpbGAAAAD3RSTlMAGS0Hou1gUYZ4/6xAxNhXAcERAAAAmklEQVR4AWMYKMCoDCKNwWwhAwaTMBCjQgBEzipgsNwDYuw6ACK7ChgYhRkYDBh2KTAwg7kWd/rOvj6w6wWT3wsDINckfNfaVxe9IvTWvtoA4U6wXeOl0FXAsnwWmCtgsdxLcde7d5FQruVyr8NenjPmwLmz9mRtT0kA6rVeDlS8THa1RdQqEJfpoI4B40HGQ8zqRQYyAgMVVAD3mDqG4V8EHAAAAABJRU5ErkJggg==" }
+  - { name: Qobuz, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAgVBMVEVHcEwGBgYAAAAAAAAAAAAGBgYVFRUKCgoAAAAGBgYAAAAAAAAAAAAAAAAAAAAsLCwAAAD///8wMDD29vZHR0evr6/U1NTe3t5sbGw8PDxcXFz9/f3m5uYjIyN+fn6Hh4empqYaGhp2dnZjY2Oampru7u7Ly8uPj4+5ubnExMRRUVGNe5f8AAAAEHRSTlMAjNnqxFy1/hc/UJtygDOngokDvgAAAZBJREFUKJFlk2ujgiAMhkktj9llQxDB+y2r//8Dz4A8WWd+kPG4l21Mxv7scrper7v9D/tnPynUQyflNEJ4+mI7GBS+7PaMj9uwQFR2e85VZt+PPn2zsKGdfIiBc+ALfZeJwwoDYlkBYpju96ngMCGWYvc6TyBWNQgzLLJrC6PBlJjFiROFCrMaev4sWtk1o+A9jIj30MIDiRYAca1HC43uAaBD1DZlCszJhZhreriurQMZyoixhLtAa/pRqa736w4zYOzcYul94WpUnhpEfmEHicrDGxVUIk7eI709O9zx5rx6ptopudzDEtvTJzTtF5RYefdBjaFDl43suVkT0rNNKI83CSU14uApl0pNMQi7ljiDbYJaj/FWWDf2TWDp8Bfq7FkSlaR6dI1XmPENpTtRJcrAXdlZ0wzoT0qNufgLjQoqonnDeLTVrnMUEMWqddp8LERvLN2/aMRzW2NWVSqXC02KscJr7AnGm5vLcn40dZhET2pq8p7cEMzSTa2AwOpFYsNsTftdmp6Pr98hIvYLZI0wRI7GxjsAAAAASUVORK5CYII=" }
+  - { name: Pandora, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAe1BMVEX////JyMf29vXQz87l5eS4t7Xh4ODAv76bm5jJyceOjYp+fXmsq6rs7Ozb2tp0c2+lpKGysa+WlZNdW1b7+/tkY2AtLCQiIBklIxw5NzFramcOCQAfHRYjIRsiIBodGhIAAABEQz8SDgAZFg0nJR89OzdQTkqFhIJ4dnLVUeX+AAABJElEQVR4AXWQB5aDIBQAEVRcewcNSCe5/wW3u2LWDK/x5ndwIoIAQnAFikGSghRdygSDDAOML+VbDouyKupLmTZxi1EBwSU4Lbs6AtfkfdEOLXjB+PkugWk5zYQua1n/i4iz5cb4thEhVQaf3KoJN2JZtOGbyU8WNtoKl2OEcL4we8vDyj2jYkDf8RArRmkwc+0J8/Hfum5jQ3UsKKgtgzqU0mz/VKvYVNClckTc9389MFOAgIGJda+LPNFZKB+CDfUhzbOc0qOseITSf5bdh68aQVR4LkdNHt5gDtbuLQ++SBHi6+MIhPn0iM0IZVMEv3sknpxOAuCqrXH3DuPyMTMrcxAST3Ljhi6LEJTIHIITVedujHLOmXTJ7g5gNzlrVRMd6gPiJRd9O/0ffgAAAABJRU5ErkJggg==" }
+  - { name: SoundCloud, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAIAAAD9b0jDAAABlElEQVR4Aa2RAUQDURjHHwAABYAgECAymUzArEErDYZUFJZkSotqgFBAFlKAgaGQIAsiIgIFDBBBbHfublur3/XZdrqnLd7zc9u9e9/v/d/3VLtgHtXeMw7SXeMg3TaP+swZB+mGcZBmzaNaa8ZBujIYi6qVUXZaWatDVkY108wwr4dv/UHh5CJ26fCrMxrV1/p+QtRh2F8PBfJsJJVzmnMebhChCw77bKeZ0tRSpsHNjlNgXxWt63OrfGzfltzn+7CUUVseC5eHjCnfaF0U0OGy78pATO/lSStljTfNaSgMSlM9RGofLGAUl89jRWJqpa2Pd7xAZFGDkh/erXySgNwGp8YoLiAjhKXhYW0mxIvOp360Tjqncik6EQV1zbcq/C1lmbTiRxpXuCSXWIKIcRAprfCmRBqHXlLothL+dXxqvRi2jpTYdKR+kvfvvVwE9pBt5MbkrvqfPR6Qgkw5M8P27MgvrLlReda25vUsRd0J1ZXyb2BiipbpiQVXitQ0bGIewhsHadQ4SCeNgzRiHuVOmOcbe7MFPYep+uEAAAAASUVORK5CYII=" }
+  - { name: Speedtest, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAWlBMVEVHcEwaGy4aGy4aGy4aGy4aGy4aGy4aGy4aGy4nJzgaGy4aGy4aGy4aGy7///8AAA0TFSoLDSUAABtNTlnLy848PEnn5+hqa3L09PXb2928vMCrq69cXWZ5eYDGufIQAAAADXRSTlMAi9LCdS6pl2r5+QUKXKcZPQAAATZJREFUKJFlk+eigyAMhbEOHCUsd73v/5r3EIWizY+W5ONklQqRrK5k08iqFj/2liqZfN9ZxVFjreFDlbMXAlY7vyzeaQvn9WUdRPoYiW1cNORdZCVkagtgnsPnBjdqUc9OiO1ew/yO42SvugNyKqJ10tyM0dNKhJAKPRdK6ZFWY+Mk1q20aUwECO84E7HQdSYUWeBjLyzcdWQzIbDTiEAtWpyJvElsc8p4IhdaksogyyUMLBzP61I0yi40n9CNYCGHnkPR5gbt3+44f4S3tNad3zHt2dCRpuQ7nq+3YRSUGnUO0yii54ve3oUHL+FaH00mwW5lYSF4fwrb/LjI3IfWkGcIEC2Z7tNlSnaq9GMb92XQwinzJ/Sw7BGVT1aKzNo7ax+vuugj6Yvh99HXbdE0RZv9Hf4BR04iEGEZI50AAAAASUVORK5CYII=" }
+  - { name: Reddit, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAllBMVEVHcEz/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RgD/RQD+////RQD/PAD/NQD+QgDP3+fb6e7n8PLx9vcKEhX0/f/L1tz+jXL718/+XCr4+vv0e1/olIP6pJDi3N3PqqbfNAn7cU//VgP+9vQyODv1bEb+49rdzc3/v66xu77IXlHlXDhqcHKsLABrLBlRGkQ3AAAADnRSTlMAwkSK1tA47GYdh31HPrF7ujQAAAF5SURBVCiRbZOHcoMwDIahyYUkbW3Z2GbvlT3e/+UqQSCkiY4D5A9bvwaWNdpqYTucO/ZiZf23NYLRnPUL2iyfiEvJl5sn+5khLuJacP41sq85gyNje5joZs7kLWCMhUiHk+fxKu9+YswnuOx1zvd5FZRKHYAc0jzlIAFudwCoU9RLGWHuJEIIABHnx7I85jE6eOHyylqg+DCKwnDPHrYPycd0tpbNIWcfLAduU8hPjDEKymXs07spi2GxKA09/FhyCwNrkzB2FruEFpMqPtO3GgEeC5lKmK4aGRGMRFNplqgM8Fgb1eZ+4l8a3hJseXNBN0e1NqUid9oYE7VDzDYyiTE7San0RSi0Nv6p6zyv606+0boYikC5QOoqpZXXm9JaqRT68vWFh8x1XRVcPe8aKHzN4FH4vmUiDdwgwP10D1JUM7RsaDbw7FDgHrc4ZLzv2GOMfof5gLhO0zoG6Bs2DtH3NHYgh1a+s5lNo7l+Q7OhfoWOvX3+Dn+Ini8glo+XBwAAAABJRU5ErkJggg==" }
+  - { name: Blizzard, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwRERERERERERERERERDAYRAAANRWQMVn4KZJMIdKsGgsAAnuoAovADj9MAmOIPLT8URf1MAAAABXRSTlMAQsL/j49+t+oAAAF/SURBVHgBfJDhzuwgCETd5XMQHcD3f9pbNP159yQ2qT1kmLbWPl/5D99Pe/iTH/w98/KTT/v+Fr5NOoouAOr0+y7AvW5dh5lNwVqKoapi4wHzoL11HnxI+ND0MdwzHeFO+n4EicxkJtQnFjF8AXPH1MkFaYL6aHSYG2agp3Rw54a5vgIG/TmrhB3A8u3YnpBXWJznWAIGpAOohFeYTLyCAMaAYHFcoXakdcwSAtK3U/E8XyGqhO8rEAJjPQep/Y1Qct0mAUHQjpaQIwTzTM8r1ChEkJyQd4ez1iRPC1Y2lNz9CN25zvRiwib01Ie9QpebT4kSF8wnOszocoVdwiB3RU3CfEByqi/I3cGPkChxBdTR6QqfEKCEPA14f/eCLgtStw9U4hEMi1H1Nz00PTL3IIwkrrDJjaQqgC5bAEQsZ3pFkKvUihoxw0l6wN1nZFYLJ3316h/+wGJBcZAGm9MUfa+Jw9axMgC5NLmi9Peq34uXfyOYcQhmPYKZl2D2BwAXwB2AkSBcdQAAAABJRU5ErkJggg==" }
+  - { name: Steam, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAGsElEQVR4AaWUBXSTSRSFB5fKpp0AMdxd6jicZnF3d9cUdyq4a3B3ari7u0OKO6TulqZ336SC06Z7z/nOb2/ufSMJy0j/qKoxiapqTrqWp+twwpsIkBSuGkUYU4kS7wgfYgTVVkgdw7IsK2V1QQ5rVXUnQmutqvaGMBDIAENKbfU1Yix55CTMC7ZU2gkUlsoa86yUNQIJZJFA4SG8CEbPfw/Pr7RnFnJ7ll9h72ChsL9IJBP4nyQLL/J0tJDbUYbD78Pzyh1ZPoWDuDagq46AueSVOyCPzA65C9khr8we+eQ/fA/Il+LN6PpjeG6ZE8sjN+FI6AiYQ26ZI3IVcoC0dANUrNkO1et1RrFqzZBf5YKcBR2+r9WlZpgy05VL5iJQEBdyy1xgDjkKOqFQuX+hmbIYl6/fxxd9MEJCw/Hi1Xts3XMY9VoMNNXlkjmbriIjNSt19vLaLLeiTvbcslrzCJgBzc4FJe3a4uDxi0gyGpGUlIQPn/R4TuERkdEQ+qoPwUDNbJp9bQpPHztPZIpsaqAOLX1dZ7rqCWQaWW3YlFRjj+8pCOlevMUgt3mo33IoGrQahsYdR2PTzkNISExEMK1I865jabVqpY3Xp2bS4VM0zJFHXl+bR14Pmac+zb4OOvSdiviERLz98AWNO7hh/MxVeKJ7bVqFQycuo2HrEVi+bj+ETp67AdtSjanxdA+tyBYNVCBeEzATmuFhCHku3IL+o+eZmvleV248ojMwHK/ffkZ4RDRqNRlCh7V+2vjXIpt+eurh+RSuBgKZJS9hU6IZLly5T/tuRPve0+Bz6AJ+Vlx8Atr1mopDx69AqMsAd+Qq2CDNx0DZI+iPoZE3ATOgZXSlfdZAHxSKRIOBGpgB74O/aSAuAW17TaftuJragCf9R7h+7+XN8qua6iwKN0VmyadsAlXlTjh1/g7SNGvxTvQftdA04+916fojatQNb959MW1B7WajaPUaf+8XwBSVu0TmL9ICAstirTLEivCiQKPRiDS9+6hH827TMHbmejx8+oYOpR7+x67Ctd0ErN50EEInqeFCFTrBsmjL7/2i2NVbTw3T522DnXokJKU7wKJYG1iVbAfrUu1/waJ4G7Ts4Y6gkAj8rOevPmLEZC3UHSZD3XGKqW77/jNITDTQzzASrXt70vi2P3saGYDE5ORkfPwcjK37zqBNn1lQ1egNy1IdYV26EyRlO8O6TCdYlOyAMrUG49ptHf4kgyEJn74E49XbL4iMjoXQl8AwDJ2ohaRcF/xDXpIfMTUQju8UHROPi9efYIz7ZlR11YBX6ony9UegeS8vbPc+D9Hs3yS2JjQ8Gs9ff8Z2nwtQd3GHTYUefyKKidX7k9FLmsn+w9fw8Nk73Lj/Epdu6aAPjsCfFB4Rg0XrD6NW22ko31CDAtX6QVKpN3iVvn8igAE4iAwk/uev3AmAxms72g5dihOXHuJnPQr4gK6a1ZA6DIak+gDY1hgIbjcoI7zZ4xefRr/7HGIwGpORkcQe+526g0YDFiHgzVcIxScYsOvIDdRo7w6J0zBwlxGZxcBdhg9nxRpPquDUfe7rCct8cfXBa8TGJWa4GoM9d2CdzyUEhkZh7GJvKNUTYFtHA2k9N3N4La2rqcCsnEfksGk4TmvTcDyKt5qJTlM2Y/fJO/gaEok/adwyfyzZdQ7L916AGMddJ0CqnmgerhO01EQOJm0yjZjqLG06Tc+bToNN4yko0Gw6uszcgWA6VO/1YYijZU7Ty0/BaOy2Dsev69B/7j5IqJ7GZp5mBGWlZjImbeEumsgubeUxT9raEwJOKDvMwf4Lj+B36TE0q49gy4m7WH/kFlpP2w6PbWdw/v5rlO21GLyVGGMmIqspZbZ0ZyZJ288RKKQd510gILDtMBf2I9bhyK0XOE547DiHqVtOw//KU1x68h7qydtg236uqDWXCyKLYOmSdlnIeLfFjHdd5EhXHe++BAKbrotRapAWw9aewMbTD7H13COM33oOlUasF99EjXmQd2qGKfMH8V7LGe+7ivHeKxrwPit1dA+BbZ+VkPRaIa7p9zZ0pW/mITyFdz/KoKzfivdfw/iwjYwPWOPAB6+/yIdsSCbAh6zPIjRWeAgv4TlUeGvZX8XH7mJ8xGZii4KP2jaPa7YHcrcdyBJirPAQXsJz3C6WWVHxbkFOPn6PE5+4T8sne78hDHyyD/6OqKHaifvX8PF7ncgjBx+3h2VZfLo/4zP8c9K1PJ9xYDh3P+jN3Q8FcI9DkdzjsDGFQ1HiHX3zETVUWyFljB/LSP8Bk0NsNaPw10gAAAAASUVORK5CYII=" }
+  - { name: Rockstar, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAnFBMVEX/sQD/swD/sgDYlgDbmADupQD/twDmoAAAAABKMwC6gQChcAD/tQCHXgDfmwD/uQDMjgCBWgBCLgAZEQCdbQCWaACOYwAlGQBiRACueQB5VAD2qwC8ggAsHwAPCQAaJC6WYwDS2eKzdgBVLwCfoKL///9NKQC4vsWxusaEXQ+PVwDk5uqVl5rHgwB7ZEOxtbt/jJ1yYUqMl6VsSwASaS99AAAAv0lEQVR4AcXQwRrBMBBF4SSt6cVQqFIBEADg/d9NqzaV2TvbP/NlEvXf9CcjmgnCohoJrCOU1ZXxsfFFNNlDbgHtOO4AXR+pBxBTJE5qoJ8M0j6GyngWomwkbMsZkDayIRD5b6UxYDnOgIAm9kdpihl95ts8D3XFjC1uU5zkuFiuiCts848zSgfAeuO2SZpVtFyDJzuXtz8oKTqenDtfSMaru7mzEU2H98fl+oxE5deKNHU7Why1XByxoimj/twbM/MMCWZ1ZQAAAAAASUVORK5CYII=" }
+  - { name: PlayStation, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAdVBMVEX////29vbe3t7x8fHW1tZubW51dHWXl5fBwMHs7OxLSUkAAAAQCg0uLS5VU1SIh4jQ0NBPTk8bGBknJCUeHR1/fn4dGRtDQUFpaGj4+PgUEBGfnp7GxsaVlJRjYGGmpaVbWVr6+vrm5ua3treurq42NDV7enpcaE0SAAAA2ElEQVR4Ac3PRWKAMBQEUBySwZ24tfc/Yt3dO9v3NfrxxEn6MmZ5UVbkJaSom7brn8dhnEZgXuJncR03UgD78SwyGnHMEC+hxITlNVSfxu4l7ICaPJIjk9qMbItSzVN72DtJnaao5T4ySnq9DM3QCXLlxBczsElvVtYGYN5lx0CrC40lw7z4jIjhHHXLhctCAyzpJQIr9zIv1cVYl4RlA05kcm7nKjo6ARs/Hzskp7QGlHe3J9kjTlObnTcM+qLp/BjnH/1DgmnDkl2WV0sSPc7ttPi8+//lDAYSExJQE99UAAAAAElFTkSuQmCC" }
+  - { name: Epic, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFFUlEQVR4AbWXA4wsTRSFf9u2zWfbtm3btm3b9tq2bdv2nndPspN0ejk72Uq+QXdX1albF9UvKFuzZk1fFX4U/hcaNQC/Cq8r51RO/rKwRAgW4huIcGGH8EZVAr4WAgQ0MAnCP1UJ+E2IVT7cpEljaGjatAlRX+NzmuvV9lMJyBba1iqgbds2GDRoEIYMGUzQp09vdOrUUfNf7g3kf06AHj26Y/DgQeyDFi2a8x7GjRuLUaNGokOH9moRFNCuJgGivBEmTBiPqKgopKSkICMjAyYmxtiwYT0SExN5TUiGk5MTRo8ehYsXLyImJoZ9sG3bViQkJCAnJweZmZkwNDRA165dKKLuAho3boSpU6egoKAAERERePToEfbt28vBUV5eDldXV9jY2IDtwoXzuHfvHgoLC7Bw4QJ4eLgjNzcXV69ehY+Pj1wvxOzZszim9gLY+f79+6D6Ro3+FwtsANvevXswZcpkFBUVgfcJxS5ZsgRBQYEIDQ1Fx44dcObMaVDw0qVLdBFwD/z/////KQTsxaRJE3lfJWAxAgMDERISgs6dO4ECysrKdBNgZmaGMWNGo2/fPti4cSPY9uzZzf2uUUCXLp0xceIE7N69GwMHDqifD+Tl5aG4uBj8fvr0KbZs2Qy2Gzdu4ODBg+Dqbt++BVpJLYCOx237779/lSGqvRNywEuXLmL16tXYtGkTuKcUVVJSQk+X66tw9+7dKizQBb169cTkyZPUUaC7D1haWoppd2HOnNlo3bpVlVvAHEFnpchly5bqFgU0oVLA/v37aFo+x5XhwYPKAhgF3CZabNWqlfUXYGBggH79+tKMsgUbwXbgwAHlgGoBTGDMhjh//hwFYOXKFfURMBX5+fkESUlJMDY2wq5dOyFNVqYW8IBiuSUwNzfjpAgPD2cmJAxZWlGbVNyYuZ3OJd7/BHp6z3D06FHMmjULjx8/xrx5c5UDMjy5VVw1xo4dw8wJe3t7WFhYSORsoZ9oFwW6QGHNmzfjpGjZsoX4iEao9gI4mLLU8rfmmvK+ulyr0b4aEq6Cpr527Rq2b9/GFTEbcivQs2cPZjdxxv38jfXr12HRooXYunULHY+pmpkSp0+fwqFDB9GtW1eK0M4HRowYzqong5zG2bNnmVqZgpGamsqJMH36NGRlZYlzGrM84/r1a7C1tWWOwOHDh1kHGBFSLS9QpPaJaObMGVLvHZnppMR6YPnyZXB0dICfnx/s7GyxYsVyeHp68hkKlfJ7hQIkCswplP3psPDy8hTnnaldGFItM9nt27dhbW0tWNGsMDQ05Oq5ahw7dhQ3b95kjuBZASdPnsCzZ894ThBrXGfI8hBDgSzddQ7DOAEaEe3atcXQoUN55GJ5ZTLiSrinNCu6d++mEct7zP0SvoMxYEB/HsUYljzK0Z/q5IS/CDGKB9UeTni9uv+K5wVVxCjIElpVJeAjwUZANXCwOlFLrvAXfqju5aSZcKFiK8oFKMOyffv2NDW3g2ZXotkiFiGlyZUkC3eEzsKL6rnVr2f/CusFd6FII2DYsKFSCfeLc5nA29sL/v7+RH570/uZI3gcZwbUTFpSseJdQnPNa1mdGlUKXwhjhSdCuoA2bVpj+PBh2LlzB2NesBCP38V3ADqtZuIcwVSYIXxX7Yq1EPOW0E44LISKc5UxGpgdCX/LtfIKJz4n9BDeq3o03YS8JPwsLBCsK1aaL7gIq4W/hFe0GlQHMZ8Ig4QRwlf1Hec55dlwfI7ygKoAAAAASUVORK5CYII=" }
+  - { name: Supercell, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABL0lEQVR4Ac2RIazDIBCGEZO1NRWT9Xq6z1RW1dXNVeFTVYeqw5+pQOETxNlTqCYIFKZJPYrXLWF9eV7sC4FcvvwXONiXUhSv/Xati8F6Z3GmHdtgtQv77qbsSkyym+RDp+XusHeRT4mqbGH3W8AG0shQl5QAvGSZaRUixFkmGDfVuiSaR/FpC3pVZJoWLWI/kp/ZRSkNWVoHoYnU4z6jkfOUozeIHkxYKSJG6O2mlL8uxI/QN5qvSek4iSSr6smLP7L7ecs1LW85/m8LlOSQkJ9ttVdZlhKRSHGFUEvRzmhA1J/BgrOGaDHenFV+SkZEz4WTJklWlJ1PAyurjxyPY6jh+Rrf0/R01GzR5ZXcuim8kg3s8xZ5RzZHKx3CflhJ574bcOcRgGXy/95y8a38AjD7zRTlLS0fAAAAAElFTkSuQmCC" }
+  - { name: EA, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACMElEQVR4AXxMgwHEQBBMJ7Ft2+gt19mVtG9jjZkh3k3TNKrrOrQsC17XFbZtg2PHTdMgSZIo4p+VZYn6vodjh6Io7nna67qGcRwhTVP0lZznOY7jGKIoglN/ziRJ7vMRdxLBL2THcXbXdeGUsiwDwzDAsuw5OY4D0zTPadv2GROGIei6vh/qogINhaIoeEGpUlVVVdV7IRBABSCCIBCBABQFfUQopD/oiRAI0kcEXlARKghCCYFi9gxa7e52GPe6b86ZM/MUK5FI6Pwg3klGq9XCZDLBeDwGwbvkgUKhwEYOYTM4yO/36yqTyRgSDpupiNlshs1mg/V6jd1uh/l8jk6ng9VqhVwuB3K5ZTabRTqdNpQ0mmzUdZ1e6ZEnfYIqkUgEHMTq9XrweDwQUYKCpqLfUCiESqWC8/mMx+OBy+WC6/WKZrOJwWCA/X6PdruN5/OJYrFIPnPiBlCaplGFGWC73WI6nX4Hxl93u91Qr9cxGo3AWiwW9I5UKkVAxWIx0+fzodvt4n6/43Q64Xg84nA4cBP0+30KoFqtElgul2g0GggEAohGo6aSixGPx1Eul+mZQSGfz4PgnWuS7Ha7YbfbUSqVUKvVkEwmmYeh5FGTLUCCw+GA0+n8AfqV71QDT6/Xy0ZQ1GKxaIolj0MSwuHwH3D91/kCm10u11C9lwRjkhgMBqn6ERwggqb6r7gJSRxC3+/gOwVeyh/LZrNp4nEoTSYHEbxLRkOr1ar95n8B4NFszcKDsPgAAAAASUVORK5CYII=" }
+  - { name: Sony, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAA9ElEQVR4Ac3QIYyEMBAF0ErcWgRe44NCI5uswqxag08Ql6zEo3HoenF+kCS1TWpraiep+bcXtsfc5fzdd9OXdPJH/dvomdwz+6yfQ1VKeiTGKymuGl5/UeMBJA7vhpgTAIRrtpIA2NsxFANFiUMAuDl33LzAMQJp0fUlP/SIvUTA7RvROt3bQqllqjPWFjmJY/B2kkXeUsbc5iG0IP7h69mzU9Vodud9iHyga192MWE5Pqivw2woAIhjxg1ciCVj+o4gcYSWgTAIhDc6H8gCoFIiwJ+XNxsnAL5RGQm+t2cZTrJmd++UqgZjnXeOZq1+T6n+Oh/PdOEnfCBFrgAAAABJRU5ErkJggg==" }
+  - { name: NGA, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAwFBMVEUAAAAxX4ElVnlGb41Zf5osW346ZoY8Z4gvXoAuXX9tjqa7ytZfgp1Mc5Kqvcs9aYgrWn0yYILb4+nY4ecqWn3L1t9DbYuHorUuXH9NdJI3Y4R2lazj6e5QeJPJ1d6PqLs0YoMoWHyVrL61xtJoiqIeUHWbssIqWXxIcY/F0tv///9xkKijt8e0xdHO2eH6+/yRqrxhhZ6xws/w9PajuMe3x9Otv8xDbYynu8koWHvJ1d1JcpBBa4tmiKGBnbK+zNfmfEroAAAAAXRSTlMAQObYZgAAALtJREFUeAE9yAN2BEEUBdD+NW3bdr/YTva/q9Tw+F5BEIiI7URJVlQi4WhNN0zLdlyP6GCS/CCM7DiRNT5EnpRmeVFWddPmKg+v8/phbKe5NKNM47GsGwDjKjO3a0Y80hm4ucXdvfcgPjIe+YYnh56Bl+n1EEwH3tzwHbDZh8dDenv8dDSpvQVEiXhQ2ipEMvvyb7/TQ5CWLj9Bkr5xH4NU9R34XVS6hNQAfx90iMN8iHfol6OP4yZDfvQ/mwkSf4VongkAAAAASUVORK5CYII=" }
+  - { name: HoYoverse, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAvVBMVEVHcEykwv2XuP/UzPiYwP+UvP+DuP+P3/+V6P+V9/6f9/+p+f6a9vyZ9vt7sv99sv98s/+Hzf+U5/+i/P6d8P17sf9/u/+O2/+d+P6r//+x+//V5/t7sf97sf99s/+IuP+ExP99tv+d6P+39Pu6+f/I8/99sf+CsP+Uuv/Z7v/T7v/xyvbt2fnj6f3uzvjzwPT7vvJ/sP9/sP9+sP+xqv67q/2zqv+yqf+vqv+nqv+pqv+qqv+pqv+ZrP+Jr/+E5EiVAAAAPnRSTlMABAkOEihWjrPE0rOKRj+Q5f3//ml0/dCfz/0q+/+kiHZoe42o/oBIHKG0HYZSPmlLzravaVo8TnuMpeH+/YIKh+QAAAFBSURBVHgBZM6DEcAADADA1LZtY//tavePceABQVEMxxD4QwmSohmW5XiB+NZFSVZUVdVWjI6/xgzZVBSLtm3OcV1Nsz244JIfmGEUxYme8lleFC53VdGlJidlVa8Igdebomg72BlLTSxx5Pi55gXUa3p0/0VeagY88MIAo7cvDfykhJfMw6BbRwk5CEscXrpswMY1RwZ+Wc2FEzUCwyAwvmbqFJ/qxbkj9v9nlSVuOOe6ctv9Epp49o4zFj+c1Ug+hFLX8Xgmbhvk+0N94jkey/JqiyQ/X14h98WS39si9w16E6WVd+AKKIn6IAgBQmjCg/AhQKj8/cCjrh3QuykLUDeoYUx2NiX7ASibFiCYl0lqywSlRGPqtm18b1FgWZYykeeCdV3bwKY0Mzv6vu8ao3eKOuaM8TgKR5HLdrBjHqs/PxwqBQezngYAAAAASUVORK5CYII=" }
+  - { name: Fastly, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACRElEQVR4Ad1XA4weQRTe2owanDH/dme2thEUYW0HddiwihrU0YW1jaC2bdu22+m3yfn2vduZu3KT7+d733vzmHFMHx3zJ+uY0gRGOL/60a4/EIYehRi/rV3V2fkdDwwtD3FgBqnwXziglaqhhRyaafxNiAPvUB8b8f8o7Xk1i80wyGoFpyOMEoCsUNOK7AiI+gKvAG2Jxzomu9rmeQIIfgC6iPgOjDYzLuRYmtAKP9C+46OevDN/cnsnMtPBVzoE70YjU0eBNVqotXg/HtHpe2xhQmBKIQRfgLkgiS+YNj8J/2UAX1kOoaZS7VYZAs8Z5WdIT+sIKewIIy8ZnhdaiCpUy9EnT6/T0qCDOkLnG83n9wlzYBGp4MpZFjMkg3ZAzg9TuEEqpMoUi60pmYheDXPgIyF82XqSCnWH4HyfVzA1tSpTtdvsR7m/j+LNU4g6MbE8E66d9g6og+Qc8byy+YVfEBV7y8q445SA/iOqpcO8PUdGId2rY1GETZmong7L12xGYaVF+DcxfDMKKtT2O7CzX/jdDbZpf343yLYFlRo0KEO1TSY+4v9+EYwPhewnZgre0m3blqbCNhjQLITajPc2KLKSOQXXoxQi1B6/by1cX/ZnKhdEKJBo+10+xfupTPln0XTU8UzHueKpm5hJrosX4HTdhIgVLLvS28wK34xvTeiKVvQgMcLDgMv2TpAKggP2xrEL0lUyQW8wUoXsiRBeM8j3lWBuBLo0s91sb5B5Pd8eGMnsd0Beyfxtknb9+iaGfwLLMLV73V9OOAAAAABJRU5ErkJggg==" }
+  - { name: Tor, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAzFBMVEUAAABosERosERosERosERosERosERosERosERosERosERosERosERosERosEQBAQEBAQFosEQBAQEBAQEcMBNIeS9osERNTka4uqcvLyoBAQEBAQH1+N57fXAgEycBAQEBAQFsbWIoFzABAQFdXlTX2cJHKFYBAQE+Pzjm6dCam4tXMWkJBQoBAQEQEA+KjH2pq5l2Q48vKTB+R5hPLV9nOnwBAQHHyrUBAQEgIB0nJCZAJE1uPoVfNnIBAQEBAQEBAQEwGzoYDh0RChQGpkL6AAAAQXRSTlMAIECfYM8QgO9w3zCv/1BQII+A/+//v////98w////QBD//6/////v//////+P///////////P/2D//////7+fcJgRKyAAAAFmSURBVHgBfE+1AQAhEMM9r8D+ozLASdq4YWGtUeG8zoeYgk8inUOpLcp8HyVC4Y0vUPkEoGgfLgBdpu/nBari//659umTrBIcBGIwfIO1PCCboDNlBqdGpy73v9MG1qCWx/xfPM828GbZjvv5jAAkz3+iB4Bh9PFEj4V0JvAwxWuidJp6WV4E98PLCmVdU9ZEyeut/uk6ElFo0tPZjJPcDJgIjdpKMbXT+Wy2uCGWArFWLcpW6WjWEeNWVwaRmMHKTtP1jG3jjhNwbmK9tkMUastAk482ClpbXXzKKYTYdSlGC/MNC6hVy5CoVA9s4iGgkBNYrNcppWrTA/vhkIaBukKUIdnCfAOHYQ+JpJZ0t6hQK+hLeMchcKA2JImyQmqhB7bwNgT8UlpVhbaNRAANA6f9eJOF0zpG2ylSBWfW58koAdvBCY2FApUFE9bh9p4fJRgrTA1cmp139zHfDgl05l2Wq3/vF3/mN1vANq4vAAAAAElFTkSuQmCC" }
+  - { name: 4GTV, <<: *pr, icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABgFBMVEX////2zMzndHXeQELZJCTO5fJ4tttDmswpi8XXFhh1td0bhMPhUFFVo9Dnb3PwbGtnt+L41tbmCgj99vbz+PsNjdDa6/XsnqChzOPdNznUQ0hJlcc/l8zLHSMjgLzEAwkCbrgAhc7SAgHkFBJGlcgUjc8Gd7kfhsT/+vr////p8vn5//8rKChXVFR7uNzhUlTxqqsRDw8AAAA5ODjk4+Op0enVBheuu8QTgM4Dd8v87+7voZzhVkzgSUR0cnL+++j57Z7131Ty1y/w0A+ZxF1zrjCHuUufx2bJ36vy+Oz583316yz06x3//veEg4P6/PaPvTeEtyq814f25Vzz3Srx1wX78rDQ47FwrByHuUCmy3L46nvv2BPz3i7u7e39/vx7siyIuUG21Iz9+df14kj+/fLQ0uT3+vJyrR+Ku0Tp893z3jL58KTx9+j74Cjv4EmAtkH83ht3sTeOvUrs2yuLuj9/tkLz41P464H97YG715L25mT464T47Ib04DyRv1AmyYWZAAAAAXRSTlMAQObYZgAAAaNJREFUeAFc0AV2hEAQANHG3d3d4u7J/Y+V5mHDfpwpFGYUzbAsQ1Ow4nhBFAWegxUtrejlWFZW/HKsSjsVkKbsNEC6RDAATIXAA1gSyXZcTyH5oJ+DIDwHMkTnIE7OQQrsOcjycyBeBkVZXQTkI+q6iduu7AfyEToxzgbjNF2FYnkUMvGZNeNM1xNyhaPwjx9dszh2czvNhl5Z3AG6X4MHHHl8en7BzWt5/Gqkv6H6zZnv8PT0+I4P+fj8QDKsvr5/2PoXxzFAf9Mk9KIWurD673osEBiEgSC436m8oe7u7u6u6Nd76JEOzgwkQTgSjcWjbkDzSCRT6UzW8bk8UcgX7aDk85Ur1QpRs3y9YdJsmYExBV+70zXpgeg3LAZDYxXBEZ3H3cnUKmbAvGEzbC6WvpWPWCc2267Njn7Axf5A+pjZsqdfLBpcDJqnc+KymbDvJrBveLkOqrfutMvc/4LT4/kyBQcLMXinxSCBvhgc2mIww1wMimUx2AEfb/AFZl4vgZDZyyB67HswURyvwkTi723m6lvT3uocNjspretpaQfiB1EGtUPtfghCAAAAAElFTkSuQmCC" }
+
+  # 地区分组
+  - { name: 🇭🇰香港, <<: *u, filter: '(?i)🇭🇰|\bHK\b|香港|Hong Kong' }
+
+  - { name: 🇹🇼台湾, <<: *u, filter: '(?i)🇹🇼|\bTW\b|台湾|Taiwan|Tai wan' }
+
+  - { name: 🇯🇵日本, <<: *u, filter: '(?i)🇯🇵|\bJP\b|日本|Japan' }
+
+  - { name: 🇺🇸美国, <<: *u, filter: '(?i)🇺🇸|\bUS\b|美国|United States|CT' }
+
+  - { name: 🇸🇬新加坡, <<: *u, filter: '(?i)🇸🇬|\bSG\b|新加坡|Singapore' }
+
+  - { name: 🇩🇪德国, <<: *u, filter: '(?i)🇩🇪|\bDE\b|德国|Germany' }
+
+  - { name: 🇫🇷法国, <<: *u, filter: '(?i)🇫🇷|\bFR\b|法国|France' }
+
+  - { name: 🇨🇦加拿大, <<: *u, filter: '(?i)🇨🇦|\bCA\b|加拿大|Canada' }
+
+  - { name: 🇦🇺澳大利亚, <<: *u, filter: '(?i)🇦🇺|\bAU\b|澳大利亚|Australia' }
+
+  - { name: 🇰🇷韩国, <<: *u, filter: '(?i)🇰🇷|\bKR\b|韩国|South Korea' }
+
+  - { name: 🇷🇺俄罗斯, <<: *u, filter: '(?i)🇷🇺|\bRU\b|俄罗斯|Russia' }
+
+  - { name: 🇳🇱荷兰, <<: *u, filter: '(?i)🇳🇱|\bNL\b|荷兰|Netherlands' }
+
+  - { name: 🇮🇳印度, <<: *u, filter: '(?i)🇮🇳|\bIN\b|印度|India' }
+
+  - { name: 🇲🇾马来西亚, <<: *u, filter: '(?i)🇲🇾|\bMY\b|马来西亚|Malaysia' }
+
+  - { name: 🇵🇱波兰, <<: *u, filter: '(?i)🇵🇱|\bPL\b|波兰|Poland' }
+
+  - { name: 🇪🇪爱沙尼亚, <<: *u, filter: '(?i)🇪🇪|\bEE\b|爱沙尼亚|Estonia' }
+
+  - { name: 🇦🇪阿联酋, <<: *u, filter: '(?i)🇦🇪|\bAE\b|阿联酋|United Arab Emirates' }
+
+  - { name: 🇳🇬尼日利亚, <<: *u, filter: '(?i)🇳🇬|\bNG\b|尼日利亚|Nigeria' }
+
+  - { name: 🇧🇬保加利亚, <<: *u, filter: '(?i)🇧🇬|\bBG\b|保加利亚|Bulgaria' }
+
+  - { name: 🇸🇨塞舌尔, <<: *u, filter: '(?i)🇸🇨|\bSC\b|塞舌尔|Seychelles' }
+
+  - { name: 🇬🇧英国, <<: *u, filter: '(?i)🇬🇧|\bGB\b|英国|United Kingdom' }
+
+  - { name: 🇪🇸西班牙, <<: *u, filter: '(?i)🇪🇸|\bES\b|西班牙|Spain' }
+
+  - { name: 🇻🇳越南, <<: *u, filter: '(?i)🇻🇳|\bVN\b|越南|Vietnam' }
+
+  - { name: 🇸🇽荷属圣马丁, <<: *u, filter: '(?i)🇸🇽|\bSX\b|荷属圣马丁|Sint Maarten' }
+
+  - { name: 🇲🇴澳门, <<: *u, filter: '(?i)🇲🇴|\bMO\b|澳门|Macau|Macao' }
+
+  - { name: 🇵🇭菲律宾, <<: *u, filter: '(?i)🇵🇭|\bPH\b|菲律宾|Philippines' }
+
+  - { name: 🇹🇭泰国, <<: *u, filter: '(?i)🇹🇭|\bTH\b|泰国|Thailand' }
+
+  - { name: 🇲🇳蒙古, <<: *u, filter: '(?i)🇲🇳|\bMN\b|蒙古|Mongolia' }
+
+  - { name: 🇫🇮芬兰, <<: *u, filter: '(?i)🇫🇮|\bFI\b|芬兰|Finland' }
+
+  - { name: 🇸🇪瑞典, <<: *u, filter: '(?i)🇸🇪|\bSE\b|瑞典|Sweden' }
+
+  - { name: 🇦🇹奥地利, <<: *u, filter: '(?i)🇦🇹|\bAT\b|奥地利|Austria' }
+
+  - { name: 🇧🇷巴西, <<: *u, filter: '(?i)🇧🇷|\bBR\b|巴西|Brazil' }
+
+  - { name: 🇰🇿哈萨克斯坦, <<: *u, filter: '(?i)🇰🇿|\bKZ\b|哈萨克斯坦|Kazakhstan' }
+
+  - { name: 🇮🇱以色列, <<: *u, filter: '(?i)🇮🇱|\bIL\b|以色列|Israel' }
+
+  - { name: 🇦🇪阿拉伯联合酋长国, <<: *u, filter: '(?i)🇦🇪|\bAE\b|阿拉伯联合酋长国|United Arab Emirates' }
+
+  - { name: 🇨🇭瑞士, <<: *u, filter: '(?i)🇨🇭|\bCH\b|瑞士|Switzerland' }
+
+  - { name: 🌐其它地区, <<: *u, type: select, filter: '(?i)^(?!.*(?:🇨🇳|\bCN\b|中国|China|
+        ‎|🇭🇰|\bHK\b|香港|Hong Kong|
+        ‎|🇹🇼|\bTW\b|台湾|Taiwan|Tai wan|
+        ‎|🇯🇵|\bJP\b|日本|Japan|
+        ‎|🇺🇸|\bUS\b|美国|United States|CT|
+        ‎|🇸🇬|\bSG\b|新加坡|Singapore|
+        ‎|🇩🇪|\bDE\b|德国|Germany|
+        ‎|🇫🇷|\bFR\b|法国|France|
+        ‎|🇨🇦|\bCA\b|加拿大|Canada|
+        ‎|🇦🇺|\bAU\b|澳大利亚|Australia|
+        ‎|🇰🇷|\bKR\b|韩国|South Korea|
+        ‎|🇷🇺|\bRU\b|俄罗斯|Russia|
+        ‎|🇳🇱|\bNL\b|荷兰|Netherlands|
+        ‎|🇮🇳|\bIN\b|印度|India|
+        ‎|🇲🇾|\bMY\b|马来西亚|Malaysia|
+        ‎|🇵🇱|\bPL\b|波兰|Poland|
+        ‎|🇪🇪|\bEE\b|爱沙尼亚|Estonia|
+        ‎|🇦🇪|\bAE\b|阿联酋|United Arab Emirates|
+        ‎|🇳🇬|\bNG\b|尼日利亚|Nigeria|
+        ‎|🇧🇬|\bBG\b|保加利亚|Bulgaria|
+        ‎|🇸🇨|\bSC\b|塞舌尔|Seychelles|
+        ‎|🇬🇧|\bGB\b|英国|United Kingdom|
+        ‎|🇪🇸|\bES\b|西班牙|Spain|
+        ‎|🇻🇳|\bVN\b|越南|Vietnam|
+        ‎|🇸🇽|\bSX\b|荷属圣马丁|Sint Maarten|
+        ‎|🇲🇴|\bMO\b|澳门|Macau|Macao|
+        ‎|🇵🇭|\bPH\b|菲律宾|Philippines|
+        ‎|🇹🇭|\bTH\b|泰国|Thailand|
+        ‎|🇲🇳|\bMN\b|蒙古|Mongolia|
+        ‎|🇫🇮|\bFI\b|芬兰|Finland|
+        ‎|🇸🇪|\bSE\b|瑞典|Sweden|
+        ‎|🇦🇹|\bAT\b|奥地利|Austria|
+        ‎|🇧🇷|\bBR\b|巴西|Brazil|
+        ‎|🇰🇿|\bKZ\b|哈萨克斯坦|Kazakhstan|
+        ‎|🇮🇱|\bIL\b|以色列|Israel|
+        ‎|🇦🇪|\bAE\b|阿拉伯联合酋长国|United Arab Emirates|
+        ‎|🇨🇭|\bCH\b|瑞士|Switzerland)).*$' }
+
+  - { name: 🐟漏网之鱼, <<: *pr }
+
+rules:
+  # 广告拦截
+  - RULE-SET,BlockHttpDNS,🚫广告拦截
+  - RULE-SET,Advertising,🚫广告拦截
+  - RULE-SET,Category-httpdns-cn,🚫广告拦截
+  - RULE-SET,Category-ads-all,🚫广告拦截
+
+  # Apple 相关服务
+  - RULE-SET,Apple,Apple # Apple 相关服务的总规则
+  - RULE-SET,AppStore,Apple # App Store 应用商店
+  - RULE-SET,iCloud,Apple # iCloud 云存储服务
+  - RULE-SET,SystemOTA,Apple # iOS/macOS 系统更新 (OTA)
+  - RULE-SET,AppleID,Apple # Apple ID 登录及验证
+  - RULE-SET,AppleMail,Apple # Apple Mail 邮件服务
+  - RULE-SET,AppleMusic,Apple # Apple Music 音乐流媒体
+  - RULE-SET,AppleNews,Apple # Apple News 新闻订阅
+  - RULE-SET,AppleFirmware,Apple # Apple 设备固件下载
+  - RULE-SET,AppleHardware,Apple # Apple 硬件相关服务
+  - RULE-SET,AppleDaily,Apple # Apple Daily (已停运)
+  - RULE-SET,AppleDev,Apple # Apple 开发者服务
+  - RULE-SET,AppleMedia,Apple # Apple 影音服务 (如 Podcasts)
+  - RULE-SET,FitnessPlus,Apple # Apple Fitness+ 健身订阅
+  - RULE-SET,Siri,Apple # Siri 语音助手
+  - RULE-SET,AppleProxy,Apple # Apple 代理相关流量
+  - RULE-SET,Beats,Apple # Beats 耳机及音频服务
+  - RULE-SET,AppleTV,AppleTV # Apple TV+ 影视订阅服务
+
+  # 其他互联网公司及服务
+  - RULE-SET,PikPak,PikPak # PikPak 云存储
+  - RULE-SET,Google,Google # Google 相关服务
+  - RULE-SET,GoogleDrive,Google # Google Drive 云存储
+  - RULE-SET,GoogleEarth,Google # Google Earth 地图服务
+  - RULE-SET,GoogleFCM,Google # Google Firebase Cloud Messaging (推送)
+  - RULE-SET,GoogleVoice,Google # Google Voice 语音服务
+  - RULE-SET,Chromecast,Google # Google Chromecast 投屏
+  - RULE-SET,TikTok,TikTok # TikTok 短视频平台
+  - RULE-SET,YouTube,YouTube # YouTube 视频平台
+  - RULE-SET,YouTubeMusic,YouTubeMusic # YouTube Music 音乐流媒体
+  - RULE-SET,Twitter,Twitter # Twitter 社交平台
+  - RULE-SET,Discord,Discord # Discord 语音聊天社区
+  - RULE-SET,Spotify,Spotify # Spotify 音乐流媒体
+  - RULE-SET,Telegram,Telegram # Telegram 即时通讯
+  - RULE-SET,OpenAI,OpenAI # OpenAI 相关服务
+  - RULE-SET,Claude,OpenAI # Claude AI 聊天机器人
+  - RULE-SET,Copilot,OpenAI # GitHub Copilot AI 编码助手
+  - RULE-SET,Gemini,OpenAI # Google Gemini AI
+  - RULE-SET,GitHub,GitHub # GitHub 代码托管平台
+  - RULE-SET,Facebook,Facebook # Facebook 社交网络
+  - RULE-SET,Netflix,Netflix # Netflix 影视流媒体
+  - RULE-SET,Disney,Disney # Disney+ 影视订阅服务
+  - RULE-SET,Cloudflare,Cloudflare # Cloudflare CDN 及安全服务
+  - RULE-SET,Bahamut,Bahamut # 巴哈姆特 ACG 论坛
+  - RULE-SET,Hulu,Hulu # Hulu 影视流媒体
+  - RULE-SET,HuluJP,Hulu # Hulu 日本版
+  - RULE-SET,HuluUSA,Hulu # Hulu 美国版
+  - RULE-SET,TVB,TVB # TVB 香港电视台
+  - RULE-SET,Niconico,Niconico # Niconico 日本弹幕视频
+  - RULE-SET,AbemaTV,AbemaTV # AbemaTV 日本网络电视
+  - RULE-SET,Adobe,Adobe # Adobe 相关服务 (如 Creative Cloud)
+  - RULE-SET,Docker,Docker # Docker 容器服务
+  - RULE-SET,IMDB,IMDB # IMDB 电影数据库
+  - RULE-SET,AmazonPrimeVideo,AmazonPrimeVideo # 亚马逊 Prime Video 影视订阅
+  - RULE-SET,Amazon,Amazon # 亚马逊电商
+  - RULE-SET,Instagram,Instagram # Instagram 社交平台
+  - RULE-SET,LastFM,LastFM # Last.fm 音乐推荐
+  - RULE-SET,PayPal,PayPal # PayPal 在线支付
+  - RULE-SET,Bing,Microsoft # Bing 搜索引擎
+  - RULE-SET,Microsoft,Microsoft # Microsoft 相关服务
+  - RULE-SET,Teams,Microsoft # Microsoft Teams 协作工具
+  - RULE-SET,MicrosoftEdge,Microsoft # Microsoft Edge 浏览器
+  - RULE-SET,OneDrive,Microsoft # OneDrive 云存储
+  - RULE-SET,Scholar,Scholar # Google Scholar 学术搜索
+  - RULE-SET,Intel,Intel # Intel 相关服务
+  - RULE-SET,Qobuz,Qobuz # Qobuz 音乐流媒体
+  - RULE-SET,Pandora,Pandora # Pandora 音乐流媒体
+  - RULE-SET,SoundCloud,SoundCloud # SoundCloud 音乐分享平台
+  - RULE-SET,Speedtest,Speedtest # Speedtest 速度测试
+  - RULE-SET,Reddit,Reddit # Reddit 论坛
+  - RULE-SET,4GTV,4GTV # 4GTV 媒体
+
+  # 游戏相关
+  - RULE-SET,Blizzard,Blizzard # 暴雪游戏 (如魔兽世界)
+  - RULE-SET,Steam,Steam # Steam 游戏商店及社区
+  - RULE-SET,Rockstar,Rockstar # Rockstar 游戏 (如 GTA)
+  - RULE-SET,PlayStation,PlayStation # PlayStation 网络
+  - RULE-SET,Epic,Epic # Epic Games 商店
+  - RULE-SET,Supercell,Supercell # Supercell (如部落冲突)
+  - RULE-SET,EA,EA # EA 游戏 (如 FIFA)
+  - RULE-SET,Sony,Sony # Sony 相关服务
+  - RULE-SET,NGA,NGA # NGA 论坛 (游戏社区)
+  - RULE-SET,HoYoverse,HoYoverse # 米哈游 (如原神)
+
+  # Meta-rules-dat 代理规则
+  - RULE-SET,Category-anticensorship,🚀节点选择 # 反审查相关规则集，适用于翻墙和自由访问互联网
+  - RULE-SET,Category-media,🚀节点选择 # 媒体相关规则集，适用于流媒体解锁
+  - RULE-SET,Geolocation-!cn,🚀节点选择 # 国际网络
+  - RULE-SET,Gfw,🚀节点选择 # Gfw 防火墙
+
+  # 全球直连
+  - RULE-SET,Lan,🎯全球直连 # 局域网相关规则
+  - RULE-SET,PrivateTracker,🎯全球直连 # 私有跟踪器，通常用于 BT 下载和种子分享
+  - RULE-SET,DouYin,🎯全球直连 # 抖音，短视频社交平台
+  - RULE-SET,BaiDuTieBa,🎯全球直连 # 百度贴吧，社区论坛
+  - RULE-SET,NetEaseMusic,🎯全球直连 # 网易云音乐，在线音乐流媒体
+  - RULE-SET,GaoDe,🎯全球直连 # 高德地图，地图导航服务
+  - RULE-SET,KugouKuwo,🎯全球直连 # 酷狗&酷我音乐，在线音乐平台
+  - RULE-SET,MeiTuan,🎯全球直连 # 美团，外卖、团购、酒店预订等服务
+  - RULE-SET,SMZDM,🎯全球直连 # 什么值得买，购物推荐和折扣信息
+  - RULE-SET,Tencent,🎯全球直连 # 腾讯相关服务，包括 QQ、腾讯云等
+  - RULE-SET,CCTV,🎯全球直连 # 央视影音，中国中央电视台相关服务
+  - RULE-SET,12306,🎯全球直连 # 12306，中国铁路售票官网
+  - RULE-SET,Sina,🎯全球直连 # 新浪，包含新浪新闻、微博等
+  - RULE-SET,DouBan,🎯全球直连 # 豆瓣，书影音社区
+  - RULE-SET,Hupu,🎯全球直连 # 虎扑，体育和潮流社区
+  - RULE-SET,ABC,🎯全球直连 # ABC，可能是银行或其他服务
+  - RULE-SET,Baidu,🎯全球直连 # 百度，搜索引擎和相关服务
+  - RULE-SET,DingTalk,🎯全球直连 # 钉钉，阿里巴巴企业通讯工具
+  - RULE-SET,iQIYI,🎯全球直连 # 爱奇艺，在线视频平台
+  - RULE-SET,ByteDance,🎯全球直连 # 字节跳动，包含抖音、今日头条等
+  - RULE-SET,SteamCN,🎯全球直连 # Steam 中国版，游戏社区和商店
+  - RULE-SET,GameDownloadCN,🎯全球直连 # 中国区游戏下载
+  - RULE-SET,BiliBili,🎯全球直连 # 哔哩哔哩，二次元弹幕视频网站
+  - RULE-SET,Bilibili-game,🎯全球直连 # bilibili 游戏规则
+  - RULE-SET,NetEase,🎯全球直连 # 网易，涵盖邮箱、游戏等服务
+  - RULE-SET,JingDong,🎯全球直连 # 京东，电商平台
+  - RULE-SET,58TongCheng,🎯全球直连 # 58同城，分类信息平台
+  - RULE-SET,AliPay,🎯全球直连 # 支付宝，在线支付平台
+  - RULE-SET,Pinduoduo,🎯全球直连 # 拼多多，社交电商平台
+  - RULE-SET,WeChat,🎯全球直连 # 微信，社交通讯应用
+  - RULE-SET,Alibaba,🎯全球直连 # 阿里巴巴，涵盖云计算、电商等
+  - RULE-SET,115,🎯全球直连 # 115 网盘，云存储服务
+  - RULE-SET,4399,🎯全球直连 # 4399，网页游戏和小游戏平台
+  - RULE-SET,ChinaMedia,🎯全球直连 # 中国主流媒体
+  - RULE-SET,CN,🎯全球直连
+
+  # ASN 相关规则 (自治系统编号，通常用于识别特定服务的网络流量)
+  - RULE-SET,ASNCN,🎯全球直连 # 中国网络
+
+  # ASN 相关规则 (自治系统编号，通常用于识别特定服务的网络流量)
+  - RULE-SET,ASNAmazon,Amazon # 亚马逊 Amazon 相关 ASN
+  - RULE-SET,ASNCloudflare,Cloudflare # Cloudflare CDN 及安全服务相关 ASN
+  - RULE-SET,ASNFacebook,Facebook # Facebook (Meta) 相关 ASN
+  - RULE-SET,ASNGoogle,Google # Google 相关 ASN (如 Google Search, YouTube, Gmail)
+  - RULE-SET,ASNFastly,Fastly # Fastly CDN 相关 ASN (内容分发网络)
+  - RULE-SET,ASNMicrosoft,Microsoft # Microsoft 相关 ASN (如 OneDrive, Azure, Teams)
+  - RULE-SET,ASNNetflix,Netflix # Netflix 影视流媒体相关 ASN
+  - RULE-SET,ASNTelegram,Telegram # Telegram 即时通讯相关 ASN
+  - RULE-SET,ASNTwitter,Twitter # Twitter 社交平台相关 ASN
+  - RULE-SET,ASNTor,Tor # Tor 网络相关 ASN (匿名浏览服务)
+
+  # 节点代理
+  - MATCH,🐟漏网之鱼
+  - NETWORK,udp,🚫泄漏拦截
+
+ipcidr: &ipcidr { type: http, interval: 600, behavior: ipcidr, format: yaml }
+domain: &domain { type: http, interval: 600, behavior: domain, format: yaml }
+classical: &classical { type: http, interval: 600, behavior: classical, format: yaml }
+
+rule-providers:
+  # 嵌套规则
+  Advertising:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/TG-Twilight/AWAvenue-Ads-Rule@refs/heads/main/Filters/AWAvenue-Ads-Rule-Clash-classical.yaml"
+    path: ./ruleset/Advertising.yaml
+
+  Lan:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml"
+    path: ./ruleset/Lan.yaml
+
+  BlockHttpDNS:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BlockHttpDNS/BlockHttpDNS.yaml"
+    path: ./ruleset/BlockHttpDNS.yaml
+
+  Apple:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml"
+    path: ./ruleset/Apple.yaml
+
+  ChinaMedia:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMedia/ChinaMedia.yaml"
+    path: ./ruleset/ChinaMedia.yaml
+
+  BiliBili:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml"
+    path: ./ruleset/BiliBili.yaml
+
+  NetEase:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEase/NetEase.yaml"
+    path: ./ruleset/NetEase.yaml
+
+  JingDong:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JingDong/JingDong.yaml"
+    path: ./ruleset/JingDong.yaml
+
+  58TongCheng:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/58TongCheng/58TongCheng.yaml"
+    path: ./ruleset/58TongCheng.yaml
+
+  AliPay:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AliPay/AliPay.yaml"
+    path: ./ruleset/AliPay.yaml
+
+  Pinduoduo:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pinduoduo/Pinduoduo.yaml"
+    path: ./ruleset/Pinduoduo.yaml
+
+  WeChat:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/WeChat/WeChat.yaml"
+    path: ./ruleset/WeChat.yaml
+
+  Alibaba:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Alibaba/Alibaba_Classical.yaml"
+    path: ./ruleset/Alibaba.yaml
+
+  115:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/115/115.yaml"
+    path: ./ruleset/115.yaml
+
+  4399:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/4399/4399.yaml"
+    path: ./ruleset/4399.yaml
+
+  PikPak:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PikPak/PikPak.yaml"
+    path: ./ruleset/PikPak.yaml
+
+  Google:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml"
+    path: ./ruleset/Google.yaml
+
+  TikTok:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
+    path: ./ruleset/TikTok.yaml
+
+  YouTube:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
+    path: ./ruleset/YouTube.yaml
+
+  YouTubeMusic:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml"
+    path: ./ruleset/YouTubeMusic.yaml
+
+  Twitter:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml"
+    path: ./ruleset/Twitter.yaml
+
+  Discord:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Discord/Discord.yaml"
+    path: ./ruleset/Discord.yaml
+
+  Spotify:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml"
+    path: ./ruleset/Spotify.yaml
+
+  Telegram:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml"
+    path: ./ruleset/Telegram.yaml
+
+  OpenAI:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml"
+    path: ./ruleset/OpenAI.yaml
+
+  GitHub:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml"
+    path: ./ruleset/GitHub.yaml
+
+  Facebook:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
+    path: ./ruleset/Facebook.yaml
+
+  Netflix:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix_Classical.yaml"
+    path: ./ruleset/Netflix.yaml
+
+  Disney:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml"
+    path: ./ruleset/Disney.yaml
+
+  Cloudflare:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml"
+    path: ./ruleset/Cloudflare.yaml
+
+  Bahamut:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml"
+    path: ./ruleset/Bahamut.yaml
+
+  Hulu:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Hulu/Hulu.yaml"
+    path: ./ruleset/HuluJP.yaml
+
+  TVB:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TVB/TVB.yaml"
+    path: ./ruleset/TVB.yaml
+
+  Niconico:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Niconico/Niconico.yaml"
+    path: ./ruleset/Niconico.yaml
+
+  AbemaTV:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AbemaTV/AbemaTV.yaml"
+    path: ./ruleset/AbemaTV.yaml
+
+  12306:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/12306/12306.yaml"
+    path: ./ruleset/12306.yaml
+
+  ABC:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ABC/ABC.yaml"
+    path: ./ruleset/ABC.yaml
+
+  Adobe:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Adobe/Adobe.yaml"
+    path: ./ruleset/Adobe.yaml
+
+  Amazon:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml"
+    path: ./ruleset/Amazon.yaml
+
+  AmazonPrimeVideo:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AmazonPrimeVideo/AmazonPrimeVideo.yaml"
+    path: ./ruleset/AmazonPrimeVideo.yaml
+
+  AppleDaily:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleDaily/AppleDaily.yaml"
+    path: ./ruleset/AppleDaily.yaml
+
+  AppleDev:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleDev/AppleDev.yaml"
+    path: ./ruleset/AppleDev.yaml
+
+  AppleFirmware:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleFirmware/AppleFirmware.yaml"
+    path: ./ruleset/AppleFirmware.yaml
+
+  AppleHardware:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleHardware/AppleHardware.yaml"
+    path: ./ruleset/AppleHardware.yaml
+
+  AppleID:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleID/AppleID.yaml"
+    path: ./ruleset/AppleID.yaml
+
+  AppleMail:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMail/AppleMail.yaml"
+    path: ./ruleset/AppleMail.yaml
+
+  AppleMedia:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMedia/AppleMedia.yaml"
+    path: ./ruleset/AppleMedia.yaml
+
+  AppleMusic:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMusic/AppleMusic.yaml"
+    path: ./ruleset/AppleMusic.yaml
+
+  AppleNews:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleNews/AppleNews.yaml"
+    path: ./ruleset/AppleNews.yaml
+
+  AppleProxy:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleProxy/AppleProxy.yaml"
+    path: ./ruleset/AppleProxy.yaml
+
+  AppleTV:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleTV/AppleTV.yaml"
+    path: ./ruleset/AppleTV.yaml
+
+  AppStore:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppStore/AppStore.yaml"
+    path: ./ruleset/AppStore.yaml
+
+  Baidu:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Baidu/Baidu.yaml"
+    path: ./ruleset/Baidu.yaml
+
+  BaiDuTieBa:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BaiDuTieBa/BaiDuTieBa.yaml"
+    path: ./ruleset/BaiDuTieBa.yaml
+
+  Beats:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Beats/Beats.yaml"
+    path: ./ruleset/Beats.yaml
+
+  Bing:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml"
+    path: ./ruleset/Bing.yaml
+
+  Blizzard:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Blizzard/Blizzard.yaml"
+    path: ./ruleset/Blizzard.yaml
+
+  ByteDance:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ByteDance/ByteDance.yaml"
+    path: ./ruleset/ByteDance.yaml
+
+  CCTV:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/CCTV/CCTV.yaml"
+    path: ./ruleset/CCTV.yaml
+
+  Chromecast:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Chromecast/Chromecast.yaml"
+    path: ./ruleset/chromecast.yaml
+
+  Claude:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml"
+    path: ./ruleset/Claude.yaml
+
+  Copilot:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml"
+    path: ./ruleset/Copilot.yaml
+
+  DingTalk:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DingTalk/DingTalk.yaml"
+    path: ./ruleset/DingTalk.yaml
+
+  Docker:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Docker/Docker.yaml"
+    path: ./ruleset/Docker.yaml
+
+  DouBan:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouBan/DouBan.yaml"
+    path: ./ruleset/DouBan.yaml
+
+  DouYin:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouYin/DouYin.yaml"
+    path: ./ruleset/DouYin.yaml
+
+  EA:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/EA/EA.yaml"
+    path: ./ruleset/EA.yaml
+
+  Epic:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Epic/Epic.yaml"
+    path: ./ruleset/Epic.yaml
+
+  FitnessPlus:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/FitnessPlus/FitnessPlus.yaml"
+    path: ./ruleset/FitnessPlus.yaml
+
+  GameDownloadCN:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml"
+    path: ./ruleset/GameDownloadCN.yaml
+
+  GaoDe:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GaoDe/GaoDe.yaml"
+    path: ./ruleset/GaoDe.yaml
+
+  Gemini:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml"
+    path: ./ruleset/Gemini.yaml
+
+  GoogleDrive:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GoogleDrive/GoogleDrive.yaml"
+    path: ./ruleset/GoogleDrive.yaml
+
+  GoogleEarth:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GoogleEarth/GoogleEarth.yaml"
+    path: ./ruleset/GoogleEarth.yaml
+
+  GoogleFCM:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GoogleFCM/GoogleFCM.yaml"
+    path: ./ruleset/GoogleFCM.yaml
+
+  GoogleVoice:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GoogleVoice/GoogleVoice.yaml"
+    path: ./ruleset/GoogleVoice.yaml
+
+  HoYoverse:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HoYoverse/HoYoverse.yaml"
+    path: ./ruleset/HoYoverse.yaml
+
+  HuluJP:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HuluJP/HuluJP.yaml"
+    path: ./ruleset/HuluJP.yaml
+
+  HuluUSA:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HuluUSA/HuluUSA.yaml"
+    path: ./ruleset/HuluUSA.yaml
+
+  Hupu:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Hupu/Hupu.yaml"
+    path: ./ruleset/Hupu.yaml
+
+  iCloud:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iCloud/iCloud.yaml"
+    path: ./ruleset/iCloud.yaml
+
+  IMDB:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/IMDB/IMDB.yaml"
+    path: ./ruleset/IMDB.yaml
+
+  Instagram:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Instagram/Instagram.yaml"
+    path: ./ruleset/Instagram.yaml
+
+  Intel:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Intel/Intel.yaml"
+    path: ./ruleset/Intel.yaml
+
+  iQIYI:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iQIYI/iQIYI.yaml"
+    path: ./ruleset/iQIYI.yaml
+
+  KugouKuwo:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/KugouKuwo/KugouKuwo.yaml"
+    path: ./ruleset/KugouKuwo.yaml
+
+  LastFM:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/LastFM/LastFM.yaml"
+    path: ./ruleset/LastFM.yaml
+
+  MeiTuan:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/MeiTuan/MeiTuan.yaml"
+    path: ./ruleset/MeiTuan.yaml
+
+  Microsoft:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml"
+    path: ./ruleset/Microsoft.yaml
+
+  MicrosoftEdge:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/MicrosoftEdge/MicrosoftEdge.yaml"
+    path: ./ruleset/MicrosoftEdge.yaml
+
+  NetEaseMusic:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml"
+    path: ./ruleset/NetEaseMusic.yaml
+
+  NGA:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NGA/NGA.yaml"
+    path: ./ruleset/NGA.yaml
+
+  OneDrive:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OneDrive/OneDrive.yaml"
+    path: ./ruleset/OneDrive.yaml
+
+  Pandora:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pandora/Pandora.yaml"
+    path: ./ruleset/Pandora.yaml
+
+  PayPal:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PayPal/PayPal.yaml"
+    path: ./ruleset/PayPal.yaml
+
+  PlayStation:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PlayStation/PlayStation.yaml"
+    path: ./ruleset/PlayStation.yaml
+
+  PrivateTracker:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PrivateTracker/PrivateTracker.yaml"
+    path: ./ruleset/PrivateTracker.yaml
+
+  Qobuz:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Qobuz/Qobuz.yaml"
+    path: ./ruleset/Qobuz.yaml
+
+  Reddit:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml"
+    path: ./ruleset/Reddit.yaml
+
+  Rockstar:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Rockstar/Rockstar.yaml"
+    path: ./ruleset/Rockstar.yaml
+
+  Scholar:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Scholar/Scholar.yaml"
+    path: ./ruleset/Scholar.yaml
+
+  Sina:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sina/Sina.yaml"
+    path: ./ruleset/Sina.yaml
+
+  Siri:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Siri/Siri.yaml"
+    path: ./ruleset/Siri.yaml
+
+  SMZDM:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SMZDM/SMZDM.yaml"
+    path: ./ruleset/SMZDM.yaml
+
+  Sony:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sony/Sony.yaml"
+    path: ./ruleset/Sony.yaml
+
+  SoundCloud:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SoundCloud/SoundCloud.yaml"
+    path: ./ruleset/SoundCloud.yaml
+
+  Speedtest:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml"
+    path: ./ruleset/Speedtest.yaml
+
+  Steam:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml"
+    path: ./ruleset/Steam.yaml
+
+  SteamCN:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SteamCN/SteamCN.yaml"
+    path: ./ruleset/SteamCN.yaml
+
+  Supercell:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Supercell/Supercell.yaml"
+    path: ./ruleset/Supercell.yaml
+
+  SystemOTA:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SystemOTA/SystemOTA.yaml"
+    path: ./ruleset/SystemOTA.yaml
+
+  Teams:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Teams/Teams.yaml"
+    path: ./ruleset/Teams.yaml
+
+  Tencent:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Tencent/Tencent.yaml"
+    path: ./ruleset/Tencent.yaml
+
+  4GTV:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/antn0000/fenliu@refs/heads/main/4GTV.list"
+    path: ./ruleset/4GTV.text
+    format: text
+
+  ASNCN:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/country/CN/ASN.CN.yaml"
+    path: ./ruleset/ASN.CN.yaml
+
+  ASNAmazon:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Amazon/ASN.Amazon.yaml"
+    path: ./ruleset/ASN.Amazon.yaml
+
+  ASNCloudflare:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Cloudflare/ASN.Cloudflare.yaml"
+    path: ./ruleset/ASN.Cloudflare.yaml
+
+  ASNFacebook:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Facebook/ASN.Facebook.yaml"
+    path: ./ruleset/ASN.Facebook.yaml
+
+  ASNFastly:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Fastly/ASN.Fastly.yaml"
+    path: ./ruleset/ASN.Fastly.yaml
+
+  ASNGoogle:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Google/ASN.Google.yaml"
+    path: ./ruleset/ASN.Google.yaml
+
+  ASNMicrosoft:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Microsoft/ASN.Microsoft.yaml"
+    path: ./ruleset/ASN.Microsoft.yaml
+
+  ASNNetflix:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Netflix/ASN.Netflix.yaml"
+    path: ./ruleset/ASN.Netflix.yaml
+
+  ASNTelegram:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Telegram/ASN.Telegram.yaml"
+    path: ./ruleset/ASN.Telegram.yaml
+
+  ASNTor:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Tor/ASN.Tor.yaml"
+    path: ./ruleset/ASN.Tor.yaml
+
+  ASNTwitter:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/Kwisma/ASN-List@refs/heads/main/data/Twitter/ASN.Twitter.yaml"
+    path: ./ruleset/ASN.Twitter.yaml
+
+  # ------------------------------------------------------------
+  # Meta-rules-dat 规则
+  Category-anticensorship:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/category-anticensorship.yaml"
+    path: ./ruleset/Category-anticensorship.yaml
+
+  Category-media:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/category-media.yaml"
+    path: ./ruleset/Category-media.yaml
+
+  Geolocation-!cn:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/geolocation-!cn.yaml"
+    path: ./ruleset/Geolocation-!cn.yaml
+
+  Bilibili-game:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/bilibili-game.yaml"
+    path: ./ruleset/Bilibili-game.yaml
+
+  Category-httpdns-cn:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/category-httpdns-cn.yaml"
+    path: ./ruleset/Category-httpdns-cn.yaml
+
+  Category-ads-all:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/category-ads-all.yaml"
+    path: ./ruleset/Category-ads-all.yaml
+
+  Private:
+    <<: *classical
+    url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@refs/heads/meta/geo/geosite/classical/private.yaml"
+    path: ./ruleset/Private.yaml
+
+  # ------------------------------------------------------------
+  # Loyalsoldier 规则
+  CN:
+    <<: *domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/CN.yaml
+
+  Gfw:
+    <<: *domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/Gfw.yaml
