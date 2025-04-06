@@ -10,32 +10,3 @@ about:
   time: The site has been running
   cdn: by
   cdn2: Provides CDN support
-message_board:
-  title: Message Board
-  welcome: Welcome to the Message Board of Yumeng's Little Blog! 🎉
-  description: This is a place where you can leave your thoughts, suggestions, or questions anytime. Whether it's a casual greeting or a technical discussion, you're very welcome to leave a message here~
-  description_continued: Feel free to express yourself here, share your daily thoughts, or discuss technology and life together. ✨
-  how_to_message: How to Leave a Message?
-  step1: Fill in your QQ email or click login to display your avatar
-  step2: "Write what you want to say in the comment box, such as:"
-  example1: Hello! Tell me where you're from.
-  example2: Your suggestions and feedback for this site.
-  example3: About my favorite things (cats, sleeping, programming, etc.).
-  example4: Any little things, questions, or ideas you want to share.
-  step3: Leave your name (a cute nickname is fine, don't be shy!).
-  step4: Click the "Submit Message" button, and your message will appear here!
-  guidelines: Message Guidelines
-  friendliness: Friendliness and Respect
-  friendliness_desc: Please follow basic etiquette and remain warm and kind.
-  no_spam: No Spam
-  no_spam_desc: No advertisements or malicious promotions.
-  interaction: Interaction and Sharing
-  interaction_desc: If you have technical questions or insights, feel free to discuss them with me here!
-  no_data: No Data Collection
-  no_data_desc: Messages only exist on this site, with no third-party data collection.
-  my_replies: My Replies
-  reply_intro: The message board is not only your "message wall" but also my "communication corner." Whenever I see interesting questions or feedback, I'll do my best to reply!
-  reply_invitation: If you have questions or just want to chat, feel free to leave a message here, and we can communicate with each other. 💬
-  looking_forward: Looking Forward to Your Message!
-  closing_message: Whether you're here to find answers or just to say hello, I'll be delighted to receive your message! 🌼
-  community_building: Let's leave beautiful memories on this little site and build a warm interactive community together. 🌟

@@ -10,32 +10,3 @@ about:
   time: 本站已运行
   cdn: 由
   cdn2: 提供 CDN 支持
-message_board:
-  title: 留言板 · Message Board
-  welcome: 欢迎来到悠梦君の的小站的留言板！🎉
-  description: 这是一个随时可以留下你心情、想法、建议、问题的地方，不管是轻松的问候，还是技术上的讨论，都非常欢迎你在这里留言~
-  description_continued: 我们可以在这里畅所欲言，分享你的点滴心情，或者一起交流技术和生活的点滴✨
-  how_to_message: 如何留言？
-  step1: 填写qq邮箱或点击登录，可以展示个人头像
-  step2: 在评论框中写下你想说的话，可以是：
-  example1: 你好呀！告诉我你是从哪里来的？
-  example2: 你对本站的建议和反馈
-  example3: 关于我最喜欢的东西（猫猫、睡觉、编程……）
-  example4: 任何你想分享的小事、疑问或想法
-  step3: 留下你的名字（昵称可爱些就好，别害羞！）
-  step4: 点击“提交留言”按钮，你的留言就会出现在这片空间里啦～
-  guidelines: 留言须知
-  friendliness: 友善和尊重
-  friendliness_desc: 请遵守基本的礼仪，保持温暖与善意
-  no_spam: 无垃圾信息
-  no_spam_desc: 不发广告、不做恶意推广
-  interaction: 互动与分享
-  interaction_desc: 如果你有技术问题或心得体会，欢迎留言与我一起探讨！
-  no_data: 不记数据
-  no_data_desc: 留言仅存在本站，无第三方信息收集。
-  my_replies: 我的回复
-  reply_intro: 留言板不仅是你们的“留言墙”，也是我的“交流角”。每当我看到有趣的问题或反馈，我都会尽力回复你！
-  reply_invitation: 如果你有问题，或者只想和我聊聊，我们都可以在这里留下信息，相互沟通。💬
-  looking_forward: 期待你的留言！
-  closing_message: 无论你来是为了找答案，还是想随便打个招呼，我都会很高兴收到你的留言！🌼
-  community_building: 让我们一起在这个小站留下美好记忆，建立一个温暖的互动社区吧～
