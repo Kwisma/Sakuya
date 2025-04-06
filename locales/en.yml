@@ -12,9 +12,8 @@ about:
   cdn2: Provides CDN support
 message_board:
   title: Message Board
-  # welcome:
-  welcome: Welcome to the **Message Board** of **Yumeng's Little Blog**! 🎉
-  description: This is a place where you can **leave your thoughts, suggestions, or questions anytime**. Whether it's a casual greeting or a technical discussion, you're very welcome to leave a message here~
+  welcome: Welcome to the Message Board of Yumeng's Little Blog! 🎉
+  description: This is a place where you can leave your thoughts, suggestions, or questions anytime. Whether it's a casual greeting or a technical discussion, you're very welcome to leave a message here~
   description_continued: Feel free to express yourself here, share your daily thoughts, or discuss technology and life together. ✨
   how_to_message: How to Leave a Message?
   step1: Fill in your QQ email or click login to display your avatar
