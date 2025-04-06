@@ -393,8 +393,6 @@ export default defineValaxyConfig<UserThemeConfig>({
       pageview: true,
       // 评论数
       comment: true,
-      //cdn
-      cdn: 'https://jsd.onmicrosoft.cn/npm/',
     }),
     // Live2d看板娘
     addonLive2d({
