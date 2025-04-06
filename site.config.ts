@@ -19,9 +19,9 @@ export default defineSiteConfig({
   // 网站主标题
   title: '悠梦君の的小站',
   // 网站副标题
-  subtitle: '如果生活没能改变，那就改变生活',
+  subtitle: '在技术与梦想之间，撒一点可爱的魔法',
   // 网站的描述信息，用于 SEO
-  description: '如果因为终有一死就放弃挣扎，那人类的一生也没有意义',
+  description: '愿我们都能被温柔以待，用可爱点亮生活的每一个角落',
   // 作者信息
   author: {
     // 作者的名字
@@ -40,7 +40,7 @@ export default defineSiteConfig({
       message: '思考',
     },
     // 作者的个人简介
-    intro: '',
+    intro: '在这个安静的角落编织代码与梦境，记录每一个灵光一闪的日子。',
   },
   // 是否在文章中显示最后更新时间
   lastUpdated: true,

@@ -79,7 +79,7 @@ acme.sh --install-cert -d '*.example.com' \
 
 ## 反向代理
 
-```conf
+```nginx
 location / {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
@@ -119,5 +119,4 @@ location ^~ /alist {
     # the max size of file to upload
     client_max_body_size 20000m;
 }
-
 ```

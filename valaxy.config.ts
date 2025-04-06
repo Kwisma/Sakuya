@@ -118,6 +118,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         icon: 'i-ri-women-line',
         color: 'hotpink',
       },
+      {
+        name: '留言板',
+        url: '/message/',
+        icon: 'i-ri-message-2-line',
+        color: 'dodgerblue',
+      }
     ],
     // 侧边栏配置
     sidebar: {},

@@ -4,10 +4,10 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <YunCard>
+  <!-- <YunCard>
     <router-link to="/about/adb" target="_blank" class="inline-flex-center gap-1">
       <div class="i-ri-advertisement-line" />
-      <span>{{ t('about.adb') }}</span>
+      <span>...</span>
     </router-link>
-  </YunCard>
+  </YunCard> -->
 </template>
