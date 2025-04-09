@@ -66,21 +66,53 @@ const TARGET_NAME = '子域名'; // 要删除的完整子域名
 // Cloudflare API 基础地址
 const CLOUDFLARE_API_BASE = `https://api.cloudflare.com/client/v4`;
 
-async function listDnsRecords(zoneId, type, name) {
-  const url = `${CLOUDFLARE_API_BASE}/zones/${zoneId}/dns_records?type=${type}&name=${name}`;
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-  });
+async function listAllDnsRecords(zoneId, type, name) {
+  const allRecords = [];
+  let page = 1;
+  let totalPages = 1;
 
-  const data = await res.json();
-  if (!data.success) {
-    throw new Error(`Failed to list DNS records: ${JSON.stringify(data.errors)}`);
+  do {
+    const url = `${CLOUDFLARE_API_BASE}/zones/${zoneId}/dns_records?type=${type}&name=${name}&page=${page}&per_page=100`;
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(`Failed to list DNS records: ${JSON.stringify(data.errors)}`);
+    }
+
+    allRecords.push(...data.result);
+    totalPages = data.result_info.total_pages;
+    page++;
+  } while (page <= totalPages);
+
+  return allRecords;
+}
+
+async function main() {
+  try {
+    console.log(`查找 ${RECORD_TYPE} 类型的记录，名称为 ${TARGET_NAME}...`);
+    const records = await listAllDnsRecords(ZONE_ID, RECORD_TYPE, TARGET_NAME);
+
+    if (records.length === 0) {
+      console.log('没有找到符合条件的 DNS 记录。');
+      return;
+    }
+
+    console.log(`找到 ${records.length} 条记录，开始删除...`);
+    for (const record of records) {
+      console.log(`删除记录 ID: ${record.id}, 内容: ${record.content}`);
+      await deleteDnsRecord(ZONE_ID, record.id);
+    }
+
+    console.log('删除完成 ✅');
+  } catch (err) {
+    console.error('出错啦 ❌', err.message);
   }
-
-  return data.result;
 }
 
 async function deleteDnsRecord(zoneId, recordId) {
@@ -99,28 +131,6 @@ async function deleteDnsRecord(zoneId, recordId) {
   }
 
   return data;
-}
-
-async function main() {
-  try {
-    console.log(`查找 ${RECORD_TYPE} 类型的记录，名称为 ${TARGET_NAME}...`);
-    const records = await listDnsRecords(ZONE_ID, RECORD_TYPE, TARGET_NAME);
-
-    if (records.length === 0) {
-      console.log('没有找到符合条件的 DNS 记录。');
-      return;
-    }
-
-    console.log(`找到 ${records.length} 条记录，开始删除...`);
-    for (const record of records) {
-      console.log(`删除记录 ID: ${record.id}, 内容: ${record.content}`);
-      await deleteDnsRecord(ZONE_ID, record.id);
-    }
-
-    console.log('删除完成 ✅');
-  } catch (err) {
-    console.error('出错啦 ❌', err.message);
-  }
 }
 
 main();
