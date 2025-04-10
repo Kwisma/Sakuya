@@ -33,6 +33,12 @@ ZONE_ID 获取方式：点击域名 > 描述 > API 区域 ID(往下滑动)
 ![](/img/cloudflare/dm1.webp)
 ![](/img/cloudflare/dm2.webp)
 
+## 安装依赖
+
+```bash
+npm i node-fetch
+```
+
 ## 批量删除dns记录
 
 
@@ -50,10 +56,8 @@ const TARGET_NAME = 'sub.mot.ip-ddns.com'; // 要删除的完整子域名
 
 ### 完整代码
 
-ps: 需要添加 [package.json](#依赖)
-
 ```js
-import fetch from 'node-fetch';
+const fetch = require('node-fetch')
 
 // 替换以下常量为你的实际值
 const CLOUDFLARE_API_TOKEN = '令牌'; // 你的 Cloudflare API 令牌
@@ -152,11 +156,9 @@ const FILE_PATH = './dns.txt'; // 数据文件路径，格式为 IP 地址列表
 
 ### 完整代码
 
-ps: 需要添加 [package.json](#依赖)
-
 ```js
-import fs from 'fs/promises';
-import fetch from 'node-fetch';
+const fs = require('fs/promises')
+const fetch = require('node-fetch')
 
 // 配置区：根据你的需求修改
 const CLOUDFLARE_API_TOKEN = '令牌'; // 你的 Cloudflare API 令牌
@@ -225,19 +227,4 @@ async function main() {
 }
 
 main();
-```
-
-## 依赖
-
-将以下添加到`package.json`
-
-然后执行 `npm i`
-
-```json
-{
-  "type": "module",
-  "dependencies": {
-    "node-fetch": "^3.3.2"
-  }
-}
 ```

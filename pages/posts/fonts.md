@@ -22,7 +22,7 @@ tags:
 
 复制保存到 `fonts.sh`
 
-```js
+```bash
 #!/bin/bash
 
 # 搜索中文字体软件包描述

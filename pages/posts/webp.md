@@ -28,8 +28,6 @@ tags:
 
 安装依赖
 
-> package.json 为`"type": "module"`类型
-
 ```bash
 npm install sharp
 ```
@@ -42,9 +40,9 @@ node webp.js 输入图片目录 输出图片目录
 
 ## 源码
 ```js
-import fs from 'fs'
-import path from 'path'
-import sharp from 'sharp';
+const fs = require('fs')
+const path = require('path')
+const sharp = require('sharp')
 // 支持的图片扩展名列表
 const SUPPORTED_EXT = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.webp', '.svg'];
 
