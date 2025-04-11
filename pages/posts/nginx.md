@@ -3,11 +3,12 @@ layout: post
 date: 2025-04-05 17:18:39
 title: cf worker 伪装nginx
 categories:
- - 伪装
+ - 脚本
 tags:
  - Cloudflare
  - Worker
  - Nginx
+ - 伪装
 ---
 
 ## 前言

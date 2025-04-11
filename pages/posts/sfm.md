@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 19:28:46
 title: SFM 自动化代码
 categories:
- - Minecraft
+ - 脚本
 tags:
  - Minecraft
  - SFM

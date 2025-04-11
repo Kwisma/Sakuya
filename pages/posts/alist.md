@@ -4,7 +4,7 @@ date: 2025-03-24 19:33:33
 title: alist自定义美化
 excerpt: 用于美化 Alist 正文的模板，包含多个功能模块和脚本，增强页面的交互性和视觉效果
 categories:
- - Alist
+ - 教程
 tags:
  - Alist
  - 美化

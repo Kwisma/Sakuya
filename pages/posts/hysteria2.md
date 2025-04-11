@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 19:28:46
 title: hysteria2安装教程
 categories:
- - 代理
+ - 脚本
 tags:
  - 代理
  - 网络

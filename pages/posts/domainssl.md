@@ -4,7 +4,7 @@ date: 2025-03-27 19:18:39
 title: Let’s Encrypt 免费申请泛域名 SSL 证书
 excerpt: 使用 Let’s Encrypt 免费申请泛域名 SSL 证书，并实现自动续期的快速指令
 categories:
- - SSL
+ - 脚本
 tags:
  - SSL
  - HTTPS

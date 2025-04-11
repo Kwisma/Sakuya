@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 17:18:39
 title: Linux 添加代理
 categories:
- - 网络配置
+ - 教程
 tags:
  - Linux
  - 代理

@@ -4,7 +4,7 @@ date: 2025-03-24 19:33:39
 title: alist头部美化
 excerpt: 美化 Alist 网页头部的模板，包含多个功能模块和样式配置，旨在增强页面的视觉效果和交互性
 categories:
- - Alist
+ - 教程
 tags:
  - Alist
  - 网页美化

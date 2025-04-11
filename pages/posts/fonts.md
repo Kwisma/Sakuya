@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 19:09:48
 title: Linux一键安装中文字体
 categories:
- - 字体
+ - 脚本
 tags:
  - Linux
  - 字体

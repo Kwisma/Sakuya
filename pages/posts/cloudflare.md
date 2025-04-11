@@ -3,7 +3,7 @@ layout: post
 date: 2025-04-05 17:25:39
 title: cloudflare 批量脚本
 categories:
- - Cloudflare
+ - 脚本
 tags:
  - Cloudflare
  - DNS
