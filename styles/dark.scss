@@ -9,6 +9,13 @@ html.dark {
     backdrop-filter: blur(20px);
   }
 
+  // 背景网格
+  .grid-bg {
+    --size: 0px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: var(--size) var(--size);
+  }
+
   // 主页背景
   .yun-fullscreen-menu {
     background: rgba(0, 0, 0, 0.3);
