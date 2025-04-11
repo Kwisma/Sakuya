@@ -291,7 +291,11 @@ export default defineValaxyConfig<UserThemeConfig>({
     }
   },
   vue: {
-    isCustomElement: [(tag: string) => tag === 'meting-js'],
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => ['meting-js'].includes(tag),
+      },
+    },
   },
   groupIcons: {
     customIcon: {
