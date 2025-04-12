@@ -1,2 +1,9 @@
+# 专用配置文件（_config.yml）
 mermaid:
-  fontFamily: "'SimSun', sans-serif"
+  requirement:
+    riskLevels: ["Critical", "High", "Medium", "Low"]
+    relationTypes: 
+      - "contains"
+      - "copies"
+      - "traces"
+  fontFamily: "'Hiragino Sans GB', 'Microsoft YaHei'"
