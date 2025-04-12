@@ -97,27 +97,12 @@ $$
 \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e \quad \Rightarrow \quad \lim_{days \to 14} \left(1 + \frac{1}{life}\right)^{spring} = \infty
 $$
 
-### 3.2 临终协奏曲指令集
-
-```cpp
-void play_final(MusicSheet sheet) {
-    while(sheet.hasNotes()) {
-        Note n = sheet.getNextNote();
-        if(n.velocity > 0.8f) {
-            ECGMonitor.trigger(Arrhythmia); // 琴键与心电同频
-        }
-        Piano::pressKey(n, Memory::kaori_hands); // 幽灵触键
-    }
-    World::setColorSpace(CMYK); // 世界褪色
-}
-```
-
-### 3.3 季节暴政
+### 3.2 季节暴政
 
 - 四月樱花祭的集体无意识狂欢
 - 薰的14岁：樱花花期精确映射（染井吉野樱平均寿命≈角色生存时长）
 
-### 3.4 琴键墓志铭
+### 3.3 琴键墓志铭
 
 > "你驻足于春色中，于那独一无二的春色之中"
 
