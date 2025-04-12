@@ -18,27 +18,6 @@ tags:
 
 当最后的乐谱在焚化炉中化作纷飞的灰蝶，宫园薰用谎言编织的四月永远定格在了公生的黑白琴键里。这部以古典乐为经纬的作品，本质上是一部关于「存在」与「消逝」的盛大安魂曲。本文将解析那些飘落在五线谱间隙的樱花碎片，如何构建出当代青少年亚文化语境下最凄美的生命寓言。
 
-被篡改的春之谱：
-
-```python
-class April:
-    def __init__(self):
-        self.lies = []  # 存储所有温柔的欺骗
-        
-    def bloom(self, name):
-        if name == "Kaori":
-            raise EternalSpringError("此花永不凋零")
-
-# 运行即崩溃的代码隐喻
-try:
-    sakura = April()
-    sakura.bloom("Kaori")
-except EternalSpringError as e:
-    print(f"捕获到永恒：{e}")
-```
-
-这个永远无法完整执行的程序，恰如宫园薰用谎言构建的春天。当琴声成为存在主义的锚点，我们不得不追问：在必然消逝的宿命中，艺术如何完成对死亡的逆向救赎？
-
 <!-- more -->
 
 ## 一、色彩暴力的叙事悖论
@@ -68,25 +47,6 @@ pie
     "黑白（现实）" : 16
 ```
 
-### 1.4 声波解剖
-
-```json
-{
-  "final_duet": {
-    "BPM": {
-      "begin": 72, 
-      "climax": 128,
-      "silence": 0
-    },
-    "frequency_analysis": {
-      "cello": ["32.7Hz-2.1kHz", "渐弱"],
-      "piano": ["27.5Hz-4.2kHz", "共振异常"]
-    },
-    "meta": "声谱图中可见心跳波纹"
-  }
-}
-```
-
 ---
 
 ## 二、谎言拓扑学：三重叙事迷宫
@@ -99,6 +59,7 @@ A[「讨厌公生」] --> B[「想要合奏」]
 B --> C[「手术成功」]
 C --> D[「永远春天」]
 ```
+
 ```mermaid
 sequenceDiagram
     公生->>薰: 奏响《爱的忧伤》
@@ -125,17 +86,6 @@ $$
 - $\alpha$: 现实腐蚀系数  
 - $\beta$: 谎言渗透率  
 - $\gamma$: 自我欺骗指数
-
-### 2.4 记忆熵增定律
-
-```bash
-# 计算记忆混乱度
-$ entropy-calculate \
-   -f "kaori_memory.bin" \
-   -algorithm shannon \
-   --time-window 2014-04-01:2014-12-31
-> 结果：熵值持续上升直至绝对零度
-```
 
 ---
 
@@ -323,20 +273,43 @@ journey
 ### 九、需求图（Requirement）
 
 ```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "Microsoft YaHei, SimSun",
+    "requirementBackground": "#F8F8FF",
+    "requirementBorderColor": "#483D8B"
+  }
+}}%%
 requirementDiagram
-    requirement 公生重生 {
-        id: REQ_001
-        text: 需在12集内完成音乐人格重构
-        risk: 高
+
+    requirement R1 {
+        id: "REQ-3.1"
+        text: "音乐人格重构"
+        risk: "High"
+        verificationMethod: "艺术评估"
+        owner: "公生"
+        docRef: "EP12"
     }
-    
-    requirement 薰存活 {
-        id: REQ_002
-        text: 维持生命至最终合奏
-        risk: 致命
+
+    requirement R2 {
+        id: "REQ-3.2"
+        text: "生命维持系统"
+        risk: "Critical"
+        verificationMethod: "医疗认证"
+        owner: "薰"
+        docRef: "EP22"
     }
-    
-    REQ_001 --> REQ_002: 依赖关系
+
+    element S1 {
+        id: "ARC-01"
+        type: "时空容器"
+        description: "樱花祭至焚谱时刻"
+    }
+
+    S1 - contains -> R1
+    S1 - contains -> R2
+    R1 - traces -> R2
 ```
 
 ---
@@ -345,16 +318,15 @@ requirementDiagram
 
 ```mermaid
 gitGraph
-    commit id: "初始公生"
-    commit id: "母亲去世"
-    branch 薰的干预
-    checkout 薰的干预
-    commit id: "天台初遇"
-    commit id: "强行合奏"
+    commit id: "Initial"
+    branch feature/kaori
+    checkout feature/kaori
+    commit id: "First Meet"
+    commit id: "Forced Duet"
     checkout main
-    merge 薰的干预 tag: "色彩污染开始"
-    commit id: "黑白键裂变"
-    commit id: "永恒灰阶" tag: "最终提交"
+    merge feature/kaori tag: "Color Invasion"
+    commit id: "Key Fracture"
+    commit id: "Eternal Gray" tag: "Finale"
 ```
 
 ---
@@ -383,6 +355,113 @@ gitGraph
    ```
 
 ---
+
+
+以下是专门为《樱花落尽的协奏曲——论《四月是你的谎言》的悲剧美学》定制的XY象限图与用户旅程图深度应用方案：
+
+---
+
+### XY象限图：悲剧坐标系的四维解构
+
+```mermaid
+%%{init: {'themeVariables': { 'primaryColor': '#fff5ee'}}}%%
+quadrantChart
+    title 悲剧坐标系四维解构
+    x-axis "现实浓度" --> "虚妄浓度"
+    y-axis "存在强度" --> "消逝强度"
+    
+    quadrant-1 "血色浪漫"
+    quadrant-2 "真空地带"
+    quadrant-3 "死亡白噪"
+    quadrant-4 "幽灵回响"
+    
+    "薰的初登场": [0.75, 0.75]
+    "公生失聪期": [0.25, 0.75]
+    "太平间场景": [0.25, 0.25]
+    "公生最终独奏": [0.75, 0.25]
+```
+
+```mermaid
+%%{init: {'themeVariables': {'quadrant1Text': '#FF69B4'}}}%%
+quadrantChart
+    title 观众心理创伤热力图
+    x-axis "剧情进度" --> "终章"
+    y-axis "泪腺激活度" --> "崩溃阈值"
+    
+    quadrant-1 "甜蜜陷阱"
+    quadrant-2 "慢性疼痛"
+    quadrant-3 "延迟伤害"
+    quadrant-4 "瞬时暴击"
+    
+    "天台初遇": [0.18, 0.75]
+    "雨中奔跑": [0.35, 0.68]
+    "手术通知": [0.72, 0.85]
+    "焚谱时刻": [0.92, 0.95]
+```
+
+**象限解析**：
+1. **血色浪漫（高存在/低现实）**：薰强行介入公生世界的瞬间，谎言浓度达峰值
+2. **真空地带（高存在/高现实）**：母亲去世后的绝对音准如同刺眼探照灯
+3. **死亡白噪（低存在/低现实）**：医院仪器声构建的抽象空间
+4. **幽灵回响（低存在/高现实）**：残留琴声在现实世界的量子纠缠
+
+---
+
+### 用户旅程图：眼泪的动力学模型
+```mermaid
+journey
+    title 观众泪腺激活曲线
+    
+    section 引力加速段
+      天台初遇: 8: 期待
+      雨中奔跑: 6: 隐痛
+      首次合奏: 9: 震撼
+    
+    section 洛希极限段
+      医院探视: 10: 窒息
+      病床乐谱: 12: 心颤
+    
+    section 黑洞撕裂段
+      临终信件: 15: 崩溃
+      樱花葬礼: 20: 致盲级泪崩
+    
+    section 引力波余震
+      片尾ED: 18: 延时伤害
+      二刷预警: 10: PTSD触发
+```
+
+---
+
+### 复合应用：时空撕裂算法
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'quadrant1Text': '#8b0000',
+    'quadrant2Text': '#4b0082',
+    'quadrant3Text': '#2f4f4f',
+    'quadrant4Text': '#006400'
+  }
+}}%%
+quadrantChart
+    title Algorithm of spacetime fracture
+    x-axis Reality Anchor --> Illusion Abyss
+    y-axis Life Density --> Death Vacuum
+    
+    quadrant-1 "谎言奇点 (Lie Singularity)"
+    quadrant-2 "记忆坟场 (Memory Graveyard)"
+    quadrant-3 "幽灵剧场 (Ghost Theater)"
+    quadrant-4 "量子坟茔 (Quantum Tomb)"
+    
+    "Cherry Blossom Festival": [0.7, 0.8]
+    "Surgical Light": [0.3, 0.2]
+    "Final Duet": [0.6, 0.4]
+    "Blank Score": [0.9, 0.1]
+```
+
+---
+
+这些可视化模型如同公生重构的听觉世界，将抽象的情感创伤转化为可量化的美学参数。当数据点越过泪腺阈值时，学术论文便完成了向情感共振器的终极进化。
 
 ## 后记
 
