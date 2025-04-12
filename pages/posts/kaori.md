@@ -235,20 +235,57 @@ pie
 
 ```mermaid
 erDiagram
-    MUSIC ||--o{ LIE : "contains"
-    MUSIC {
-        string 曲目编号 PK
-        timestamp 演奏时刻
+    Kousei_Arima {
+        Kousei Arima
     }
-    LIE {
-        int 谎言编号 PK
-        string 伪装内容
-        bool 善意标记
+
+    Kaho_Miyazono {
+        Kaho Miyazono
     }
-    
-    公生 ||--o{ MUSIC : "produces"
-    薰 ||--o{ LIE : "generates"
+
+    Tsubaki_Sawabe {
+        Tsubaki Sawabe
+    }
+
+    Ryota_Watari {
+        Ryota Watari
+    }
+
+    Kousei_Mother {
+        Kousei Mother
+    }
+
+    Kousei_Arima ||--|{ Kaho_Miyazono : "Romantic Love"
+    Kaho_Miyazono ||--|{ Kousei_Arima : "Romantic Love"
+    Kousei_Arima ||--|{ Tsubaki_Sawabe : "Friendship"
+    Kousei_Arima ||--|{ Ryota_Watari : "Friendship"
+    Tsubaki_Sawabe ||--|{ Ryota_Watari : "Friendship"
+    Kousei_Arima ||--|{ Kousei_Mother : "Parental Relationship"
+    Kaho_Miyazono ||--|{ Kousei_Mother : "Teacher-Student"
 ```
+
+#### 角色及其关系：
+1. **阿知贺海斗（Kousei Arima）** - **男主角**
+   - 和 **宫园薰（Kaho Miyazono）** 有浪漫的爱情关系。
+   - 和 **澄田美月（Tsubaki Sawabe）** 有青梅竹马的友情。
+   - 和 **渡亮太（Ryota Watari）** 是朋友。
+   - 和 **有马贤一（Kousei's Mother）** 具有复杂的父母关系，母亲严苛地要求他。
+
+2. **宫园薰（Kaho Miyazono）** - **女主角**
+   - 与 **阿知贺海斗** 有浪漫的爱情关系。
+   - 与 **有马贤一（Kousei's Mother）** 有师生关系。
+
+3. **澄田美月（Tsubaki Sawabe）** - **海斗的青梅竹马**
+   - 与 **阿知贺海斗** 是朋友，且暗恋海斗。
+   - 与 **渡亮太** 是朋友，喜欢亮太但未被回应。
+
+4. **渡亮太（Ryota Watari）** - **海斗的朋友**
+   - 与 **阿知贺海斗** 是朋友。
+   - 与 **澄田美月** 是朋友，美月喜欢他。
+
+5. **有马贤一（Kousei's Mother）** - **海斗的母亲**
+   - 与 **阿知贺海斗** 有压迫的母子关系。
+   - 与 **宫园薰** 有师生关系，要求薰成为顶级小提琴家。
 
 ---
 
@@ -273,44 +310,82 @@ journey
 ### 九、需求图（Requirement）
 
 ```mermaid
-%%{init: {
-  "theme": "base",
-  "themeVariables": {
-    "fontFamily": "Microsoft YaHei, SimSun",
-    "requirementBackground": "#F8F8FF",
-    "requirementBorderColor": "#483D8B"
-  }
-}}%%
 requirementDiagram
 
-    requirement R1 {
-        id: "REQ-3.1"
-        text: "音乐人格重构"
-        risk: "High"
-        verificationMethod: "艺术评估"
-        owner: "公生"
-        docRef: "EP12"
-    }
+requirement Musical_Legacy {
+    id: R1
+    text: "有马公生必须克服钢琴演奏的心理障碍"
+    risk: high
+    verifymethod: test
+}
 
-    requirement R2 {
-        id: "REQ-3.2"
-        text: "生命维持系统"
-        risk: "Critical"
-        verificationMethod: "医疗认证"
-        owner: "薰"
-        docRef: "EP22"
-    }
+functionalRequirement Violin_Duet {
+    id: R1.1
+    text: "宫园薰的小提琴演奏需要与钢琴完美配合"
+    risk: low
+    verifymethod: inspection
+}
 
-    element S1 {
-        id: "ARC-01"
-        type: "时空容器"
-        description: "樱花祭至焚谱时刻"
-    }
+performanceRequirement Spring_Concert {
+    id: R1.2
+    text: "春季音乐会必须达到专业级演出水准"
+    risk: medium
+    verifymethod: demonstration
+}
 
-    S1 - contains -> R1
-    S1 - contains -> R2
-    R1 - traces -> R2
+interfaceRequirement Instrument_Sync {
+    id: R1.2.1
+    text: "钢琴与小提琴声部需要精确同步"
+    risk: medium
+    verifymethod: analysis
+}
+
+physicalRequirement Stage_Lighting {
+    id: R1.2.2
+    text: "舞台灯光需要随音乐情绪变化"
+    risk: medium
+    verifymethod: analysis
+}
+
+designConstraint Music_Score {
+    id: R1.2.3
+    text: "必须使用原版乐谱进行改编"
+    risk: medium
+    verifymethod: analysis
+}
+
+element Final_Performance {
+    type: "test suite"
+    docRef: concert_hall/schedule
+}
+
+element Heart_Score {
+    type: "word doc"
+    docRef: scores/spring_sonata
+}
+
+element Competition_Sim {
+    type: simulation
+}
+
+Final_Performance - satisfies -> Violin_Duet
+Musical_Legacy - traces -> Violin_Duet
+Musical_Legacy - contains -> Spring_Concert
+Spring_Concert - contains -> Instrument_Sync
+Instrument_Sync - derives -> Stage_Lighting
+Stage_Lighting - refines -> Music_Score
+Competition_Sim - verifies -> Stage_Lighting
+Musical_Legacy <- copies - Heart_Score
 ```
+
+这个需求图通过以下方式映射原作：
+1. 核心需求围绕公生的音乐重生之旅
+2. 功能需求体现薰与公生的二重奏关系
+3. 性能需求对应重要演出场景
+4. 接口需求展现乐器配合细节
+5. 物理需求包含舞台效果要素
+6. 设计约束强调乐谱的核心地位
+7. 验证元素对应剧中关键事件（比赛模拟、最终演奏等）
 
 ---
 
