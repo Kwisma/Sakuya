@@ -22,6 +22,7 @@ tags:
 全部dns路由国外,仅包含在`RULE-SET:CN,Private`的dns路由国内以防止 DNS 泄露，您可以通过以下配置启用增强的 DNS 模块。以下是配置项的简要说明：
 
 - `enable`: 启用 DNS 模块。
+- `cache-algorithm`: 缓存算法，默认 `arc`。
 - `prefer-h3`: 优先使用 HTTP/3 协议进行 DNS 查询。
 - `use-hosts` 和 `use-system-hosts`: 使用自定义和系统的 hosts 文件条目。
 - `respect-rules`: 确保 DNS 查询遵守路由规则。
@@ -41,6 +42,7 @@ tags:
 ```yaml
 dns:
   enable: true # 启用 DNS 模块
+  cache-algorithm: arc # 缓存算法，参数:lru 最近最少使用，arc 自适应替换缓存
   prefer-h3: true # DOH 优先使用 http/3
   use-hosts: true # 使用配置中的 hosts 文件条目
   use-system-hosts: true # 使用系统的 hosts 文件条目
