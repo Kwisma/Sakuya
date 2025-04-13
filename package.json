@@ -12,16 +12,14 @@
     "new": "valaxy new",
     "serve": "vite preview"
   },
-  "dependencies": {
+  "devDependencies": {
+    "typescript": "^5.8.2",
     "valaxy": "0.22.17",
     "valaxy-addon-components": "^0.1.0",
     "valaxy-addon-live2d": "^0.3.0",
     "valaxy-addon-waline": "^0.2.0",
     "valaxy-theme-yun": "0.22.17",
     "vue-gtag-next": "^1.14.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

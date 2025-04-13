@@ -274,7 +274,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       // 启用 RSS
       enable: true,
       // 全文输出
-      fullText: true,
+      fullText: false,
     }
   },
   // Markdown 功能
