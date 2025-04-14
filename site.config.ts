@@ -17,11 +17,11 @@ export default defineSiteConfig({
   // 网站的完整 URL，用于生成 RSS 和静态站点
   url: 'https://www.mot.cloudns.biz',
   // 网站主标题
-  title: '悠梦君の的小站',
+  title: '悠梦君の小站',
   // 网站副标题
   subtitle: '在技术与梦想之间，撒一点可爱的魔法',
   // 网站的描述信息，用于 SEO
-  description: '愿我们都能被温柔以待，用可爱点亮生活的每一个角落',
+  description: '悠梦君の个人博客网站，记录技术分享、生活点滴以及灵感创作。打造一个温馨且实用的个人空间。',
   // 作者信息
   author: {
     // 作者的名字
@@ -45,7 +45,7 @@ export default defineSiteConfig({
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
   // 您网站的图标
-  favicon: '/img/avatar/avatar.webp',
+  favicon: '/img/avatar/6624140365a01.webp',
   // RSS源和图标
   feed: {
     // RSS 源的名称

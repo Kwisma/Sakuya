@@ -1,51 +1,31 @@
-# create-valaxy
+## 项目描述
+本项目是一个基于 `Valaxy` 框架构建的个人博客网站，旨在记录技术分享、生活点滴以及灵感创作。通过丰富的功能配置和个性化主题设计，打造一个温馨且实用的个人空间。
 
-Example: [valaxy.site](https://valaxy.site)
+## 核心功能
+- **多语言支持**：支持中文和英文，方便不同语言的用户访问。
+- **自动模式切换**：根据用户设备自动切换亮/暗模式。
+- **社交链接集成**：提供多种社交平台链接，方便用户快速联系。
+- **搜索功能**：内置本地搜索，支持全文检索。
+- **文章管理**：支持文章分类、标签、摘要等功能，便于内容组织。
+- **评论系统**：启用评论功能，方便与读者互动。
+- **赞助支持**：集成多种打赏方式，支持支付宝、微信支付等。
+- **阅读统计**：提供阅读时间估算，提升用户阅读体验。
+- **代码高亮**：支持代码块高亮显示，适合技术类文章。
+- **图片预览**：启用图片缩放预览功能，提升视觉效果。
 
-## Usage
+## 技术栈
+- **框架**：Valaxy
+- **语言**：TypeScript
+- **工具**：Fuse.js（搜索）、Vanilla LazyLoad（延迟加载）、Floating Vue（弹出提示）
 
-```bash
-# install
-npm i
-# or pnpm i
+## 项目亮点
+- **个性化主题**：通过配置文件轻松定制站点外观和功能。
+- **SEO 优化**：支持站点描述、RSS 订阅等功能，提升搜索引擎排名。
+- **高性能**：使用 CDN 加速资源加载，优化用户访问体验。
+- **安全性**：支持内容加密，保护敏感信息。
 
-# start
-npm run dev
-# or pnpm dev
-```
-
-See `http://localhost:4859/`, have fun!
-
-### Config
-
-Modify `valaxy.config.ts` to custom your blog.
-
-English & Chinese Docs is coming!
-
-> Wait a minute.
-
-### Docker
-
-```bash
-docker build . -t your-valaxy-blog-name:latest
-```
-
-## Structure
-
-In most cases, you only need to work in the `pages` folder.
-
-### Main folders
-
-- `pages`: your all pages
-  - `posts`: write your posts here, will be counted as posts
-- `styles`: override theme styles, `index.scss`/`vars.csss`/`index.css` will be loaded automatically
-- `components`: custom your vue components (will be loaded automatically)
-- `layouts`: custom layouts (use it by `layout: xxx` in md)
-- `locales`: custom i18n
-
-### Other
-
-- `.vscode`: recommend some useful plugins & settings, you can preview icon/i18n/class...
-- `.github`: GitHub Actions to auto build & deploy to GitHub Pages
-- `netlify.toml`: for [netlify](https://www.netlify.com/)
-- `vercel.json`: for [vercel](https://vercel.com/)
+## 适用场景
+- 个人博客
+- 技术分享
+- 生活记录
+- 创意展示

@@ -1,9 +1,0 @@
-# 专用配置文件（_config.yml）
-mermaid:
-  requirement:
-    riskLevels: ["Critical", "High", "Medium", "Low"]
-    relationTypes: 
-      - "contains"
-      - "copies"
-      - "traces"
-  fontFamily: "'Hiragino Sans GB', 'Microsoft YaHei'"
