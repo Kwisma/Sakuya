@@ -10,7 +10,7 @@ tags:
  - HTTPS
  - Let’s Encrypt
  - 自动化
-cover: /img/posts/ssl.webp
+cover: /img/posts/domain_ssl_script.webp
 ---
 
 ## 使用 acme.sh 设置 SSL 证书

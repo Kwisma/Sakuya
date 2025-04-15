@@ -11,7 +11,7 @@ tags:
  - 系统优化
  - 软件管理
  - KED neno
-cover: /img/posts/ked.webp
+cover: /img/posts/ked_neno_commands.webp
 ---
 
 ## 更新软件源

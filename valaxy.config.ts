@@ -141,15 +141,15 @@ export default defineValaxyConfig<UserThemeConfig>({
         // 是否启用
         enable: true,
         // 图标名称
-        name: 'i-ri-leaf-line',
+        name: 'i-ri-copyright-fill',
         // 图标是否可点击
         animated: true,
         // 图标颜色
         color: 'aqua',
         // 文章链接
-        url: '/',
+        url: '/privacy/',
         // 图标标题
-        title: '回到首页',
+        title: '隐私协议',
       },
       // 框架和主题来源信息显示
       powered: true,
