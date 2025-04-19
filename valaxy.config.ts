@@ -9,6 +9,11 @@ const safelist = [
   'i-ri-qq-line',
   'i-ri-wechat-pay-line',
   'i-ri-alipay-line',
+  'i-marketeq-1st-place',
+  'i-marketeq-bag-alt',
+  'i-marketeq-cube',
+  'i-marketeq-gallery',
+  'i-marketeq-marshmallow',
 ]
 const colors = ['purple', 'green', 'blue', 'dark']
 colors.forEach((c) => {
@@ -312,7 +317,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 评论区
     addonWaline({
       // Waline 配置项，参考 https://waline.js.org/reference/client/props.html
-      serverURL: 'https://boly-orpin.vercel.app/',
+      serverURL: 'https://bloy.mot.cloudns.biz/',
       locale: {
         nick: '昵称',
         nickError: '昵称不能少于3个字符',
@@ -364,10 +369,6 @@ export default defineValaxyConfig<UserThemeConfig>({
         hottest: '按热度',
         reactionTitle: '你认为这篇文章怎么样？',
       },
-      // 代码高亮
-      highlighter: true,
-      // TEX渲染器
-      texRenderer: true,
       // 表情设置
       emoji: [
         'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/alus',
@@ -393,6 +394,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw',
         'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/weibo',
       ],
+      cdn: "",
       // 浏览量
       pageview: true,
       // 评论数
