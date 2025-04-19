@@ -94,6 +94,16 @@ export default defineSiteConfig({
       icon: 'i-ri-mail-line',
       // 社交链接的颜色
       color: 'black',
+    },
+    {
+      // 社交链接的名称
+      name: 'Marshmallow',
+      // 社交链接的 URL
+      link: 'https://marshmallow-qa.com/f3cjeh1nxnui85v',
+      // 社交链接的图标
+      icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAnFBMVEXzlpr1l5v5mZ38mp7ci4+DX2A/REROTk6aa22LZGYfMTGcnJyLjY1eY2NPR0fpkZXt7e3///+wsLBVVVUzOTnhjpE9PT28vLymp6cmMzIiIiIyOTjMzc0WFhYbGxvExMR6enr70sH5tpr5u6L3pYD/+fVGQkLY2dmBhYVkPTmKhIPl5eWqdHbulJjQWEtQV1bJgoVdTk9zXF1ASUnf3rFfAAABH0lEQVR4AaXSBQ7DMBBEUe+GOVNm5ibF+9+tblxm+GI/ySw+i1jTmB6TphumZQt6ZOS4nm8GYcT3FoVBjFwefkG/VSoWfAClMlCp3ihFBQ+An4csd61EoQ+gXIuxr1KP6IyaEwBoNBuIW9kMIZ2UdDcG2s02gE4D3R4C+zQxGz7g1RpQ9QfDxkg7zVoYN0r5GMeGuMJGow0o9RsAJg4zKWQ7gKzVAVCZzoC5W+QkVUoiO4nXAPzpogwsbaaVJeh4BxVkjWfSOmuW00lVsV7NAd0+9k1GcsYbraA3GALojCKN1Jg4acGHtPlynWqbIqu9nFS+WaMxcW0mKm6lXkVkj0ZONspS6cEXYhKZWgqv4mTFapoHSKml9GEk3qhO4v92i1wYqQQ7Vj4AAAAASUVORK5CYII=',
+      // 社交链接的颜色
+      color: 'black',
     }
   ],
   // 搜索功能
