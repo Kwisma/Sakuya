@@ -394,7 +394,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw',
         'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/weibo',
       ],
-      cdn: "",
+      types: [],
       // 浏览量
       pageview: true,
       // 评论数
