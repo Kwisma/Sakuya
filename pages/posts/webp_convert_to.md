@@ -9,17 +9,19 @@ tags:
  - Sharp
  - WebP
  - 图片优化
+ - PNG 
+ - JPEG 
 ---
 
 ## 前言
 
-本文介绍如何使用 Node.js 和 Sharp 库将常见图片格式（如 .jpg、.png、.gif 等）转换为高效的 WebP 格式，以减少图片体积并提升加载速度。
+本文介绍如何使用 Node.js 和 Sharp 库将常见图片格式（如 .jpg、.png、.webp 等）相互转换，以减少图片体积并提升加载速度。
 
 <!-- more -->
 
 ## 图片转换脚本
 
-将（如 .jpg、.png、.gif 等）图片格式转换成webp格式的图片
+将（如 .jpg、.png、.webp等）图片格式相互转换
 
 ## 使用
 
@@ -34,89 +36,86 @@ npm install sharp
 执行代码
 
 ```bash
-node webp.js 输入图片目录 输出图片目录
+node webp.js 输入图片目录
 ```
 
 ## 源码
 ```js
-const fs = require('fs')
-const path = require('path')
-const sharp = require('sharp')
-// 支持的图片扩展名列表
-const SUPPORTED_EXT = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.webp', '.svg'];
+const sharp = require('sharp');
+const path = require('path');
+const fs = require('fs');
 
-async function convertToWebp(inputPath, outputPath, quality = 80) {
+// 批量 PNG → WebP
+async function batchPngToWebp(inputDir, outputDir) {
+  const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.png'));
+
+  for (const file of files) {
+    const inputPath = path.join(inputDir, file);
+    const outputFileName = file.replace(/\.png$/i, '.webp');
+    const outputPath = path.join(outputDir, outputFileName);
+
     try {
-        await sharp(inputPath)
-            .toFormat('webp', {
-                quality: quality,
-                lossless: false,
-                alphaQuality: 100
-            })
-            .toFile(outputPath);
-
-        const beforeSize = fs.statSync(inputPath).size;
-        const afterSize = fs.statSync(outputPath).size;
-        console.log(`[OK] ${path.relative(process.cwd(), inputPath)} → ${(beforeSize / 1024).toFixed(1)}KB → ${(afterSize / 1024).toFixed(1)}KB (${((beforeSize - afterSize) / beforeSize * 100).toFixed(1)}% saved)`);
+      await sharp(inputPath)
+        .webp({ quality: 100 })
+        .toFile(outputPath);
+      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
     } catch (err) {
-        console.error(`[ERROR] ${inputPath}: ${err.message}`);
+      console.error(`❌ 转换失败: ${file}`, err);
     }
+  }
 }
 
-function processDirectory(inputDir, outputDir, quality) {
-    // 创建输出根目录
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
+// 批量 WebP → PNG
+async function batchWebpToPng(inputDir, outputDir) {
+  const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.webp'));
+
+  for (const file of files) {
+    const inputPath = path.join(inputDir, file);
+    const outputFileName = file.replace(/\.webp$/i, '.png');
+    const outputPath = path.join(outputDir, outputFileName);
+
+    try {
+      await sharp(inputPath)
+        .png()
+        .toFile(outputPath);
+      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
+    } catch (err) {
+      console.error(`❌ 转换失败: ${file}`, err);
     }
+  }
+}
+// 批量 JPEG → PNG
+async function batchJpegToPng(inputDir, outputDir) {
+  const files = fs.readdirSync(inputDir).filter(file =>
+    file.endsWith('.jpg') || file.endsWith('.jpeg')
+  );
 
-    // 递归遍历目录
-    const entries = fs.readdirSync(inputDir, { withFileTypes: true });
+  for (const file of files) {
+    const inputPath = path.join(inputDir, file);
+    const outputFileName = file.replace(/\.(jpg|jpeg)$/i, '.png');
+    const outputPath = path.join(outputDir, outputFileName);
 
-    for (const entry of entries) {
-        const srcPath = path.join(inputDir, entry.name);
-        const destPath = path.join(outputDir, entry.name);
-
-        if (entry.isDirectory()) {
-            processDirectory(srcPath, destPath, quality);
-        } else if (entry.isFile()) {
-            const ext = path.extname(entry.name).toLowerCase();
-            if (SUPPORTED_EXT.includes(ext)) {
-                const webpFilename = path.basename(entry.name, ext) + '.webp';
-                const webpPath = path.join(outputDir, webpFilename);
-
-                // 创建子目录（如果不存在）
-                const parentDir = path.dirname(webpPath);
-                if (!fs.existsSync(parentDir)) {
-                    fs.mkdirSync(parentDir, { recursive: true });
-                }
-
-                convertToWebp(srcPath, webpPath, quality);
-            }
-        }
+    try {
+      await sharp(inputPath)
+        .png()
+        .toFile(outputPath);
+      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
+    } catch (err) {
+      console.error(`❌ 转换失败: ${file}`, err);
     }
+  }
 }
+// 示例用法（你可以改成自己想要的目录）
+const inputDir = path.resolve(__dirname, 'input');
+const outputDir = path.resolve(__dirname, 'output');
 
-// 命令行参数处理
-const args = process.argv.slice(2);
-if (args.length < 2) {
-    console.log('使用方法: node converter.js <输入目录> <输出目录> [质量 1-100]');
-    console.log('示例: node converter.js ./images ./output 85');
-    process.exit(1);
-}
+fs.mkdirSync(outputDir, { recursive: true });
 
-const inputDir = path.resolve(args[0]);
-const outputDir = path.resolve(args[1]);
-const quality = args[2] ? Math.min(Math.max(parseInt(args[2]), 1, 100)) : 80;
+// 执行 PNG → WebP
+batchPngToWebp(inputDir, outputDir);
 
-// 启动处理
-if (!fs.existsSync(inputDir)) {
-    console.error(`输入目录不存在: ${inputDir}`);
-    process.exit(1);
-}
-
-console.log(`开始转换目录: ${inputDir}`);
-console.log(`输出目录: ${outputDir}`);
-console.log(`质量设置: ${quality}\n`);
-
-processDirectory(inputDir, outputDir, quality);
+// 执行 WebP → PNG
+batchWebpToPng(inputDir, outputDir);
+// 执行 JEPG → PNG
+batchJpegToPng(inputDir, outputDir);
 ```
