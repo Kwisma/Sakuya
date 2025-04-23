@@ -104,5 +104,5 @@ tun:
 
 ## 完整配置
 
-完整配置文件: [点击这里](https://jsd.onmicrosoft.cn/gh/Kwisma/MarketNest@main/vpn/mihomo/Mihomo.yaml)
+完整配置文件: [点击这里](https://cdn.jsdelivr.net/gh/Kwisma/MarketNest@main/vpn/mihomo/Mihomo.yaml)
 
