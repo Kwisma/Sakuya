@@ -1,5 +1,6 @@
 // 覆盖 Dark Mode
 html.dark {
+  --va-c-bg-opacity: rgba(0, 0, 0, 0.3);
   // 作者名
   --va-c-text: rgb(255, 255, 255);
 
@@ -24,12 +25,6 @@ html.dark {
 
   // 文章框的底色
   .yun-card {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px);
-  }
-
-  //顶栏背景
-  .bg-transparent {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
   }

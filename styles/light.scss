@@ -1,5 +1,6 @@
 // 覆盖 light Mode
 :root {
+  --va-c-bg-opacity: rgba(225, 225, 225, 0.3);
   // 作者名
   --va-c-text: rgb(0, 0, 0);
 
@@ -28,13 +29,7 @@
     backdrop-filter: blur(20px);
   }
 
-  //顶栏背景
-  .bg-transparent {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-  }
-
-  //主页标题
+  // 主页标题
   .text-white {
     color: rgb(0, 0, 0)
   }
