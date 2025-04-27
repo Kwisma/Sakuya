@@ -30,7 +30,7 @@ tags:
 安装依赖
 
 ```bash
-npm install sharp
+npm install sharp fs-extra
 ```
 
 执行代码
@@ -42,10 +42,49 @@ node webp.js 输入图片目录
 ## 源码
 ```js
 const sharp = require('sharp');
+const fs = require('fs-extra');
 const path = require('path');
-const fs = require('fs');
 
-// 批量 PNG → WebP
+// === 配置区域 ===
+const inputDir = path.resolve(__dirname, 'input');         // 输入文件夹
+const resizedDir = path.resolve(__dirname, 'resized');     // 调整尺寸后的文件夹（可选）
+const convertedDir = path.resolve(__dirname, 'converted'); // 格式转换后的文件夹
+
+const resizeEnabled = true;   // 是否启用尺寸调整 true=开启 false=关闭
+const targetWidth = 512;      // 目标宽度
+const targetHeight = 512;     // 目标高度
+const supportedFormats = ['.jpg', '.jpeg', '.png', '.webp']; // 支持的格式
+
+// 确保输出目录存在
+fs.ensureDirSync(convertedDir);
+
+// 调整图片尺寸
+async function resizeImages(inputDir, outputDir) {
+  await fs.ensureDir(outputDir);
+  const files = await fs.readdir(inputDir);
+
+  for (const file of files) {
+    const ext = path.extname(file).toLowerCase();
+    if (!supportedFormats.includes(ext)) {
+      console.log(`跳过不支持的文件: ${file}`);
+      continue;
+    }
+
+    const inputPath = path.join(inputDir, file);
+    const outputPath = path.join(outputDir, file);
+
+    console.log(`调整尺寸: ${file}`);
+
+    await sharp(inputPath)
+      .resize(targetWidth, targetHeight, {
+        fit: 'contain',
+        background: { r: 255, g: 255, b: 255, alpha: 1 }
+      })
+      .toFile(outputPath);
+  }
+}
+
+// PNG → WebP
 async function batchPngToWebp(inputDir, outputDir) {
   const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.png'));
 
@@ -58,14 +97,14 @@ async function batchPngToWebp(inputDir, outputDir) {
       await sharp(inputPath)
         .webp({ quality: 100 })
         .toFile(outputPath);
-      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
+      console.log(`✅ PNG → WebP: ${file} → ${outputFileName}`);
     } catch (err) {
       console.error(`❌ 转换失败: ${file}`, err);
     }
   }
 }
 
-// 批量 WebP → PNG
+// WebP → PNG
 async function batchWebpToPng(inputDir, outputDir) {
   const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.webp'));
 
@@ -78,13 +117,14 @@ async function batchWebpToPng(inputDir, outputDir) {
       await sharp(inputPath)
         .png()
         .toFile(outputPath);
-      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
+      console.log(`✅ WebP → PNG: ${file} → ${outputFileName}`);
     } catch (err) {
       console.error(`❌ 转换失败: ${file}`, err);
     }
   }
 }
-// 批量 JPEG → PNG
+
+// JPEG → PNG
 async function batchJpegToPng(inputDir, outputDir) {
   const files = fs.readdirSync(inputDir).filter(file =>
     file.endsWith('.jpg') || file.endsWith('.jpeg')
@@ -99,23 +139,35 @@ async function batchJpegToPng(inputDir, outputDir) {
       await sharp(inputPath)
         .png()
         .toFile(outputPath);
-      console.log(`✅ 转换成功: ${file} → ${outputFileName}`);
+      console.log(`✅ JPEG → PNG: ${file} → ${outputFileName}`);
     } catch (err) {
       console.error(`❌ 转换失败: ${file}`, err);
     }
   }
 }
-// 示例用法（你可以改成自己想要的目录）
-const inputDir = path.resolve(__dirname, 'input');
-const outputDir = path.resolve(__dirname, 'output');
 
-fs.mkdirSync(outputDir, { recursive: true });
+// 主程序
+(async () => {
+  try {
+    let workingDir = inputDir; // 默认使用 inputDir
 
-// 执行 PNG → WebP
-batchPngToWebp(inputDir, outputDir);
+    if (resizeEnabled) {
+      console.log('🔧 开始调整图片尺寸...');
+      await resizeImages(inputDir, resizedDir);
+      workingDir = resizedDir; // 如果调整了尺寸，后续在 resized 里面处理
+    } else {
+      console.log('🚫 尺寸调整已关闭，直接使用原始 input 文件夹...');
+    }
 
-// 执行 WebP → PNG
-batchWebpToPng(inputDir, outputDir);
-// 执行 JEPG → PNG
-batchJpegToPng(inputDir, outputDir);
+    console.log('🚀 开始执行格式转换（基于 ' + path.basename(workingDir) + ' 文件夹）...');
+    await batchPngToWebp(workingDir, convertedDir);
+    await batchWebpToPng(workingDir, convertedDir);
+    await batchJpegToPng(workingDir, convertedDir);
+
+    console.log('🎉 全部处理完成！');
+  } catch (err) {
+    console.error('处理出错:', err);
+  }
+})();
+
 ```
