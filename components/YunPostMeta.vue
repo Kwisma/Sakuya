@@ -9,10 +9,8 @@ defineProps<{
 }>()
 const { t } = useI18n()
 const isPost = useLayout('post')
+
 </script>
 <template>
   <YunPostMeta :frontmatter="frontmatter" />
-  <span v-if="isPost" id="busuanzi_container_page_pv">
-    {{ t('post.meta.pv') }}: <span id="busuanzi_value_page_pv" /> {{ t('post.meta.pv-z') }}
-  </span>
 </template>

@@ -3,7 +3,6 @@ import { useScriptTag } from '@vueuse/core'
 import YunFooter from 'valaxy-theme-yun/components/YunFooter.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-useScriptTag('https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js')
 // <!-- require APlayer -->
 useScriptTag('https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js')
 // <!-- require MetingJS -->
@@ -13,12 +12,11 @@ const upyun = {
   url: 'https://www.cloudflare.com',
   logo: '/img/cloudflare/logo.svg',
 }
+
 </script>
 <template>
   <YunFooter>
     <!-- 自定义页脚内容 -->
-    <div>{{ t('about.pv') }} <span id="busuanzi_value_site_pv" /> {{ t('about.pv-z') }}</div>
-    <div>{{ t('about.uv') }} <span id="busuanzi_value_site_uv" /> {{ t('about.uv-z') }}</div>
     <VCLiveTime start-time="2025-03-15">
       <template #live-time-before>
         <span>{{ t('about.time') }} </span>
