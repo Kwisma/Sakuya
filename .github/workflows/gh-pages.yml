@@ -88,4 +88,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}  # 传入 Vercel token
           github-token: ${{ secrets.GITHUB_TOKEN }}  # 可选: 传入 GitHub token
           vercel-args: '--main'  # 部署到生产环境
-          working-directory: ./dist  # 如果代码在子目录下
+          working-directory: .
