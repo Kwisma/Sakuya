@@ -1,0 +1,31 @@
+name: Copy Directory from Another Repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copy-directory:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout current repository
+      uses: actions/checkout@v3
+
+    - name: Checkout the other repository
+      uses: actions/checkout@v3
+      with:
+        repository: Kwisma/cf-worker-mihomo  # 替换为目标仓库的所有者和名称
+        ref: main  # 目标仓库的分支
+        token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+
+    - name: Copy directory from the other repository
+      run: |
+        ls -a  # 替换为目标目录和本仓库的目标路径
+
+#    - name: Commit and push changes
+#      run: |
+#        git config --global user.name "github-actions"
+#        git config --global user.email "github-actions@github.com"
+#        git add .
+#        git commit -m "Copied directory from <other-repo>"
+#        git push
