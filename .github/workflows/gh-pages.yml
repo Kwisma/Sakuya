@@ -82,10 +82,3 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-
-      - uses: amondnet/vercel-action@v25  # 使用 Vercel 部署
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}  # 传入 Vercel token
-          github-token: ${{ secrets.GITHUB_TOKEN }}  # 可选: 传入 GitHub token
-          vercel-args: '--main'  # 部署到生产环境
-          working-directory: .
