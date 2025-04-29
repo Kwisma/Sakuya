@@ -21,7 +21,19 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Checkout the other repository
+        uses: actions/checkout@v3
+        with:
+          repository: Kwisma/cf-worker-mihomo  # 替换为目标仓库的所有者和名称
+          ref: main  # 目标仓库的分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+          path: other-repo
+
+      - name: Copy directory from the other repository
+        run: |
+          cp -r other-repo/rules/* public/rules
+          cp -r other-repo/icon/* public/icon
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
