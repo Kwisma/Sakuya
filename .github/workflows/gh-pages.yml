@@ -32,6 +32,7 @@ jobs:
 
       - name: Copy directory from the other repository
         run: |
+          mkdir -p public/rules public/icon
           cp -r other-repo/rules/* public/rules
           cp -r other-repo/icon/* public/icon
 
