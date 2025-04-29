@@ -2,11 +2,8 @@ name: GitHub Pages
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      # The branch where the project source code resides
-      # 项目源代码所在的分支
-      - main
+  schedule:
+    - cron: "0 2 * * *"
 
 permissions:
   contents: write
@@ -28,13 +25,21 @@ jobs:
           repository: Kwisma/cf-worker-mihomo  # 替换为目标仓库的所有者和名称
           ref: main  # 目标仓库的分支
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
-          path: other-repo
+          path: cf-worker-mihomo@main
+
+      - name: Checkout the other repository
+        uses: actions/checkout@v3
+        with:
+          repository: peiyingyao/Rule-for-OCD  # 替换为目标仓库的所有者和名称
+          ref: master  # 目标仓库的分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+          path: Rule-for-OCD@master
 
       - name: Copy directory from the other repository
         run: |
-          mkdir -p public/rules public/icon
-          cp -r other-repo/rules/* public/rules
-          cp -r other-repo/icon/* public/icon
+          mkdir -p public/gh/cf-worker-mihomo@main
+          cp -r cf-worker-mihomo@main/* public/gh/cf-worker-mihomo@main
+          cp -r Rule-for-OCD@master/* public/gh/Rule-for-OCD@master
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
