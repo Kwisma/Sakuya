@@ -38,6 +38,7 @@ jobs:
       - name: Copy directory from the other repository
         run: |
           mkdir -p public/gh/cf-worker-mihomo@main
+          mkdir -p public/gh/Rule-for-OCD@master
           cp -r cf-worker-mihomo@main/* public/gh/cf-worker-mihomo@main
           cp -r Rule-for-OCD@master/* public/gh/Rule-for-OCD@master
 
