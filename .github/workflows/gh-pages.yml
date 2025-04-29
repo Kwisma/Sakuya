@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *"
+    - cron: "*/20 * * * *"
 
 permissions:
   contents: write
@@ -35,12 +35,32 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
           path: Rule-for-OCD@master
 
+      - name: Checkout the other repository
+        uses: actions/checkout@v3
+        with:
+          repository: qljsyph/ruleset-icon  # 替换为目标仓库的所有者和名称
+          ref: main  # 目标仓库的分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+          path: ruleset-icon@main
+
+      - name: Checkout the other repository
+        uses: actions/checkout@v3
+        with:
+          repository: DustinWin/ruleset_geodata  # 替换为目标仓库的所有者和名称
+          ref: mihomo-ruleset  # 目标仓库的分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+          path: ruleset_geodata@mihomo-ruleset
+
       - name: Copy directory from the other repository
         run: |
           mkdir -p public/gh/Kwisma/cf-worker-mihomo@main
           mkdir -p public/gh/peiyingyao/Rule-for-OCD@master
+          mkdir -p public/gh/qljsyph/ruleset-icon@main
+          mkdir -p public/gh/DustinWin/ruleset_geodata@mihomo-ruleset
           cp -r cf-worker-mihomo@main/* public/gh/Kwisma/cf-worker-mihomo@main
           cp -r Rule-for-OCD@master/* public/gh/peiyingyao/Rule-for-OCD@master
+          cp -r ruleset-icon@main/* public/gh/qljsyph/ruleset-icon@main
+          cp -r ruleset_geodata@mihomo-ruleset/* public/gh/DustinWin/ruleset_geodata@mihomo-ruleset
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
