@@ -1,0 +1,6 @@
+Kwisma/cf-worker-mihomo@main
+peiyingyao/Rule-for-OCD@master
+qljsyph/ruleset-icon@main
+DustinWin/ruleset_geodata@mihomo-ruleset
+MetaCubeX/meta-rules-dat@meta
+TG-Twilight/AWAvenue-Ads-Rule@main
