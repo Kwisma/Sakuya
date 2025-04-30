@@ -19,48 +19,83 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Checkout the other repository
+      - name: Checkout Kwisma/cf-worker-mihomo
         uses: actions/checkout@v3
         with:
-          repository: Kwisma/cf-worker-mihomo  # 替换为目标仓库的所有者和名称
-          ref: main  # 目标仓库的分支
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
+          repository: Kwisma/cf-worker-mihomo
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: cf-worker-mihomo@main
 
-      - name: Checkout the other repository
-        uses: actions/checkout@v3
-        with:
-          repository: peiyingyao/Rule-for-OCD  # 替换为目标仓库的所有者和名称
-          ref: master  # 目标仓库的分支
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
-          path: Rule-for-OCD@master
-
-      - name: Checkout the other repository
-        uses: actions/checkout@v3
-        with:
-          repository: qljsyph/ruleset-icon  # 替换为目标仓库的所有者和名称
-          ref: main  # 目标仓库的分支
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
-          path: ruleset-icon@main
-
-      - name: Checkout the other repository
-        uses: actions/checkout@v3
-        with:
-          repository: DustinWin/ruleset_geodata  # 替换为目标仓库的所有者和名称
-          ref: mihomo-ruleset  # 目标仓库的分支
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GitHub token
-          path: ruleset_geodata@mihomo-ruleset
-
-      - name: Copy directory from the other repository
+      - name: Copy Kwisma/cf-worker-mihomo to public
         run: |
           mkdir -p public/gh/Kwisma/cf-worker-mihomo@main
-          mkdir -p public/gh/peiyingyao/Rule-for-OCD@master
-          mkdir -p public/gh/qljsyph/ruleset-icon@main
-          mkdir -p public/gh/DustinWin/ruleset_geodata@mihomo-ruleset
           cp -r cf-worker-mihomo@main/* public/gh/Kwisma/cf-worker-mihomo@main
+
+      - name: Checkout peiyingyao/Rule-for-OCD
+        uses: actions/checkout@v3
+        with:
+          repository: peiyingyao/Rule-for-OCD
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: Rule-for-OCD@master
+
+      - name: Copy peiyingyao/Rule-for-OCD to public
+        run: |
+          mkdir -p public/gh/peiyingyao/Rule-for-OCD@master
           cp -r Rule-for-OCD@master/* public/gh/peiyingyao/Rule-for-OCD@master
+
+      - name: Checkout qljsyph/ruleset-icon
+        uses: actions/checkout@v3
+        with:
+          repository: qljsyph/ruleset-icon
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ruleset-icon@main
+
+      - name: Copy qljsyph/ruleset-icon to public
+        run: |
+          mkdir -p public/gh/qljsyph/ruleset-icon@main
           cp -r ruleset-icon@main/* public/gh/qljsyph/ruleset-icon@main
+
+      - name: Checkout DustinWin/ruleset_geodata
+        uses: actions/checkout@v3
+        with:
+          repository: DustinWin/ruleset_geodata
+          ref: mihomo-ruleset
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ruleset_geodata@mihomo-ruleset
+
+      - name: Copy DustinWin/ruleset_geodata to public
+        run: |
+          mkdir -p public/gh/DustinWin/ruleset_geodata@mihomo-ruleset
           cp -r ruleset_geodata@mihomo-ruleset/* public/gh/DustinWin/ruleset_geodata@mihomo-ruleset
+
+      - name: Checkout MetaCubeX/meta-rules-dat
+        uses: actions/checkout@v3
+        with:
+          repository: MetaCubeX/meta-rules-dat
+          ref: meta
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: meta-rules-dat@meta
+
+      - name: Copy MetaCubeX/meta-rules-dat to public
+        run: |
+          mkdir -p public/gh/MetaCubeX/meta-rules-dat@meta
+          cp -r meta-rules-dat@meta/* public/gh/MetaCubeX/meta-rules-dat@meta
+
+      - name: Checkout TG-Twilight/AWAvenue-Ads-Rule
+        uses: actions/checkout@v3
+        with:
+          repository: TG-Twilight/AWAvenue-Ads-Rule
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: AWAvenue-Ads-Rule@main
+
+      - name: Copy TG-Twilight/AWAvenue-Ads-Rule to public
+        run: |
+          mkdir -p public/gh/TG-Twilight/AWAvenue-Ads-Rule@main
+          cp -r AWAvenue-Ads-Rule@main/* public/gh/TG-Twilight/AWAvenue-Ads-Rule@main
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
