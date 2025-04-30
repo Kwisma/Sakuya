@@ -1,5 +1,16 @@
 {
+  "name": "sakuyo_bloy",
   "cleanUrls": true,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "builds": [
+    {
+      "src": "dist/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/dist/$1"
+    }
+  ]
 }
