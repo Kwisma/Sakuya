@@ -83,8 +83,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
-      - name: Install Vercel CLI
-        run: npm install -g vercel
+#      - name: Install Vercel CLI
+#        run: npm install -g vercel
 
-      - name: Deploy to Vercel
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --archive=tgz --yes
+#      - name: Deploy to Vercel
+#        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --archive=tgz --yes
