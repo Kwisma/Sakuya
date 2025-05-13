@@ -47,19 +47,18 @@ const path = require('path');
 
 // === 配置区域 ===
 const inputDir = path.resolve(__dirname, 'input');         // 输入文件夹
-const resizedDir = path.resolve(__dirname, 'resized');     // 调整尺寸后的文件夹（可选）
-const convertedDir = path.resolve(__dirname, 'converted'); // 格式转换后的文件夹
+const outputDir = path.resolve(__dirname, 'output');       // 输出文件夹（调整尺寸和转换格式后的文件都会在这里）
 
 const resizeEnabled = true;   // 是否启用尺寸调整 true=开启 false=关闭
 const targetWidth = 512;      // 目标宽度
 const targetHeight = 512;     // 目标高度
-const supportedFormats = ['.jpg', '.jpeg', '.png', '.webp']; // 支持的格式
+const supportedFormats = ['.jpg', '.jpeg', '.png', '.webp', '.svg']; // 支持的格式
 
 // 确保输出目录存在
-fs.ensureDirSync(convertedDir);
+fs.ensureDirSync(outputDir);
 
-// 调整图片尺寸
-async function resizeImages(inputDir, outputDir) {
+// 调整图片尺寸并同时转换为多种格式
+async function resizeAndConvertImages(inputDir, outputDir) {
   await fs.ensureDir(outputDir);
   const files = await fs.readdir(inputDir);
 
@@ -71,75 +70,36 @@ async function resizeImages(inputDir, outputDir) {
     }
 
     const inputPath = path.join(inputDir, file);
-    const outputPath = path.join(outputDir, file);
+    const baseFileName = path.basename(file, ext);
 
-    console.log(`调整尺寸: ${file}`);
-
-    await sharp(inputPath)
-      .resize(targetWidth, targetHeight, {
-        fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 1 }
-      })
-      .toFile(outputPath);
-  }
-}
-
-// PNG → WebP
-async function batchPngToWebp(inputDir, outputDir) {
-  const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.png'));
-
-  for (const file of files) {
-    const inputPath = path.join(inputDir, file);
-    const outputFileName = file.replace(/\.png$/i, '.webp');
-    const outputPath = path.join(outputDir, outputFileName);
+    console.log(`调整尺寸并转换格式: ${file}`);
 
     try {
-      await sharp(inputPath)
-        .webp({ quality: 100 })
-        .toFile(outputPath);
-      console.log(`✅ PNG → WebP: ${file} → ${outputFileName}`);
-    } catch (err) {
-      console.error(`❌ 转换失败: ${file}`, err);
-    }
-  }
-}
+      // 先调整大小
+      const resizedImage = sharp(inputPath)
+        .resize(targetWidth, targetHeight, {
+          fit: 'contain',
+          background: { r: 255, g: 255, b: 255, alpha: 1 }
+        });
 
-// WebP → PNG
-async function batchWebpToPng(inputDir, outputDir) {
-  const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.webp'));
+      // 转换为 PNG
+      await resizedImage.clone().png().toFile(path.join(outputDir, `${baseFileName}.png`));
+      console.log(`✅ 转换为 PNG: ${file}`);
 
-  for (const file of files) {
-    const inputPath = path.join(inputDir, file);
-    const outputFileName = file.replace(/\.webp$/i, '.png');
-    const outputPath = path.join(outputDir, outputFileName);
+      // 转换为 WebP
+      await resizedImage.clone().webp({ quality: 100 }).toFile(path.join(outputDir, `${baseFileName}.webp`));
+      console.log(`✅ 转换为 WebP: ${file}`);
 
-    try {
-      await sharp(inputPath)
-        .png()
-        .toFile(outputPath);
-      console.log(`✅ WebP → PNG: ${file} → ${outputFileName}`);
-    } catch (err) {
-      console.error(`❌ 转换失败: ${file}`, err);
-    }
-  }
-}
+      // 转换为 JPEG
+      await resizedImage.clone().jpeg({ quality: 100 }).toFile(path.join(outputDir, `${baseFileName}.jpeg`));
+      console.log(`✅ 转换为 JPEG: ${file}`);
 
-// JPEG → PNG
-async function batchJpegToPng(inputDir, outputDir) {
-  const files = fs.readdirSync(inputDir).filter(file =>
-    file.endsWith('.jpg') || file.endsWith('.jpeg')
-  );
+      // 如果是 SVG 格式，保留原始 SVG 文件（可选）
+      if (ext === '.svg') {
+        await resizedImage.clone().toFile(path.join(outputDir, `${baseFileName}.svg`));
+        console.log(`✅ 转换为 SVG: ${file}`);
+      }
 
-  for (const file of files) {
-    const inputPath = path.join(inputDir, file);
-    const outputFileName = file.replace(/\.(jpg|jpeg)$/i, '.png');
-    const outputPath = path.join(outputDir, outputFileName);
-
-    try {
-      await sharp(inputPath)
-        .png()
-        .toFile(outputPath);
-      console.log(`✅ JPEG → PNG: ${file} → ${outputFileName}`);
     } catch (err) {
       console.error(`❌ 转换失败: ${file}`, err);
     }
@@ -152,19 +112,13 @@ async function batchJpegToPng(inputDir, outputDir) {
     let workingDir = inputDir; // 默认使用 inputDir
 
     if (resizeEnabled) {
-      console.log('🔧 开始调整图片尺寸...');
-      await resizeImages(inputDir, resizedDir);
-      workingDir = resizedDir; // 如果调整了尺寸，后续在 resized 里面处理
+      console.log('🔧 开始调整图片尺寸并转换为多种格式...');
+      await resizeAndConvertImages(inputDir, outputDir);
     } else {
-      console.log('🚫 尺寸调整已关闭，直接使用原始 input 文件夹...');
+      console.log('🚫 尺寸调整已关闭，直接处理文件...');
     }
 
-    console.log('🚀 开始执行格式转换（基于 ' + path.basename(workingDir) + ' 文件夹）...');
-    await batchPngToWebp(workingDir, convertedDir);
-    await batchWebpToPng(workingDir, convertedDir);
-    await batchJpegToPng(workingDir, convertedDir);
-
-    console.log('🎉 全部处理完成！');
+    console.log('🎉 所有操作完成！');
   } catch (err) {
     console.error('处理出错:', err);
   }
