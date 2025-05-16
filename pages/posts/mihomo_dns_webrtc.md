@@ -95,7 +95,7 @@ tun:
   enable: true # 启用 TUN 模式，用于透明代理
   stack: gvisor # 使用空间网络栈处理流量，可用值： system/gvisor/mixed
   auto-route: true # 自动根据流量选择最佳路由
-  auto-redirect: true # 自动配置 iptables/nftables 以重定向 TCP 连接
+  auto-redirect: false # 自动配置 iptables/nftables 以重定向 TCP 连接，需要root权限
   auto-detect-interface: true # 自动检测并使用适当的网络接口
   dns-hijack:
     - any:53 # 劫持所有 53 端口的 DNS 请求
