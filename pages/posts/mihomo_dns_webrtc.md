@@ -43,32 +43,36 @@ tags:
 dns:
   enable: true # 启用 DNS 模块
   cache-algorithm: arc # 缓存算法，参数:lru 最近最少使用，arc 自适应替换缓存
-  prefer-h3: true # DOH 优先使用 http/3
+  prefer-h3: false # DOH 优先使用 http/3
   use-hosts: true # 使用配置中的 hosts 文件条目
   use-system-hosts: true # 使用系统的 hosts 文件条目
-  respect-rules: true # dns 连接遵守路由规则，需配置 proxy-server-nameserver
+  respect-rules: true # dns 连接遵守路由规则，需配置 proxy-server-nameserver, 强烈不建议和 prefer-h3 一起使用
   listen: 0.0.0.0:1053 # 本地 DNS 监听端口，默认是 1053 端口
   ipv6: true # 启用 IPv6 DNS 解析，避免 IPv6 地址的解析请求
   default-nameserver:
-    - tls://223.5.5.5:853 # 阿里 DNS 解析 DNS 域名
-    - tls://223.6.6.6:853 # 阿里 DNS 解析 DNS 域名
+    - quic://223.5.5.5 # 阿里 DNS 解析 DNS 域名
+    - quic://223.6.6.6 # 阿里 DNS 解析 DNS 域名
+    - "2400:3200::1" # 阿里 DNS 解析 DNS 域名
+    - "2400:3200:baba::1" # 阿里 DNS 解析 DNS 域名
   enhanced-mode: fake-ip # 启用增强模式 redir-host or fake-ip
-  fake-ip-range: 10.10.10.1/16 # fake-ip 池设置
+  fake-ip-range: 198.18.0.0/16 # fake-ip 池设置
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - '*'
-  nameserver:
-    - "https://cloudflare-dns.com/dns-query" # Cloudflare DNS over H3
-    - "https://dns.google/dns-query" # Google DNS over H3
-    - "https://doh.dns.sb/dns-query" # SB DNS over H3
-    - "https://public.dns.iij.jp/dns-query" # IIJ DNS over H3
-  proxy-server-nameserver: # 用于节点域名解析 DNS 服务器
-    - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
-  direct-nameserver: #  用于直连出口域名解析的 DNS 服务器
-    - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
+    - RULE-SET:Private,Fakeip_Filter,China
   nameserver-policy:
-    RULE-SET:CN,Private:
-      - "https://dns.alidns.com/dns-query" # 阿里 DNS over H3
+    RULE-SET:Private,China:
+      - "quic://223.5.5.5" # 阿里 DNS over DOQ
+      - "quic://223.6.6.6"
+      - "quic://dns.jupitrdns.com" # JupitrDNS DNS over DOQ
+  nameserver: # 设置多个 DNS 会泄漏不同服务商，不会泄漏 CN，如果在意建议只设置一个
+    - "quic://dns.adguard-dns.com" # AdGuard DNS over DOQ
+  proxy-server-nameserver: # 代理节点域名解析服务器，仅用于解析代理节点的域名
+    - "quic://223.5.5.5" # 阿里 DNS over DOQ
+    - "quic://223.6.6.6"
+  direct-nameserver: #  用于直连出口域名解析的 DNS 服务器
+    - "quic://223.5.5.5" # 阿里 DNS over DOQ
+    - "quic://223.6.6.6"
+  direct-nameserver-follow-policy: true # 是否遵循 nameserver-policy，默认为不遵守，仅当 direct-nameserver 不为空时生效
 ```
 
 ## 防止 WebRTC 泄露
