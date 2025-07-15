@@ -83,6 +83,12 @@ service mihomo start
 cd ~/.config/mihomo
 ```
 
+下载配置文件
+
+```bash
+wget -U 'clash.meta' 订阅链接
+```
+
 下载面板，解压，重命名
 
 ```text
