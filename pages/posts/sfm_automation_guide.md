@@ -22,7 +22,7 @@ tags:
 批量燃烧物品，全自动熔炼
 
 ```lua
-name "insolator"  -- 定义机器的名称
+name "灌注机自动化"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
     input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
@@ -52,7 +52,7 @@ end
 全自动收集
 
 ```lua
-name "insolator"  -- 定义机器的名称
+name "蜜蜂资源"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
     input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
