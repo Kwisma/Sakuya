@@ -60,23 +60,35 @@ every 1 ticks do  -- 每1个刻（tick）执行以下操作
 end
 
 every 20 ticks do  -- 每20个刻（tick）执行以下操作
-    input *glass_bottle from "水瓶箱"
-    output to each "蜂箱" slots 0
-    output to each "装瓶机" slots 0
+-- 基因提取
+    input from "me接口"
+    output *glass_bottle to "蜂箱" slots 0
+    output *glass_bottle to "装瓶机" slots 0
+    output *rose_bush to "繁殖箱"
+    output *honey_treat to "孵化机" slots 1
+    output *bee_cage to "繁殖箱" slots 0
     forget  -- 清除状态，确保后续操作不受之前步骤影响
-    input from "蜂箱" slots 2-10
-    output *configurable* to each "离心机"
-    output *gene to each "基因检索器"
-    output *honey* to each "箱子"
+    input from "繁殖箱"slots 5
+    output to "孵化机" slots 0
     forget  -- 清除状态，确保后续操作不受之前步骤影响
     input from "离心机" slots 2-10
-    output *gene to each "基因检索器"
-    output to each "箱子"
+    output *gene to "基因检索器"
+    output to "me接口"
     forget  -- 清除状态，确保后续操作不受之前步骤影响
     input from "装瓶机" slots 11
-    output to each "箱子"
+    output to "me接口"
     forget  -- 清除状态，确保后续操作不受之前步骤影响
-    input *honey_treat from "蜂蜜小食箱"
-    output to each "孵化机" slots 1
+-- 养蜜蜂
+    input from "蜂箱" slots 2-10
+    output *configurable_comb to "热力离心机" slots 1
+    output *gene to "基因检索器"
+    output EXCEPT *configurable_comb,*gene to "me接口"
+    forget  -- 清除状态，确保后续操作不受之前步骤影响
+-- 离心机输出
+    input from "热力离心机" slots 2-10
+    output to "me接口"
+    forget  -- 清除状态，确保后续操作不受之前步骤影响
+    input fluid:: from "热力离心机"
+    output fluid:: to "me接口"
 end
 ```
