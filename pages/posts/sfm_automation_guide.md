@@ -80,9 +80,16 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     forget  -- 清除状态，确保后续操作不受之前步骤影响
 -- 养蜜蜂
     input from "蜂箱" slots 2-10
-    output *configurable_comb to "热力离心机" slots 1
+    output
+        *configurable_comb,
+        *configurable_honeycomb,
+    to "热力离心机" slots 1
     output *gene to "基因检索器"
-    output EXCEPT *configurable_comb,*gene to "me接口"
+    output EXCEPT
+        *configurable_comb,
+        *configurable_honeycomb,
+        *gene,
+    to "me接口"
     forget  -- 清除状态，确保后续操作不受之前步骤影响
 -- 离心机输出
     input from "热力离心机" slots 2-10
