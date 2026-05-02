@@ -115,6 +115,13 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     input fluid:: from "水槽" top side
     output fluid:: to each "电解分离器" bottom side
     output fluid:: to each "回旋式气液转换机" bottom side
+    output fluid:: to each "加压反应室" bottom side
+    forget
+    input from "me接口"
+    output *fluorite to "化学溶解室" bottom side
+    output *sulfur to "化学氧化机a" bottom side
+    output *yellow_cake_uranium to "化学氧化机b" bottom side
+    output *fluorite_dust to "加压反应室" top side
     forget
     input gas:mekanism:sulfur_trioxide from "化学灌注器a" bottom side
     output gas:mekanism:sulfur_trioxide to "化学灌注器b" bottom side
@@ -125,9 +132,7 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     input gas:mekanism:fissile_fuel from "同位数离心机" front side
     output gas:mekanism:fissile_fuel to "化学储罐" bottom side
     forget
-    input from "me接口"
-    output *fluorite to "化学溶解室" bottom side
-    output *sulfur to "化学氧化机a" bottom side
-    output *yellow_cake_uranium to "化学氧化机b" bottom side
+    input pellet_plutonium from "加压反应室" bottom side
+    output to "me接口"
 end
 ```
