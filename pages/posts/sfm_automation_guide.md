@@ -21,7 +21,7 @@ tags:
 
 批量燃烧物品，全自动熔炼
 
-```lua
+```sfm
 name "灌注机自动化"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
@@ -51,7 +51,7 @@ end
 
 全自动收集
 
-```lua
+```sfm
 name "蜜蜂资源"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
@@ -90,5 +90,37 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     forget  -- 清除状态，确保后续操作不受之前步骤影响
     input fluid:: from "热力离心机"
     output fluid:: to "me接口"
+end
+```
+
+## 裂变燃料 
+
+```sfm
+-- 摆放循序：电解分离器 >  化学灌注器a > 化学氧化机a > 回旋式气液转换机 > 化学灌注器b > 化学溶解室 > 化学灌注器c > 化学氧化机b > 同位素离心机
+name "裂变燃料"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+
+every 20 ticks do  -- 每20个刻（tick）执行以下操作
+    input fluid:: from "水槽" top side
+    output fluid:: to each "电解分离器" bottom side
+    output fluid:: to each "回旋式气液转换机" bottom side
+    forget
+    input gas:mekanism:sulfur_trioxide from "化学灌注器a" bottom side
+    output gas:mekanism:sulfur_trioxide to "化学灌注器b" bottom side
+    forget
+    input gas:mekanism:uranium_hexafluoride from "化学灌注器c" bottom side
+    output gas:mekanism:uranium_hexafluoride to "同位数离心机" bottom side
+    forget
+    input gas:mekanism:fissile_fuel from "同位数离心机" front side
+    output gas:mekanism:fissile_fuel to "化学储罐" bottom side
+    forget
+    input from "me接口"
+    output *fluorite to "化学溶解室" bottom side
+    output *sulfur to "化学氧化机a" bottom side
+    output *yellow_cake_uranium to "化学氧化机b" bottom side
 end
 ```
