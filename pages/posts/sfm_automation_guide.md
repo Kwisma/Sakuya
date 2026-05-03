@@ -136,3 +136,83 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     output to "me接口"
 end
 ```
+
+## 四级矿产
+
+```sfm
+-- 机器可无序摆放
+name "4倍矿产"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+
+every 20 ticks do  -- 每20个刻（tick）执行以下操作
+    input fluid:: from "水槽" top side
+    output fluid:: to each "电解分离器" top side
+    output fluid:: to each "回旋式气液转换机" top side
+    output fluid:: to each "化学清洗机" top side
+    output fluid:: to each "电解分离器2" top side
+    output fluid:: to each "电解分离器3" top side
+    forget
+    input from "me接口" top side
+    output alltheores:sulfur to "化学氧化机" top side -- 输入硫磺
+    forget
+    -- 从右侧抽取氧
+    input slurry:mekanism:oxygen from each  "电解分离器" west side
+    output slurry:mekanism:oxygen to "化学灌注室a" west side
+    forget
+    -- 从右侧抽取二氧化硫
+    input slurry:mekanism:sulfur_dioxide from each "化学氧化机" west side
+    output slurry:mekanism:sulfur_dioxide to "化学灌注室a" east side
+    forget
+    input chemical:mekanism:sulfur_trioxide  from each "化学灌注室a" north side
+    output chemical:mekanism:sulfur_trioxide to "化学灌注室b" east side
+    forget
+    input slurry:mekanism:water_vapor from each "回旋式气液转换机" west side
+    output slurry:mekanism:water_vapor to "化学灌注室b" west side
+    forget
+    input slurry:mekanism:sulfuric_acid from each "化学灌注室b" north side
+    output slurry:mekanism:sulfuric_acid to "化学溶解室" east side
+    forget
+    input infusion:: from each "化学溶解室" west side
+    output infusion:: to "化学清洗机" east side
+    forget
+    input infusion:: from each "化学清洗机" west side
+    output infusion:: to "化学结晶室" east side
+    forget
+    input from each "化学结晶室" west side
+    output to "化学压射室" east side
+    forget
+    input fluid:: from each "盐水" top side
+    output fluid:: to "电解分离器1" top side
+    forget
+    input slurry:mekanism:chlorine from each "电解分离器1" west side
+    output slurry:mekanism:chlorine to "化学灌注室1" west side
+    forget
+    input slurry:mekanism:hydrogen from  each "电解分离器2" east side
+    output slurry:mekanism:hydrogen to "化学灌注室1" east side
+    forget
+    input slurry:mekanism:hydrogen_chloride  from each "化学灌注室1" north side
+    output slurry:mekanism:hydrogen_chloride to "化学压射室" top side
+    forget
+    input from each "化学压射室" west side
+    output to "提纯工厂" east side
+    forget
+    input slurry:mekanism:oxygen from each "电解分离器3" west side
+    output slurry:mekanism:oxygen to "提纯工厂" top side
+    forget
+    input from each "提纯工厂" west side
+    output to "粉碎机" east side
+    forget
+    input from each "粉碎机" west side
+    output to "富集工厂" east side
+    forget
+    input from each "富集工厂" west side
+    output to "熔炼工厂" east side
+    forget
+    input from each "熔炼工厂" west side
+    output to "me接口" east side
+end
+```
