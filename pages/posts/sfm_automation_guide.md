@@ -141,7 +141,7 @@ end
 
 ```sfm
 -- 机器可无序摆放
-name "4倍矿产"  -- 定义机器的名称
+name "4级矿产"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
     input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
