@@ -149,7 +149,7 @@ every 1 ticks do  -- 每1个刻（tick）执行以下操作
 end
 
 every 20 ticks do  -- 每20个刻（tick）执行以下操作
-    input fluid:: from "水槽" top side
+    input 999999999 fluid:: from "水槽" top side
     output fluid:: to each "电解分离器" top side
     output fluid:: to each "回旋式气液转换机" top side
     output fluid:: to each "化学清洗机" top side
