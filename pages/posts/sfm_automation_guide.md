@@ -216,3 +216,26 @@ every 20 ticks do  -- 每20个刻（tick）执行以下操作
     output to "me接口" east side
 end
 ```
+
+## 熔炼工厂
+
+```sfm
+name "熔炼工厂"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+every 20 ticks do
+    input from each "熔炉" bottom side
+    output to "me接口" top side
+    forget
+    input from  "me接口" top side
+    output minecraft:gravel to each "筛子"slots 2-10
+    output 1 exdeorum:netherite_mesh to each "筛子" slots 1
+    output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    forget
+    input from each "缓存" top side
+    output to "处理" top side
+end
+```
