@@ -219,7 +219,10 @@ end
 
 ## 熔炼工厂
 
+> 沙砾和沙子产物处理
+
 ```sfm
+-- 沙砾和沙子产物处理
 name "熔炼工厂"  -- 定义机器的名称
 
 every 1 ticks do  -- 每1个刻（tick）执行以下操作
@@ -227,15 +230,72 @@ every 1 ticks do  -- 每1个刻（tick）执行以下操作
     output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
 end
 every 20 ticks do
-    input from each "熔炉" bottom side
-    output to "me接口" top side
-    forget
     input from  "me接口" top side
-    output minecraft:gravel to each "筛子"slots 2-10
+    output minecraft:gravel to each "筛子" slots 2-10
     output 1 exdeorum:netherite_mesh to each "筛子" slots 1
     output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    output minecraft:sand to each "筛子2" slots 2-10
+    output 1 exdeorum:netherite_mesh to each "筛子2" slots 1
+    output 3 exmachinis:diamond_upgrade to each "筛子2" slots 0
     forget
     input from each "缓存" top side
     output to "处理" top side
+    forget
+    input
+        minecraft:gold_ore,
+        minecraft:iron_ore,
+        alltheores:platinum_ore,
+        alltheores:lead_ore,
+        minecraft:copper_ore,
+        alltheores:aluminum_ore,
+        alltheores:silver_ore,
+        alltheores:osmium_ore,
+        alltheores:tin_ore,
+        alltheores:nickel_ore,
+        alltheores:zinc_ore,
+        alltheores:uranium_ore,
+    from "处理" top side
+    output to each "熔炉" top side
+    forget
+    input
+        allthemodium:allthemodium_nugget,
+        minecraft:emerald,
+        xycraft_world:xychorium_gem_red,
+        actuallyadditions:black_quartz,
+        minecraft:coal,
+        minecraft:flint,
+        alltheores:salt,
+        alltheores:sulfur,
+        forbidden_arcanus:arcane_crystal,
+        minecraft:amethyst_shard,
+        minecraft:redstone,
+        minecraft:blaze_powder,
+        minecraft:gunpowder,
+        minecraft:sea_pickle,
+        minecraft:prismarine_shard,
+        minecraft:prismarine_crystals,
+        minecraft:kelp,
+        alltheores:fluorite,
+        xycraft_world:xychorium_gem_dark,
+        powah:uraninite,
+        xycraft_world:xychorium_gem_light,
+        minecraft:cactus,
+        ae2:charged_certus_quartz_crystal,
+        enderio:grains_of_infinity,
+        minecraft:iron_nugget,
+        minecraft:diamond,
+        ae2:certus_quartz_dust,
+        ae2:certus_quartz_crystal,
+        xycraft_world:xychorium_gem_blue,
+        xycraft_world:xychorium_gem_green,
+        minecraft:glowstone_dust,
+        minecraft:bone_meal,
+        ae2:sky_dust,
+        minecraft:lapis_lazuli,
+    from "处理" top side
+    output to "me接口" top side
+    forget
+    input from each "熔炉" bottom side
+    output to "me接口" top side
 end
 ```
