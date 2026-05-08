@@ -299,3 +299,144 @@ every 20 ticks do
     output to "me接口" top side
 end
 ```
+
+```sfm
+name "深板岩筛矿"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+every 20 ticks do
+    input from  "me接口" top side
+    output *cobbled_deepslate_9x to each "粉碎" top side
+--    output 1 exdeorum:netherite_mesh to each "筛子" slots 1
+--    output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    forget
+    input *crushed_deepslate_9x from "粉碎" north side
+    output *crushed_deepslate_9x to "合成" slots 2
+    forget
+    input *crushed_deepslate_7x from "合成" slots 0
+    output *crushed_deepslate_7x to "合成2" slots 2
+    forget
+    input *crushed_deepslate_5x from "合成2" west side slots 0
+    output *crushed_deepslate_5x to "合成3" slots 2
+    forget
+    input *crushed_deepslate_3x from "合成3" slots 0
+    output *crushed_deepslate_3x to "合成4" slots 2
+    forget
+    input *crushed_deepslate_1x from "合成4" slots 0
+    output *crushed_deepslate_1x to "合成5" slots 2
+    forget
+    input *crushed_deepslate from "合成5"  slots 0
+    output to each "筛子" slots 2-10
+    forget
+    input from each "缓存" top side
+    output to "处理" top side
+    forget
+    input
+        alltheores:tin_ore,
+        alltheores:osmium_ore,
+        alltheores:silver_ore,
+        minecraft:copper_ore,
+        alltheores:lead_ore,
+        alltheores:platinum_ore,
+        minecraft:iron_ore,
+        minecraft:gold_ore,
+        alltheores:nickel_ore,
+        alltheores:uranium_ore,
+    from "处理" top side
+    output to each "熔炉" top side
+    forget
+    input
+        minecraft:amethyst_shard,
+        minecraft:lapis_lazuli,
+    from "处理" top side
+    output to "me接口" top side
+    forget
+    input from each "熔炉" bottom side
+    output to "me接口" top side
+end
+```
+
+```sfm
+name "尘土筛矿"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+every 20 ticks do
+    input from  "me接口" top side
+    output exdeorum:dust to each "筛子" slots 2-10
+--    output 1 exdeorum:netherite_mesh to each "筛子" slots 1
+--    output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    forget
+    input from each "缓存" top side
+    output to "me接口" top side
+end
+```
+
+```sfm
+name "沙子筛矿"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+every 20 ticks do
+    input from  "me接口" top side
+    output minecraft:sand to each "筛子" slots 2-10
+--    output 1 exdeorum:netherite_mesh to each "筛子" slots 1
+--    output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    forget
+    input from each "缓存" top side
+    output to "me接口" top side
+end
+```
+
+```sfm
+name "沙砾筛矿"  -- 定义机器的名称
+
+every 1 ticks do  -- 每1个刻（tick）执行以下操作
+    input forge_energy:: from "能量" top side  -- 从顶部立方体输入锻造能量
+    output forge_energy:: to each "机器" bottom side -- 将能量输出到机器
+end
+every 20 ticks do
+    input from  "me接口" top side
+    output minecraft:gravel to each "筛子" slots 2-10
+--    output 1 exdeorum:netherite_mesh to each "筛子" slots 1
+--    output 3 exmachinis:diamond_upgrade to each "筛子" slots 0
+    forget
+    input from each "缓存" top side
+    output to "处理" top side
+    forget
+    input
+        minecraft:gold_ore,
+        minecraft:iron_ore,
+        alltheores:platinum_ore,
+        alltheores:lead_ore,
+        minecraft:copper_ore,
+        alltheores:aluminum_ore,
+        alltheores:silver_ore,
+        alltheores:osmium_ore,
+        alltheores:tin_ore,
+        alltheores:nickel_ore,
+        alltheores:zinc_ore,
+        alltheores:uranium_ore,
+    from "处理" top side
+    output to each "熔炉" top side
+    forget
+    input
+        minecraft:coal,
+        minecraft:amethyst_shard,
+        minecraft:emerald,
+        minecraft:diamond,
+        minecraft:lapis_lazuli,
+    from "处理" top side
+    output to "me接口" top side
+    forget
+    input from each "熔炉" bottom side
+    output to "me接口" top side
+end
+```
