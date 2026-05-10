@@ -1,8 +1,6 @@
-import type { ThemeConfig } from "valaxy-theme-yun";
 import { defineValaxyConfig } from "valaxy";
-
 import { addonWaline } from "valaxy-addon-waline";
-import { addonComponents, ValaxyThemesResolver } from "valaxy-addon-components";
+import { addonComponents } from "valaxy-addon-components";
 import { addonLive2d } from "valaxy-addon-live2d";
 // add icons what you will need
 const safelist = [
@@ -29,58 +27,215 @@ colors.forEach((c) => {
   );
 });
 
-export default defineValaxyConfig<ThemeConfig>({
-  devtools: true,
-  // 主题名称
-  theme: "yun",
+export default defineValaxyConfig({
+  theme: 'yun',
+  ignoreDeadLinks: 'localhostLinks',
+
   build: {
+    ignoreDeadLinks: 'localhostLinks',
     ssgForPagination: true,
   },
+
+  deploy: {
+    type: 'gh-pages',
+  },
+
+  modules: {
+    rss: {
+      enable: true,
+      fullText: true,
+    },
+  },
+
+  features: {
+    katex: true,
+  },
+
+  math: false,
+
+  vite: {
+    ssgOptions: {
+      formatting: "none",
+    },
+  },
+
+  vue: {
+    isCustomElement: [
+      (tag: string) => ['meting-js', 'a-player'].includes(tag),
+    ],
+  },
+
+  components: {
+    dts: true,
+  },
+
+  layouts: {
+    layoutsDirs: "src/layouts",
+    pagesDirs: "src/pages",
+    extensions: ["vue"],
+    exclude: ["**/components/*.vue"],
+    defaultLayout: "default",
+  },
+
+  // router: {
+  //   extensions: ['.vue'],
+  // },
+
   unocss: {
     safelist,
   },
-  markdown: {
-    // default material-theme-palenight
-    // theme: 'material-theme-palenight',
-    theme: {
-      // light: 'material-theme-lighter',
-      light: "github-light",
-      // dark: 'material-theme-darker',
-      dark: "github-dark",
-    },
 
-    blocks: {
-      tip: {
-        icon: "i-carbon-thumbs-up",
-        text: "ヒント",
-      },
-      warning: {
-        icon: "i-carbon-warning-alt",
-        text: "注意",
-      },
-      danger: {
-        icon: "i-carbon-warning",
-        text: "警告",
-      },
-      info: {
-        text: "información",
-      },
+  // visualizer: {
+  //   open: true,
+  // },
 
-      custom: {
-        icon: "i-ri:info-i",
-        text: "CUSTOM",
-      },
-    },
+  // groupIcons: {},
 
-    codeTransformers: [
-      // We use `[!!code` in demo to prevent transformation, here we revert it back.
-      {
-        postprocess(code) {
-          return code.replace(/\[!!code/g, "[!code");
-        },
-      },
-    ],
-  },
+  // unocssPresets: {
+  //   uno: {},
+  //   attributify: {},
+  //   icons: {},
+  //   typography: {},
+  // },
+
+  // fuse: {
+  //   extendKeys: ['title', 'tags', 'categories', 'author', 'excerpt', 'link'],
+  // },
+
+  /**
+    * @experimental
+    * Enable Vue Devtools & Valaxy Devtools
+    * @see https://devtools-next.vuejs.org/
+    */
+  devtools: true,
+
+  // markdown: {
+  //   // default material-theme-palenight
+  //   // theme: 'material-theme-palenight',
+  //   theme: {
+  //     // light: 'material-theme-lighter',
+  //     light: "github-light",
+  //     // dark: 'material-theme-darker',
+  //     dark: "github-dark",
+  //   },
+
+  //   blocks: {
+  //     tip: {
+  //       icon: "i-carbon-thumbs-up",
+  //       text: "ヒント",
+  //     },
+  //     warning: {
+  //       icon: "i-carbon-warning-alt",
+  //       text: "注意",
+  //     },
+  //     danger: {
+  //       icon: "i-carbon-warning",
+  //       text: "警告",
+  //     },
+  //     info: {
+  //       text: "información",
+  //     },
+
+  //     custom: {
+  //       icon: "i-ri:info-i",
+  //       text: "CUSTOM",
+  //     },
+  //   },
+
+  //   codeTransformers: [
+  //     // We use `[!!code` in demo to prevent transformation, here we revert it back.
+  //     {
+  //       postprocess(code) {
+  //         return code.replace(/\[!!code/g, "[!code");
+  //       },
+  //     },
+  //   ],
+  // },
+
+  // extendMd: ({ route, data, content, excerpt, path }) => {
+  //   // ========== 1. 文章字数统计 ==========
+  //   const wordCount = content
+  //     .replace(/\s+/g, '')
+  //     .length
+
+  //   route.meta = {
+  //     ...route.meta,
+  //     wordCount,
+  //   }
+
+  //   // ========== 2. 自动阅读时间 ==========
+  //   // 假设 300 字/分钟
+  //   const readTime = Math.ceil(wordCount / 300)
+
+  //   route.meta = {
+  //     ...route.meta,
+  //     readTime,
+  //   }
+
+  //   // ========== 3. 如果没有 excerpt，就自动生成 ==========
+  //   if (!excerpt) {
+  //     const autoExcerpt = content
+  //       .replace(/[#>*`\n-]/g, '') // 去 markdown 符号
+  //       .slice(0, 120)
+
+  //     route.meta = {
+  //       ...route.meta,
+  //       excerpt: autoExcerpt + '...',
+  //     }
+  //   }
+
+  //   // ========== 4. 提取标题（简单版） ==========
+  //   const titleMatch = content.match(/^#\s+(.+)/m)
+  //   const title = titleMatch?.[1]
+
+  //   if (title) {
+  //     route.meta = {
+  //       ...route.meta,
+  //       title,
+  //     }
+  //   }
+
+  //   // ========== 5. 标记是否包含代码 ==========
+  //   const hasCode = /```/.test(content)
+
+  //   route.meta = {
+  //     ...route.meta,
+  //     hasCode,
+  //   }
+
+  //   // ========== 6. 标记是否为长文 ==========
+  //   const isLongPost = wordCount > 2000
+
+  //   route.meta = {
+  //     ...route.meta,
+  //     isLongPost,
+  //   }
+
+  //   // ========== 7. 路径信息增强 ==========
+  //   route.meta = {
+  //     ...route.meta,
+  //     path,
+  //   }
+
+  //   // ========== 8. frontmatter 数据透传 ==========
+  //   // 例如把 tags / date 规范化
+  //   if (data?.tags && typeof data.tags === 'string') {
+  //     route.meta = {
+  //       ...route.meta,
+  //       tags: data.tags.split(',').map(t => t.trim()),
+  //     }
+  //   }
+
+  //   // ========== 9. debug（开发时） ==========
+  //   if (process.env.NODE_ENV === 'development') {
+  //     console.log('[extendMd]', {
+  //       path,
+  //       wordCount,
+  //       readTime,
+  //     })
+  //   }
+  // },
+
   // 设置 valaxy-addon-waline 配置项
   addons: [
     // 启用插件的通用组件
@@ -201,12 +356,35 @@ export default defineValaxyConfig<ThemeConfig>({
       enableLive2D: "all",
     }),
   ],
-  groupIcons: {
-    customIcon: {
-      nodejs: "vscode-icons:file-type-node",
-      playwright: "vscode-icons:file-type-playwright",
-      typedoc: "vscode-icons:file-type-typedoc",
-      eslint: "vscode-icons:file-type-eslint",
-    },
-  },
+
+  // hooks: {
+  //   'build:before': () => {
+  //     console.log('build start')
+  //   },
+  // },
+
+  // cdn: {
+  //   modules: [
+  //     {
+  //       name: 'vue',
+  //       global: 'Vue',
+  //       url: 'https://cdn.jsdelivr.net/npm/vue@3.5.0/dist/vue.global.prod.js',
+  //       css: undefined,
+  //       exports: ['ref', 'computed', 'watch', 'createApp'],
+  //     },
+  //     {
+  //       name: 'katex',
+  //       global: 'katex',
+  //       url: 'https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js',
+  //       css: 'https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css',
+  //     },
+  //     {
+  //       name: 'dayjs',
+  //       global: 'dayjs',
+  //       url: 'https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js',
+  //     },
+  //   ]
+  // },
+
+  // loaders: []
 });

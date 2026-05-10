@@ -140,8 +140,6 @@ export default defineThemeConfig({
     beian: {
       enable: true,
       icp: "冀ICP备2222000777号",
-      icpLink: "https://beian.miit.gov.cn/",
-      police: "公安网备案号",
     },
   },
   // 自定义文章卡片类型
@@ -165,10 +163,5 @@ export default defineThemeConfig({
       // 菜单图标
       icon: "i-ri-menu-2-line",
     },
-  },
-  // 用于「在 GitHub 中打开」等功能
-  editLink: {
-    pattern: "https://github.com/user/repo/edit/main/:path",
-    text: "编辑此页面",
   },
 });

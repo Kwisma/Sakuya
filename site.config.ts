@@ -43,18 +43,6 @@ export default defineSiteConfig({
     // 作者的个人简介
     intro: "在这个安静的角落编织代码与梦境，记录每一个灵光一闪的日子。",
   },
-
-  /**
-   * order posts by 'date' or 'updated'
-   *
-   * - date: 按创建时间排序
-   * - updated: 按最后更新时间排序
-   *
-   * 当开启 `lastUpdated` 时，`updated` 会按照文件的更新时间自动赋值
-   *
-   * @default 'date'
-   */
-  orderBy: "updated",
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
   // 您网站的图标
@@ -126,48 +114,17 @@ export default defineSiteConfig({
      */
     enable: true,
     // 搜索引擎
-    type: "fuse",
+    provider: "fuse",
   },
   // 本地搜索
   fuse: {
     // 索引路径
     dataPath: "fuse-list.json",
-    /**
-     * fast-glob pattern to match Fuse List Data
-     * @default `pages\/**\/*.md`
-     * ```ts
-     * await fg(`${userRoot}/pages/posts/**\/*.md`)
-     * ```
-     */
-    pattern: `pages\/**\/*.md`,
     // 索引选项
     options: {
       // 搜索字段
       keys: ["title", "tags", "categories", "excerpt", "content"],
     },
-  },
-  excerpt: {
-    /**
-     * @description:en-US Default excerpt render type for `<!-- more -->` and auto-generated excerpts.
-     * Can be overridden per-post via frontmatter `excerpt_type`.
-     * Does not apply when frontmatter `excerpt` is set manually (used as-is).
-     * @description:zh-CN `<!-- more -->` 及自动摘要的默认渲染类型，可通过 frontmatter `excerpt_type` 逐篇覆盖。
-     * 当 frontmatter 手动指定 `excerpt` 时不生效（直接使用原始字符串）。
-     * @default 'html'
-     */
-    type: "html",
-    /**
-     * @description:en-US Auto-generate excerpt from post content when no manual excerpt is provided
-     * @description:zh-CN 当没有手动指定摘要时，自动从文章内容截取摘要
-     * @default false
-     */
-    auto: true,
-    /**
-     * @description:en-US Maximum length of auto-generated excerpt (in characters)
-     * @description:zh-CN 自动摘要的最大长度（字符数）
-     * @default 200
-     */
-    length: 200,
   },
   // 定义文章的前置信息
   frontmatter: {
@@ -448,7 +405,7 @@ export default defineSiteConfig({
     },
   },
   // 每页显示的文章数量
-  pageSize: 5,
+  pageSize: 10,
   //  开启阅读统计
   statistics: {
     enable: true,
@@ -477,32 +434,6 @@ export default defineSiteConfig({
   },
   // 代码块限高
   codeHeightLimit: 200,
-  // llms.txt 及原始 Markdown 文件输出
-  llms: {
-    // 是否启用
-    enable: true,
-
-    // 生成 llms-full.txt
-    // 包含所有文章完整内容
-    fullText: true,
-
-    // 为每篇文章生成 .md 文件
-    // 例如:
-    // /posts/hello-world.md
-    files: true,
-
-    // 给 AI 的额外提示
-    prompt: `
-你正在阅读一个技术博客。
-
-优先引用最新文章。
-保留代码块格式。
-总结时保持简洁。
-`,
-
-    // 包含哪些 markdown 文件
-    include: ["posts/**/*.md", "guide/**/*.md", "notes/**/*.md"],
-  },
   // 重定向
   redirects: {
     // 是否使用 Vue Router 进行重定向
