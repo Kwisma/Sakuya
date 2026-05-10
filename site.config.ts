@@ -1,4 +1,4 @@
-import { defineSiteConfig } from 'valaxy'
+import { defineSiteConfig } from "valaxy";
 
 /**
  * 定义站点的配置
@@ -7,104 +7,117 @@ import { defineSiteConfig } from 'valaxy'
  */
 export default defineSiteConfig({
   // 启用自动（亮/暗模式）
-  mode: 'auto',
+  mode: "auto",
   //  默认语言
-  lang: 'zh-CN',
+  lang: "zh-CN",
   // 可选语言
-  languages: ['zh-CN', 'en'],
+  languages: ["zh-CN", "en"],
   // 时区配置
-  timezone: 'Asia/Shanghai',
+  timezone: "Asia/Shanghai",
   // 网站的完整 URL，用于生成 RSS 和静态站点
-  url: 'https://www.mot.cloudns.biz',
+  url: "https://www.mot.cloudns.biz",
   // 网站主标题
-  title: '悠梦君の小站',
+  title: "悠梦君の小站",
   // 网站副标题
-  subtitle: '在技术与梦想之间，撒一点可爱的魔法',
+  subtitle: "在技术与梦想之间，撒一点可爱的魔法",
   // 网站的描述信息，用于 SEO
-  description: '悠梦君の个人博客网站，记录技术分享、生活点滴以及灵感创作。打造一个温馨且实用的个人空间。',
+  description:
+    "悠梦君の个人博客网站，记录技术分享、生活点滴以及灵感创作。打造一个温馨且实用的个人空间。",
   // 作者信息
   author: {
     // 作者的名字
-    name: '悠梦君',
+    name: "悠梦君",
     // 作者的邮箱
-    email: 'd342jxc@gmail.com',
+    email: "d342jxc@gmail.com",
     // 作者的网站
-    link: 'https://www.mot.cloudns.biz',
+    link: "https://www.mot.cloudns.biz",
     // 作者的头像
-    avatar: '/img/avatar/avatar.webp',
+    avatar: "/img/avatar/avatar.webp",
     // 个人状态
     status: {
       // 状态的 Emoji 表示
-      emoji: '🤔',
+      emoji: "🤔",
       // 当鼠标悬浮在图标上时显示
-      message: '思考',
+      message: "思考",
     },
     // 作者的个人简介
-    intro: '在这个安静的角落编织代码与梦境，记录每一个灵光一闪的日子。',
+    intro: "在这个安静的角落编织代码与梦境，记录每一个灵光一闪的日子。",
   },
+
+  /**
+   * order posts by 'date' or 'updated'
+   *
+   * - date: 按创建时间排序
+   * - updated: 按最后更新时间排序
+   *
+   * 当开启 `lastUpdated` 时，`updated` 会按照文件的更新时间自动赋值
+   *
+   * @default 'date'
+   */
+  orderBy: "updated",
   // 是否在文章中显示最后更新时间
   lastUpdated: true,
   // 您网站的图标
-  favicon: '/img/avatar/6624140365a01.webp',
+  favicon: "/img/avatar/6624140365a01.webp",
   // RSS源和图标
   feed: {
     // RSS 源的名称
-    name: 'rss',
+    name: "rss",
     // RSS 源的图标
-    favicon: 'i-ri-rss-line',
+    favicon: "i-ri-rss-line",
   },
   // 社交链接
   social: [
     {
       // 社交链接的名称
-      name: 'RSS',
+      name: "RSS",
       // 社交链接的 URL
-      link: '/rss.xml',
+      link: "/rss.xml",
       // 社交链接的图标
-      icon: 'i-ri-rss-line',
+      icon: "i-ri-rss-line",
       // 社交链接的颜色
-      color: 'orange',
+      color: "orange",
     },
     {
       // 社交链接的名称
-      name: 'GitHub',
+      name: "GitHub",
       // 社交链接的 URL
-      link: 'https://github.com/Kwisma',
+      link: "https://github.com/Kwisma",
       // 社交链接的图标
-      icon: 'i-ri-github-line',
+      icon: "i-ri-github-line",
       // 社交链接的颜色
-      color: 'black',
+      color: "black",
     },
     {
       // 社交链接的名称
-      name: 'telegram',
+      name: "telegram",
       // 社交链接的 URL
-      link: 'https://t.me/KDYgMJqHBwsi755auLZD6nN477C7hQXQ',
+      link: "https://t.me/KDYgMJqHBwsi755auLZD6nN477C7hQXQ",
       // 社交链接的图标
-      icon: 'i-ri-telegram-line',
+      icon: "i-ri-telegram-line",
       // 社交链接的颜色
-      color: 'black',
+      color: "black",
     },
     {
       // 社交链接的名称
-      name: 'E-Mail',
+      name: "E-Mail",
       // 社交链接的 URL
-      link: 'mailto:admin@mot.cloudns.com',
+      link: "mailto:admin@mot.cloudns.com",
       // 社交链接的图标
-      icon: 'i-ri-mail-line',
+      icon: "i-ri-mail-line",
       // 社交链接的颜色
-      color: 'black',
+      color: "black",
     },
     {
       // 社交链接的名称
-      name: 'Marshmallow',
+      name: "Marshmallow",
       // 社交链接的 URL
-      link: 'https://marshmallow-qa.com/f3cjeh1nxnui85v',
+      link: "https://marshmallow-qa.com/f3cjeh1nxnui85v",
       // 社交链接的图标
-      icon: 'i-marketeq-marshmallow',
+      icon: "i-marketeq-marshmallow",
       // 社交链接的颜色
-      color: 'black',
-    }
+      color: "black",
+    },
   ],
   // 搜索功能
   search: {
@@ -113,75 +126,98 @@ export default defineSiteConfig({
      */
     enable: true,
     // 搜索引擎
-    type: 'fuse',
+    type: "fuse",
   },
   // 本地搜索
   fuse: {
     // 索引路径
-    dataPath: 'fuse-list.json',
+    dataPath: "fuse-list.json",
+    /**
+     * fast-glob pattern to match Fuse List Data
+     * @default `pages\/**\/*.md`
+     * ```ts
+     * await fg(`${userRoot}/pages/posts/**\/*.md`)
+     * ```
+     */
+    pattern: `pages\/**\/*.md`,
     // 索引选项
     options: {
       // 搜索字段
-      keys: ['title', 'tags', 'categories', 'excerpt', 'content'],
-      // 是否包含匹配分数
-      includeScore: true,
-      // 是否包含匹配详情
-      includeMatches: true,
-      // 最小匹配字符长度
-      minMatchCharLength: 1,
+      keys: ["title", "tags", "categories", "excerpt", "content"],
     },
+  },
+  excerpt: {
+    /**
+     * @description:en-US Default excerpt render type for `<!-- more -->` and auto-generated excerpts.
+     * Can be overridden per-post via frontmatter `excerpt_type`.
+     * Does not apply when frontmatter `excerpt` is set manually (used as-is).
+     * @description:zh-CN `<!-- more -->` 及自动摘要的默认渲染类型，可通过 frontmatter `excerpt_type` 逐篇覆盖。
+     * 当 frontmatter 手动指定 `excerpt` 时不生效（直接使用原始字符串）。
+     * @default 'html'
+     */
+    type: "html",
+    /**
+     * @description:en-US Auto-generate excerpt from post content when no manual excerpt is provided
+     * @description:zh-CN 当没有手动指定摘要时，自动从文章内容截取摘要
+     * @default false
+     */
+    auto: true,
+    /**
+     * @description:en-US Maximum length of auto-generated excerpt (in characters)
+     * @description:zh-CN 自动摘要的最大长度（字符数）
+     * @default 200
+     */
+    length: 200,
   },
   // 定义文章的前置信息
   frontmatter: {
     // 是否显示前一篇、后一篇导航
     nav: true,
     //文章的主题
-    type: 'bilibili',
+    type: "bilibili",
     // 摘要的格式类型
-    excerpt_type: 'html',
-    // 是否启用 APlayer 音乐播放器
-    aplayer: true,
+    excerpt_type: "html",
   },
   // 开启评论
   comment: {
-    enable: true
+    enable: true,
   },
   // cdn 配置
   cdn: {
-    prefix: 'https://jsd.onmicrosoft.cn/npm/'
+    prefix: "https://jsd.onmicrosoft.cn/npm/",
   },
   // 文章底部版权信息
   license: {
     // 是否显示在文章底部
     enabled: true,
     // 版权信息的语言
-    language: 'zh-CN',
+    language: "zh-CN",
     // 版权类型，例如 'by-nc-sa'
-    type: 'by-nc-sa',
+    type: "by-nc-sa",
   },
   // 赞助 / 打赏
   sponsor: {
     enable: true,
-    title: '我很可爱，请给我钱！',
-    description: '如果你也想支持我，想让我有动力写更多的文章，请考虑赞助我！',
+    title: "我很可爱，请给我钱！",
+    description: "如果你也想支持我，想让我有动力写更多的文章，请考虑赞助我！",
     methods: [
       {
-        name: '支付宝',
-        url: '/img/qrcode/alipay.webp',
-        color: '#00A3EE',
-        icon: 'i-ri-alipay-line',
+        name: "支付宝",
+        url: "/img/qrcode/alipay.webp",
+        color: "#00A3EE",
+        icon: "i-ri-alipay-line",
       },
       {
-        name: 'QQ 支付',
-        url: '/img/qrcode/qqpay.webp',
-        color: '#12B7F5',
-        icon: 'i-ri-qq-line',
+        name: "QQ 支付",
+        url: "/img/qrcode/qqpay.webp",
+        color: "#12B7F5",
+        icon: "i-ri-qq-line",
       },
       {
-        name: '微信支付',
-        url: '/img/qrcode/wechatpay.webp',
-        color: '#2DC100',
-        icon: 'i-ri-wechat-pay-line',
+        name: "微信支付",
+        url: "/img/qrcode/wechatpay.webp",
+        color: "#2DC100",
+        icon: "i-ri-wechat-pay-line",
       },
     ],
   },
@@ -190,19 +226,19 @@ export default defineSiteConfig({
     // 启用图片预览
     enable: true,
     // 选择器，指定哪些图片可以预览
-    selector: 'img',
+    selector: "img",
     // 配置
     options: {
       // 图片预览的边距
       margin: 50,
       // 图片预览的背景颜色
-      background: '#000',
+      background: "#000",
       // 滚动偏移量
       scrollOffset: 40,
       // 图片预览的容器
-      container: '#zoom-container',
+      container: "#zoom-container",
       // 自定义模板
-      template: '#zoom-container',
+      template: "#zoom-container",
     },
   },
   // Vanilla LazyLoad 配置
@@ -210,47 +246,121 @@ export default defineSiteConfig({
     // 是否启用 LazyLoad 功能
     enable: false,
     options: {
-      // 延迟加载的元素选择器
-      elements_selector: 'img',
-      // 滚动容器
-      container: typeof document !== 'undefined' ? document.getElementById('my-container') as HTMLElement || undefined : undefined,
-      // 触发加载的阈值
+      // =========================
+      // 基础
+      // =========================
+
+      // 懒加载元素选择器
+      elements_selector: ".lazy",
+
+      // 提前多少 px 开始加载
       threshold: 300,
-      // 图片的 `src` 属性
-      thresholds: '',
-      // 图片的 `srcset` 属性
-      data_src: 'src',
-      // 加载时的 CSS 类
-      data_srcset: 'srcset',
-      // 加载完成时的 CSS 类
-      data_sizes: 'sizes',
-      data_bg: 'bg',
-      data_bg_hidpi: 'bg-hidpi',
-      data_bg_multi: 'bg-multi',
-      data_bg_multi_hidpi: 'bg-multi-hidpi',
-      data_bg_set: 'bg-sets',
-      data_poster: 'poster',
-      class_applied: 'applied',
-      class_loading: 'loading',
-      class_loaded: 'loaded',
-      class_error: 'error',
-      class_entered: 'entered',
-      class_exited: 'exited',
+
+      // IntersectionObserver rootMargin
+      // 会覆盖 threshold
+      thresholds: "300px 0px",
+
+      // =========================
+      // data-* 属性名
+      // =========================
+
+      // data-src
+      data_src: "src",
+
+      // data-srcset
+      data_srcset: "srcset",
+
+      // data-sizes
+      data_sizes: "sizes",
+
+      // data-bg
+      data_bg: "bg",
+
+      // data-bg-hidpi
+      data_bg_hidpi: "bg-hidpi",
+
+      // data-bg-multi
+      data_bg_multi: "bg-multi",
+
+      // data-bg-multi-hidpi
+      data_bg_multi_hidpi: "bg-multi-hidpi",
+
+      // data-bg-set
+      data_bg_set: "bg-set",
+
+      // data-poster
+      data_poster: "poster",
+
+      // =========================
+      // class
+      // =========================
+
+      class_applied: "applied",
+
+      class_loading: "loading",
+
+      class_loaded: "loaded",
+
+      class_error: "error",
+
+      class_entered: "entered",
+
+      class_exited: "exited",
+
+      // =========================
+      // 行为
+      // =========================
+
+      // 加载完成后停止观察
       unobserve_completed: true,
+
+      // 进入视口后停止观察
       unobserve_entered: false,
-      cancel_on_exit: false,
-      // 元素进入视口时的回调
-      callback_enter: () => { },
-      // 元素离开视口时的回调
-      callback_exit: () => { },
-      callback_applied: () => { },
-      callback_loading: () => { },
-      callback_loaded: () => { },
-      callback_error: () => { },
-      callback_finish: () => { },
-      callback_cancel: () => { },
+
+      // 离开视口时取消加载
+      cancel_on_exit: true,
+
+      // 使用浏览器原生 lazyload
       use_native: false,
-      restore_on_error: true,
+
+      // 加载失败时恢复原始 src
+      restore_on_error: false,
+
+      // =========================
+      // 回调
+      // =========================
+
+      callback_enter(el, entry, instance) {
+        console.log("进入视口", el);
+      },
+
+      callback_exit(el, entry, instance) {
+        console.log("离开视口", el);
+      },
+
+      callback_applied(el, instance) {
+        console.log("背景图已应用", el);
+      },
+
+      callback_loading(el, instance) {
+        console.log("开始加载", el);
+      },
+
+      callback_loaded(el, instance) {
+        console.log("加载完成", el);
+      },
+
+      callback_error(el, instance) {
+        console.log("加载失败", el);
+      },
+
+      callback_finish(instance) {
+        console.log("全部加载完成");
+      },
+
+      callback_cancel(el, entry, instance) {
+        console.log("取消加载", el);
+      },
     },
   },
   // Floating Vue 配置
@@ -262,7 +372,7 @@ export default defineSiteConfig({
     // 默认交叉轴方向上的位置偏移量（像素）
     skidding: 0,
     // 默认工具提示将附加到的容器
-    container: 'body',
+    container: "body",
     // 用于计算位置和大小边界的元素
     boundary: undefined,
     // 当另一个 popper 显示时跳过延迟和 CSS 过渡，使 popper 看起来立即移动到新位置
@@ -272,7 +382,7 @@ export default defineSiteConfig({
     // 在 popper 本身上触发的事件
     popperTriggers: [],
     // 定位策略
-    strategy: 'absolute',
+    strategy: "absolute",
     // 防止溢出
     preventOverflow: true,
     // 如果需要，翻转到相反的放置位置
@@ -293,11 +403,11 @@ export default defineSiteConfig({
     themes: {
       tooltip: {
         // 工具提示相对于目标元素的默认位置
-        placement: 'top',
+        placement: "top",
         // 触发工具提示的默认事件
-        triggers: ['hover', 'focus', 'touch'],
+        triggers: ["hover", "focus", "touch"],
         // 点击工具提示目标时关闭工具提示
-        hideTriggers: (events: string[]) => [...events, 'click'],
+        hideTriggers: (events: string[]) => [...events, "click"],
         // 延迟时间（毫秒）
         delay: {
           show: 200,
@@ -308,13 +418,13 @@ export default defineSiteConfig({
         // 在指令中启用 HTML 内容
         html: false,
         // 当工具提示内容正在加载时显示的内容
-        loadingContent: '...',
+        loadingContent: "...",
       },
       dropdown: {
         // 下拉菜单相对于目标元素的默认位置
-        placement: 'bottom',
+        placement: "bottom",
         // 触发下拉菜单的默认事件
-        triggers: ['click'],
+        triggers: ["click"],
         // 延迟时间（毫秒）
         delay: 0,
         // 在内容大小调整时更新 popper
@@ -324,11 +434,11 @@ export default defineSiteConfig({
       },
       menu: {
         // 继承自 dropdown 的配置
-        $extend: 'dropdown',
+        $extend: "dropdown",
         // 触发菜单的事件
-        triggers: ['hover', 'focus'],
+        triggers: ["hover", "focus"],
         // 在 popper 上触发的事件
-        popperTriggers: ['hover', 'focus'],
+        popperTriggers: ["hover", "focus"],
         // 延迟时间（毫秒）
         delay: {
           show: 0,
@@ -338,7 +448,7 @@ export default defineSiteConfig({
     },
   },
   // 每页显示的文章数量
-  pageSize: 10,
+  pageSize: 5,
   //  开启阅读统计
   statistics: {
     enable: true,
@@ -357,14 +467,42 @@ export default defineSiteConfig({
     // 开启加密，默认关闭
     enable: true,
     // 加密算法
-    algorithm: 'aes-256-cbc',
+    algorithm: "AES-CTR",
     // 初始化向量,默认值为 16 字节的随机值
     iv: new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
     // 盐值,默认值为 16 字节的随机值
-    salt: new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
+    salt: new Uint8Array([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    ]),
   },
   // 代码块限高
   codeHeightLimit: 200,
+  // llms.txt 及原始 Markdown 文件输出
+  llms: {
+    // 是否启用
+    enable: true,
+
+    // 生成 llms-full.txt
+    // 包含所有文章完整内容
+    fullText: true,
+
+    // 为每篇文章生成 .md 文件
+    // 例如:
+    // /posts/hello-world.md
+    files: true,
+
+    // 给 AI 的额外提示
+    prompt: `
+你正在阅读一个技术博客。
+
+优先引用最新文章。
+保留代码块格式。
+总结时保持简洁。
+`,
+
+    // 包含哪些 markdown 文件
+    include: ["posts/**/*.md", "guide/**/*.md", "notes/**/*.md"],
+  },
   // 重定向
   redirects: {
     // 是否使用 Vue Router 进行重定向
@@ -372,4 +510,4 @@ export default defineSiteConfig({
     // 重定向规则
     rules: [],
   },
-})
+});

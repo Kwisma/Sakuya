@@ -33,6 +33,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
     '/posts/alist_html_body': RouteRecordInfo<'/posts/alist_html_body', '/posts/alist_html_body', Record<never, never>, Record<never, never>>,
     '/posts/alist_html_head': RouteRecordInfo<'/posts/alist_html_head', '/posts/alist_html_head', Record<never, never>, Record<never, never>>,
+    '/posts/captive_portal_detection': RouteRecordInfo<'/posts/captive_portal_detection', '/posts/captive_portal_detection', Record<never, never>, Record<never, never>>,
     '/posts/check_unused_rule_providers': RouteRecordInfo<'/posts/check_unused_rule_providers', '/posts/check_unused_rule_providers', Record<never, never>, Record<never, never>>,
     '/posts/cloudflare_add_delete_domain': RouteRecordInfo<'/posts/cloudflare_add_delete_domain', '/posts/cloudflare_add_delete_domain', Record<never, never>, Record<never, never>>,
     '/posts/delete_github_release': RouteRecordInfo<'/posts/delete_github_release', '/posts/delete_github_release', Record<never, never>, Record<never, never>>,

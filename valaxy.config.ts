@@ -1,314 +1,85 @@
-import type { UserThemeConfig } from 'valaxy-theme-yun'
-import { defineValaxyConfig } from 'valaxy'
-import { addonWaline } from 'valaxy-addon-waline'
-import { addonComponents, ValaxyThemesResolver } from 'valaxy-addon-components'
-import { addonLive2d } from 'valaxy-addon-live2d'
+import type { ThemeConfig } from "valaxy-theme-yun";
+import { defineValaxyConfig } from "valaxy";
+
+import { addonWaline } from "valaxy-addon-waline";
+import { addonComponents, ValaxyThemesResolver } from "valaxy-addon-components";
+import { addonLive2d } from "valaxy-addon-live2d";
 // add icons what you will need
 const safelist = [
-  'i-ri-home-line',
-  'i-ri-qq-line',
-  'i-ri-wechat-pay-line',
-  'i-ri-alipay-line',
-  'i-marketeq-1st-place',
-  'i-marketeq-bag-alt',
-  'i-marketeq-cube',
-  'i-marketeq-gallery',
-  'i-marketeq-marshmallow',
-]
-const colors = ['purple', 'green', 'blue', 'dark']
+  "i-ri-home-line",
+  "i-ri-qq-line",
+  "i-ri-wechat-pay-line",
+  "i-ri-alipay-line",
+  "i-marketeq-1st-place",
+  "i-marketeq-bag-alt",
+  "i-marketeq-cube",
+  "i-marketeq-gallery",
+  "i-marketeq-marshmallow",
+];
+const colors = ["purple", "green", "blue", "dark"];
 colors.forEach((c) => {
-  safelist.push(...[
-    `border-${c}-300`,
-    `text-${c}-600`,
-    `hover:bg-${c}-600`,
-    `dark:text-${c}-300`,
-    `focus:ring-${c}-300`,
-  ])
-})
+  safelist.push(
+    ...[
+      `border-${c}-300`,
+      `text-${c}-600`,
+      `hover:bg-${c}-600`,
+      `dark:text-${c}-300`,
+      `focus:ring-${c}-300`,
+    ],
+  );
+});
 
-
-export default defineValaxyConfig<UserThemeConfig>({
+export default defineValaxyConfig<ThemeConfig>({
+  devtools: true,
   // 主题名称
-  theme: 'yun',
-  // 主题配置
-  themeConfig: {
-    // 主题类型
-    type: 'nimbo',
-    // 目录标题
-    outlineTitle: '悠梦君の个人博客',
-    // 主题色配置
-    colors: {
-      primary: '#0078E7',
-    },
-    // 网站上显示的横幅配置
-    banner: {
-      // 是否启用
-      enable: true,
-      // 标题，默认每个字分割
-      title: ['悠', '梦', '君', 'の', '的', '小', '站'],
-      // 首页下方的动态云
-      cloud: {
-        enable: true,
-      },
-      // 标题类
-      siteNameClass: 'text-white',
-    },
-    // 背景图片配置
-    bg_image: {
-      // 是否启用
-      enable: true,
-      // 图片地址
-      url: '/img/back/back.webp',
-      // 浅色模式
-      dark: '/img/back/back-y.webp',
-      // 图像不透明度
-      opacity: 0.9,
-    },
-    // 短语配置
-    say: {
-      // 是否启用
-      enable: true,
-      // 指定用于获取短语的 API 链接。
-      api: 'https://el-bot-api.elpsy.cn/api/words/young',
-      // 说说图标
-      hitokoto: {
-        // 是否启用
-        enable: true,
-        // 指定用于获取 hitokoto 短语的 API 链接。
-        api: 'https://v1.hitokoto.cn',
-      },
-    },
-    // 网站公告配置
-    notice: {
-      // 是否启用
-      enable: false,
-      // 是否在页面中隐藏
-      hideInPages: true,
-      // 公告内容
-      content: '本站内容仅供学习交流，不得用于商业用途，如有侵权请联系我删除。',
-    },
-    // 点击时的烟花效果
-    fireworks: {
-      // 是否启用
-      enable: true,
-      // 烟花颜色
-      colors: ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#8b00ff'],
-    },
-    // 导航栏 位于页面右上角
-    nav: [
-      {
-        icon: 'i-ri-home-line',
-        link: '/',
-        text: '首页',
-        active: 'text-red-500',
-      },
-      {
-        icon: 'i-ri-group-line',
-        link: '/links/',
-        text: '伙伴',
-        active: 'text-red-400',
-      },
-    ],
-    // 页面，显示在社交导航栏下方
-    pages: [
-      {
-        name: '我的小伙伴们',
-        url: '/links/',
-        icon: 'i-ri-account-circle-fill',
-        color: 'dodgerblue',
-      },
-      {
-        name: '我的老婆',
-        url: '/girls/',
-        icon: 'i-ri-women-line',
-        color: 'hotpink',
-      },
-      {
-        name: '留言板',
-        url: '/message/',
-        icon: 'i-ri-message-2-line',
-        color: 'dodgerblue',
-      }
-    ],
-    // 侧边栏配置
-    sidebar: {},
-    // 网站底部区域的配置。
-    footer: {
-      // 页脚上部的动态云
-      cloud: {
-        enable: true,
-
-      },
-      // 建站于
-      since: 2025,
-      // 网站上显示的图标配置
-      icon: {
-        // 是否启用
-        enable: true,
-        // 图标名称
-        name: 'i-ri-copyright-fill',
-        // 图标是否可点击
-        animated: true,
-        // 图标颜色
-        color: 'aqua',
-        // 文章链接
-        url: '/privacy/',
-        // 图标标题
-        title: '隐私协议',
-      },
-      // 框架和主题来源信息显示
-      powered: true,
-      // ICP 备案信息的配置。
-      beian: {
-        enable: true,
-        icp: '冀ICP备2222000777号',
-      },
-    },
-    // 自定义文章卡片类型
-    types: {
-      // 默认文章卡片
-      default: {
-        // 文章卡片的颜色
-        color: '#ea4c89',
-        // 文章卡片的图标
-        icon: 'i-ri-external-link-line',
-      },
-    },
-    // 自定义菜单
-    menu: {
-      // 自定义菜单
-      custom: {
-        // 菜单标题
-        title: '自定义菜单',
-        // 菜单链接
-        url: '/custom/',
-        // 菜单图标
-        icon: 'i-ri-menu-2-line',
-      }
-    },
-  },
-  // Markdown 渲染器
-  markdown: {
-    // 属性定义了 Markdown 渲染的主题样式。它支持为浅色模式和深色模式分别指定不同的主题
-    theme: {
-      // 当用户使用浅色模式时，使用 github-light 主题。
-      light: 'github-light',
-      // 当用户使用深色模式时，使用 github-dark 主题。
-      dark: 'github-dark',
-    },
-    // 属性用于自定义 Markdown 中的提示块（如提示、警告、危险等）的样式和内容。每种块类型都可以定义
-    blocks: {
-      // 用于提示信息，默认图标为“点赞”。
-      tip: {
-        icon: 'i-carbon-thumbs-up',
-        text: 'ヒント',
-        langs: {
-          'zh-CN': '提示',
-        },
-      },
-      // 用于警告信息，默认图标为“警告”。
-      warning: {
-        icon: 'i-carbon-warning-alt',
-        text: '注意',
-      },
-      // 用于危险信息，默认图标为“危险”。
-      danger: {
-        icon: 'i-carbon-warning',
-        text: '警告',
-      },
-      // 用于信息提示，默认图标为“信息”。
-      info: {
-        text: '信息',
-      },
-    },
-    // 代码块的配置
-    codeTransformers: [
-      {
-        // 转换器的名称
-        name: 'default-name',
-        // 在代码高亮处理之前对原始输入代码进行转换。
-        preprocess: (code) => {
-          return code.replace(/\[!!code/g, '[!code')
-        },
-        // 在将代码转换为 HAST（HTML 抽象语法树）之前，对完整的代码标记列表进行转换。
-        tokens: (tokens) => { },
-        // 转换整个生成的 HAST 树。
-        root: (tree) => { },
-        // 转换 `<pre>` 元素。
-        pre: (pre) => { },
-        //  转换 `<code>` 元素。
-        code: (code) => { },
-        // 转换每一行 `<span class="line">` 元素。
-        line: (line) => { },
-        // 转换每个标记 `<span>` 元素。
-        span: (span) => { },
-        // 在生成的 HTML 字符串返回之前对其进行转换。
-        // 仅在使用 `codeToHtml` 方法时调用。
-        postprocess: (html) => { },
-      },
-    ],
-    // 配置 markdown-it
-    config(md) {
-      // You can configure the MarkdownItAsync instance here
-      // Example: md.use(pluginName, options)
-    },
-  },
-  unocss: {
-    safelist
-  },
-  components: {
-    // 实现引入第三方主题
-    resolvers: [ValaxyThemesResolver({ themes: ['yun'] })],
-  },
-  // 不要因死链接而导致构建失败
-  ignoreDeadLinks: true,
-  // `valaxy build` 的选项
+  theme: "yun",
   build: {
-    // 忽略死链
-    ignoreDeadLinks: true,
-    // 启用 SSG 分页，将单独构建分页页面
     ssgForPagination: true,
   },
-  // 部署类型
-  deploy: {
-    type: 'gh-pages'
+  unocss: {
+    safelist,
   },
-  // 内部模块
-  modules: {
-    rss: {
-      // 启用 RSS
-      enable: true,
-      // 全文输出
-      fullText: false,
-    }
-  },
-  // Markdown 功能
-  features: {
-    // 启用 KaTeX
-    katex: true,
-  },
+  markdown: {
+    // default material-theme-palenight
+    // theme: 'material-theme-palenight',
+    theme: {
+      // light: 'material-theme-lighter',
+      light: "github-light",
+      // dark: 'material-theme-darker',
+      dark: "github-dark",
+    },
 
-  vite: {
-    ssgOptions: {
-      // ViteSSGOptions 配置项
-      script: 'async', // 设置生成的脚本标签的类型，默认为 'async'
-      format: 'esm', // 设置生成的 HTML 格式化方式，可选 'minify' 或 'none'
-    }
-  },
-  vue: {
-    template: {
-      compilerOptions: {
-        isCustomElement: (tag: string) => ['meting-js'].includes(tag),
+    blocks: {
+      tip: {
+        icon: "i-carbon-thumbs-up",
+        text: "ヒント",
+      },
+      warning: {
+        icon: "i-carbon-warning-alt",
+        text: "注意",
+      },
+      danger: {
+        icon: "i-carbon-warning",
+        text: "警告",
+      },
+      info: {
+        text: "información",
+      },
+
+      custom: {
+        icon: "i-ri:info-i",
+        text: "CUSTOM",
       },
     },
-  },
-  groupIcons: {
-    customIcon: {
-      nodejs: 'vscode-icons:file-type-node',
-      playwright: 'vscode-icons:file-type-playwright',
-      typedoc: 'vscode-icons:file-type-typedoc',
-      eslint: 'vscode-icons:file-type-eslint',
-    },
+
+    codeTransformers: [
+      // We use `[!!code` in demo to prevent transformation, here we revert it back.
+      {
+        postprocess(code) {
+          return code.replace(/\[!!code/g, "[!code");
+        },
+      },
+    ],
   },
   // 设置 valaxy-addon-waline 配置项
   addons: [
@@ -317,82 +88,83 @@ export default defineValaxyConfig<UserThemeConfig>({
     // 评论区
     addonWaline({
       // Waline 配置项，参考 https://waline.js.org/reference/client/props.html
-      serverURL: 'https://bloy.mot.cloudns.biz/',
+      serverURL: "https://bloy.mot.cloudns.biz/",
       locale: {
-        nick: '昵称',
-        nickError: '昵称不能少于3个字符',
-        mail: '邮箱',
-        mailError: '请填写正确的邮件地址',
-        link: '网址',
-        optional: '可选',
-        placeholder: '填写qq邮箱或点击登录，可以展示个人头像~详情请见【留言板】板块',
-        sofa: '来发评论吧~',
-        submit: '提交',
-        like: '喜欢',
-        cancelLike: '取消喜欢',
-        reply: '回复',
-        cancelReply: '取消回复',
-        comment: '评论',
-        refresh: '刷新',
-        more: '加载更多...',
-        preview: '预览',
-        emoji: '表情',
-        uploadImage: '上传图片',
-        seconds: '秒前',
-        minutes: '分钟前',
-        hours: '小时前',
-        days: '天前',
-        now: '刚刚',
-        uploading: '正在上传',
-        login: '登录',
-        logout: '退出',
-        admin: '博主',
-        sticky: '置顶',
-        word: '字',
-        wordHint: '评论字数应在 $0 到 $1 字之间！\n当前字数：$2',
-        anonymous: '匿名',
-        level0: '潜水',
-        level1: '冒泡',
-        level2: '吐槽',
-        level3: '活跃',
-        level4: '话痨',
-        level5: '传说',
-        gif: '表情包',
-        gifSearchPlaceholder: '搜索表情包',
-        profile: '个人资料',
-        approved: '通过',
-        waiting: '待审核',
-        spam: '垃圾',
-        unsticky: '取消置顶',
-        oldest: '按倒序',
-        latest: '按正序',
-        hottest: '按热度',
-        reactionTitle: '你认为这篇文章怎么样？',
+        nick: "昵称",
+        nickError: "昵称不能少于3个字符",
+        mail: "邮箱",
+        mailError: "请填写正确的邮件地址",
+        link: "网址",
+        optional: "可选",
+        placeholder:
+          "填写qq邮箱或点击登录，可以展示个人头像~详情请见【留言板】板块",
+        sofa: "来发评论吧~",
+        submit: "提交",
+        like: "喜欢",
+        cancelLike: "取消喜欢",
+        reply: "回复",
+        cancelReply: "取消回复",
+        comment: "评论",
+        refresh: "刷新",
+        more: "加载更多...",
+        preview: "预览",
+        emoji: "表情",
+        uploadImage: "上传图片",
+        seconds: "秒前",
+        minutes: "分钟前",
+        hours: "小时前",
+        days: "天前",
+        now: "刚刚",
+        uploading: "正在上传",
+        login: "登录",
+        logout: "退出",
+        admin: "博主",
+        sticky: "置顶",
+        word: "字",
+        wordHint: "评论字数应在 $0 到 $1 字之间！\n当前字数：$2",
+        anonymous: "匿名",
+        level0: "潜水",
+        level1: "冒泡",
+        level2: "吐槽",
+        level3: "活跃",
+        level4: "话痨",
+        level5: "传说",
+        gif: "表情包",
+        gifSearchPlaceholder: "搜索表情包",
+        profile: "个人资料",
+        approved: "通过",
+        waiting: "待审核",
+        spam: "垃圾",
+        unsticky: "取消置顶",
+        oldest: "按倒序",
+        latest: "按正序",
+        hottest: "按热度",
+        reactionTitle: "你认为这篇文章怎么样？",
       },
       // 表情设置
       emoji: [
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/alus',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/bilibili',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/bmoji',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/coolapk',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/coolapk_coin',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/qq',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/soul-emoji',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tieba',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-body',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-emoji',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-flag',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-food',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-natural',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-object',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-people',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-sport',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-symbol',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-time',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-travel',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-weather',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw',
-        'https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/weibo',
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/alus",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/bilibili",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/bmoji",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/coolapk",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/coolapk_coin",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/qq",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/soul-emoji",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tieba",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-body",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-emoji",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-flag",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-food",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-natural",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-object",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-people",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-sport",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-symbol",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-time",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-travel",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw-weather",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/tw",
+        "https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.3.0/weibo",
       ],
       types: [],
       // 浏览量
@@ -405,22 +177,36 @@ export default defineValaxyConfig<UserThemeConfig>({
       global: true,
       live2DCollection: {
         XiaoYun: {
-          message: '来自云游君的小云 ~',
-          models: ['https://jsd.onmicrosoft.cn/npm/@yunyoujun/live2d@latest/小云.model3.json'],
+          message: "来自云游君的小云 ~",
+          models: [
+            "https://jsd.onmicrosoft.cn/npm/@yunyoujun/live2d@latest/小云.model3.json",
+          ],
         },
         // https://github.com/fghrsh/live2d_api
         Tia: {
-          message: '来自 Potion Maker 的 Tia 酱 ~',
-          models: 'https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json',
-          textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures',
+          message: "来自 Potion Maker 的 Tia 酱 ~",
+          models:
+            "https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json",
+          textures:
+            "https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures",
         },
         Pio: {
-          message: '来自 Potion Maker 的 Pio 酱 ~',
-          models: 'https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json',
-          textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
+          message: "来自 Potion Maker 的 Pio 酱 ~",
+          models:
+            "https://jsd.onmicrosoft.cn/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json",
+          textures:
+            "https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures",
         },
       },
-      enableLive2D: 'all',
+      enableLive2D: "all",
     }),
   ],
-})
+  groupIcons: {
+    customIcon: {
+      nodejs: "vscode-icons:file-type-node",
+      playwright: "vscode-icons:file-type-playwright",
+      typedoc: "vscode-icons:file-type-typedoc",
+      eslint: "vscode-icons:file-type-eslint",
+    },
+  },
+});
