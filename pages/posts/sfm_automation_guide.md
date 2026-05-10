@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2025-04-05 19:28:46
+date: 2026-05-10 19:28:46
 title: SFM 自动化代码
 categories:
  - 脚本
@@ -300,6 +300,8 @@ every 20 ticks do
 end
 ```
 
+> 深板岩
+
 ```sfm
 name "深板岩筛矿"  -- 定义机器的名称
 
@@ -359,6 +361,8 @@ every 20 ticks do
 end
 ```
 
+> 尘土
+
 ```sfm
 name "尘土筛矿"  -- 定义机器的名称
 
@@ -377,6 +381,8 @@ every 20 ticks do
 end
 ```
 
+> 沙子
+
 ```sfm
 name "沙子筛矿"  -- 定义机器的名称
 
@@ -394,6 +400,8 @@ every 20 ticks do
     output to "me接口" top side
 end
 ```
+
+> 沙砾
 
 ```sfm
 name "沙砾筛矿"  -- 定义机器的名称
