@@ -29,33 +29,35 @@ colors.forEach((c) => {
 
 export default defineValaxyConfig({
   theme: 'yun',
-  ignoreDeadLinks: 'localhostLinks',
+  // ignoreDeadLinks: 'localhostLinks',
 
-  build: {
-    ignoreDeadLinks: 'localhostLinks',
-    ssgForPagination: true,
-  },
+  // build: {
+  //   ignoreDeadLinks: 'localhostLinks',
+  //   ssgForPagination: true,
+  // },
 
-  deploy: {
-    type: 'gh-pages',
-  },
+  // deploy: {
+  //   type: 'gh-pages',
+  // },
 
-  modules: {
-    rss: {
-      enable: true,
-      fullText: true,
-    },
-  },
+  // modules: {
+  //   rss: {
+  //     enable: true,
+  //     fullText: true,
+  //   },
+  // },
 
-  features: {
-    katex: true,
-  },
+  // features: {
+  //   katex: true,
+  // },
 
-  math: false,
+  // math: false,
 
   vite: {
-    ssgOptions: {
-      formatting: "none",
+    optimizeDeps: {
+      exclude: [
+        'valaxy',
+      ],
     },
   },
 
@@ -65,17 +67,17 @@ export default defineValaxyConfig({
     ],
   },
 
-  components: {
-    dts: true,
-  },
+  // components: {
+  //   dts: true,
+  // },
 
-  layouts: {
-    layoutsDirs: "src/layouts",
-    pagesDirs: "src/pages",
-    extensions: ["vue"],
-    exclude: ["**/components/*.vue"],
-    defaultLayout: "default",
-  },
+  // layouts: {
+  //   layoutsDirs: "src/layouts",
+  //   pagesDirs: "src/pages",
+  //   extensions: ["vue"],
+  //   exclude: ["**/components/*.vue"],
+  //   defaultLayout: "default",
+  // },
 
   // router: {
   //   extensions: ['.vue'],
@@ -109,132 +111,132 @@ export default defineValaxyConfig({
     */
   devtools: true,
 
-  // markdown: {
-  //   // default material-theme-palenight
-  //   // theme: 'material-theme-palenight',
-  //   theme: {
-  //     // light: 'material-theme-lighter',
-  //     light: "github-light",
-  //     // dark: 'material-theme-darker',
-  //     dark: "github-dark",
-  //   },
+  markdown: {
+    // default material-theme-palenight
+    // theme: 'material-theme-palenight',
+    theme: {
+      // light: 'material-theme-lighter',
+      light: "github-light",
+      // dark: 'material-theme-darker',
+      dark: "github-dark",
+    },
 
-  //   blocks: {
-  //     tip: {
-  //       icon: "i-carbon-thumbs-up",
-  //       text: "ヒント",
-  //     },
-  //     warning: {
-  //       icon: "i-carbon-warning-alt",
-  //       text: "注意",
-  //     },
-  //     danger: {
-  //       icon: "i-carbon-warning",
-  //       text: "警告",
-  //     },
-  //     info: {
-  //       text: "información",
-  //     },
+    blocks: {
+      tip: {
+        icon: "i-carbon-thumbs-up",
+        text: "ヒント",
+      },
+      warning: {
+        icon: "i-carbon-warning-alt",
+        text: "注意",
+      },
+      danger: {
+        icon: "i-carbon-warning",
+        text: "警告",
+      },
+      info: {
+        text: "información",
+      },
 
-  //     custom: {
-  //       icon: "i-ri:info-i",
-  //       text: "CUSTOM",
-  //     },
-  //   },
+      custom: {
+        icon: "i-ri:info-i",
+        text: "CUSTOM",
+      },
+    },
 
-  //   codeTransformers: [
-  //     // We use `[!!code` in demo to prevent transformation, here we revert it back.
-  //     {
-  //       postprocess(code) {
-  //         return code.replace(/\[!!code/g, "[!code");
-  //       },
-  //     },
-  //   ],
-  // },
+    codeTransformers: [
+      // We use `[!!code` in demo to prevent transformation, here we revert it back.
+      {
+        postprocess(code) {
+          return code.replace(/\[!!code/g, "[!code");
+        },
+      },
+    ],
+  },
 
-  // extendMd: ({ route, data, content, excerpt, path }) => {
-  //   // ========== 1. 文章字数统计 ==========
-  //   const wordCount = content
-  //     .replace(/\s+/g, '')
-  //     .length
+  extendMd: ({ route, data, content, excerpt, path }) => {
+    // ========== 1. 文章字数统计 ==========
+    const wordCount = content
+      .replace(/\s+/g, '')
+      .length
 
-  //   route.meta = {
-  //     ...route.meta,
-  //     wordCount,
-  //   }
+    route.meta = {
+      ...route.meta,
+      wordCount,
+    }
 
-  //   // ========== 2. 自动阅读时间 ==========
-  //   // 假设 300 字/分钟
-  //   const readTime = Math.ceil(wordCount / 300)
+    // ========== 2. 自动阅读时间 ==========
+    // 假设 300 字/分钟
+    const readTime = Math.ceil(wordCount / 300)
 
-  //   route.meta = {
-  //     ...route.meta,
-  //     readTime,
-  //   }
+    route.meta = {
+      ...route.meta,
+      readTime,
+    }
 
-  //   // ========== 3. 如果没有 excerpt，就自动生成 ==========
-  //   if (!excerpt) {
-  //     const autoExcerpt = content
-  //       .replace(/[#>*`\n-]/g, '') // 去 markdown 符号
-  //       .slice(0, 120)
+    // ========== 3. 如果没有 excerpt，就自动生成 ==========
+    if (!excerpt) {
+      const autoExcerpt = content
+        .replace(/[#>*`\n-]/g, '') // 去 markdown 符号
+        .slice(0, 120)
 
-  //     route.meta = {
-  //       ...route.meta,
-  //       excerpt: autoExcerpt + '...',
-  //     }
-  //   }
+      route.meta = {
+        ...route.meta,
+        excerpt: autoExcerpt + '...',
+      }
+    }
 
-  //   // ========== 4. 提取标题（简单版） ==========
-  //   const titleMatch = content.match(/^#\s+(.+)/m)
-  //   const title = titleMatch?.[1]
+    // ========== 4. 提取标题（简单版） ==========
+    const titleMatch = content.match(/^#\s+(.+)/m)
+    const title = titleMatch?.[1]
 
-  //   if (title) {
-  //     route.meta = {
-  //       ...route.meta,
-  //       title,
-  //     }
-  //   }
+    if (title) {
+      route.meta = {
+        ...route.meta,
+        title,
+      }
+    }
 
-  //   // ========== 5. 标记是否包含代码 ==========
-  //   const hasCode = /```/.test(content)
+    // ========== 5. 标记是否包含代码 ==========
+    const hasCode = /```/.test(content)
 
-  //   route.meta = {
-  //     ...route.meta,
-  //     hasCode,
-  //   }
+    route.meta = {
+      ...route.meta,
+      hasCode,
+    }
 
-  //   // ========== 6. 标记是否为长文 ==========
-  //   const isLongPost = wordCount > 2000
+    // ========== 6. 标记是否为长文 ==========
+    const isLongPost = wordCount > 2000
 
-  //   route.meta = {
-  //     ...route.meta,
-  //     isLongPost,
-  //   }
+    route.meta = {
+      ...route.meta,
+      isLongPost,
+    }
 
-  //   // ========== 7. 路径信息增强 ==========
-  //   route.meta = {
-  //     ...route.meta,
-  //     path,
-  //   }
+    // ========== 7. 路径信息增强 ==========
+    route.meta = {
+      ...route.meta,
+      path,
+    }
 
-  //   // ========== 8. frontmatter 数据透传 ==========
-  //   // 例如把 tags / date 规范化
-  //   if (data?.tags && typeof data.tags === 'string') {
-  //     route.meta = {
-  //       ...route.meta,
-  //       tags: data.tags.split(',').map(t => t.trim()),
-  //     }
-  //   }
+    // ========== 8. frontmatter 数据透传 ==========
+    // 例如把 tags / date 规范化
+    if (data?.tags && typeof data.tags === 'string') {
+      route.meta = {
+        ...route.meta,
+        tags: data.tags.split(',').map(t => t.trim()),
+      }
+    }
 
-  //   // ========== 9. debug（开发时） ==========
-  //   if (process.env.NODE_ENV === 'development') {
-  //     console.log('[extendMd]', {
-  //       path,
-  //       wordCount,
-  //       readTime,
-  //     })
-  //   }
-  // },
+    // ========== 9. debug（开发时） ==========
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[extendMd]', {
+        path,
+        wordCount,
+        readTime,
+      })
+    }
+  },
 
   // 设置 valaxy-addon-waline 配置项
   addons: [
