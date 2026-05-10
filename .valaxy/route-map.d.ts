@@ -65,13 +65,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/album': RouteRecordInfo<
-      '/album',
-      '/album',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/archives/': RouteRecordInfo<
       '/archives/',
       '/archives',
@@ -86,23 +79,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/girls/': RouteRecordInfo<
-      '/girls/',
-      '/girls',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/links/': RouteRecordInfo<
       '/links/',
       '/links',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/message/': RouteRecordInfo<
-      '/message/',
-      '/message',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -121,149 +100,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/posts/alist_html_body': RouteRecordInfo<
-      '/posts/alist_html_body',
-      '/posts/alist_html_body',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/alist_html_head': RouteRecordInfo<
-      '/posts/alist_html_head',
-      '/posts/alist_html_head',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/captive_portal_detection': RouteRecordInfo<
-      '/posts/captive_portal_detection',
-      '/posts/captive_portal_detection',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/check_unused_rule_providers': RouteRecordInfo<
-      '/posts/check_unused_rule_providers',
-      '/posts/check_unused_rule_providers',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/cloudflare_add_delete_domain': RouteRecordInfo<
-      '/posts/cloudflare_add_delete_domain',
-      '/posts/cloudflare_add_delete_domain',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/delete_github_release': RouteRecordInfo<
-      '/posts/delete_github_release',
-      '/posts/delete_github_release',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/domain_check_loop': RouteRecordInfo<
-      '/posts/domain_check_loop',
-      '/posts/domain_check_loop',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/domain_ssl_script': RouteRecordInfo<
-      '/posts/domain_ssl_script',
-      '/posts/domain_ssl_script',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/extract_ip_port': RouteRecordInfo<
-      '/posts/extract_ip_port',
-      '/posts/extract_ip_port',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/fonts_linux_install': RouteRecordInfo<
-      '/posts/fonts_linux_install',
-      '/posts/fonts_linux_install',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/github_release_auto_upload': RouteRecordInfo<
-      '/posts/github_release_auto_upload',
-      '/posts/github_release_auto_upload',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/hysteria2_script': RouteRecordInfo<
-      '/posts/hysteria2_script',
-      '/posts/hysteria2_script',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/ked_neno_commands': RouteRecordInfo<
-      '/posts/ked_neno_commands',
-      '/posts/ked_neno_commands',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/mihomo_dns_webrtc': RouteRecordInfo<
-      '/posts/mihomo_dns_webrtc',
-      '/posts/mihomo_dns_webrtc',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/mihomo_linux_install': RouteRecordInfo<
-      '/posts/mihomo_linux_install',
-      '/posts/mihomo_linux_install',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/nginx_disguise': RouteRecordInfo<
-      '/posts/nginx_disguise',
-      '/posts/nginx_disguise',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/proxy_linux': RouteRecordInfo<
-      '/posts/proxy_linux',
-      '/posts/proxy_linux',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/sfm_automation_guide': RouteRecordInfo<
-      '/posts/sfm_automation_guide',
-      '/posts/sfm_automation_guide',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/webp_convert_to': RouteRecordInfo<
-      '/posts/webp_convert_to',
-      '/posts/webp_convert_to',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/posts/Your_Lie_in_April': RouteRecordInfo<
-      '/posts/Your_Lie_in_April',
-      '/posts/Your_Lie_in_April',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/privacy/': RouteRecordInfo<
-      '/privacy/',
-      '/privacy',
+    '/posts/hello-valaxy': RouteRecordInfo<
+      '/posts/hello-valaxy',
+      '/posts/hello-valaxy',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -288,13 +127,13 @@ declare module 'vue-router/auto-routes' {
    * @internal
    */
   export interface _RouteFileInfoMap {
-    'node_modules/valaxy-theme-yun/pages/index.vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.7_magicast@0.5.2_vue@3.5.22_typescript@5.9.3_/node_modules/valaxy-theme-yun/pages/index.vue': {
       routes:
         | '/'
       views:
         | never
     }
-    'node_modules/valaxy/client/pages/[...path].vue': {
+    'node_modules/.pnpm/valaxy@0.28.7_@babel+parser@7.29.3_@nuxt+kit@3.21.4_magicast@0.5.2__@types+markdown-it@_647387575283067fe982af8e7e26a00b/node_modules/valaxy/client/pages/[...path].vue': {
       routes:
         | '/[...path]'
       views:
@@ -318,12 +157,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'pages/album.md': {
-      routes:
-        | '/album'
-      views:
-        | never
-    }
     'pages/archives/index.md': {
       routes:
         | '/archives/'
@@ -336,159 +169,27 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'pages/girls/index.md': {
-      routes:
-        | '/girls/'
-      views:
-        | never
-    }
     'pages/links/index.md': {
       routes:
         | '/links/'
       views:
         | never
     }
-    'pages/message/index.md': {
-      routes:
-        | '/message/'
-      views:
-        | never
-    }
-    'node_modules/valaxy-theme-yun/pages/page/[page].vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.7_magicast@0.5.2_vue@3.5.22_typescript@5.9.3_/node_modules/valaxy-theme-yun/pages/page/[page].vue': {
       routes:
         | '/page/[page]'
       views:
         | never
     }
-    'node_modules/valaxy-theme-yun/pages/posts/index.vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.7_magicast@0.5.2_vue@3.5.22_typescript@5.9.3_/node_modules/valaxy-theme-yun/pages/posts/index.vue': {
       routes:
         | '/posts/'
       views:
         | never
     }
-    'pages/posts/alist_html_body.md': {
+    'pages/posts/hello-valaxy.md': {
       routes:
-        | '/posts/alist_html_body'
-      views:
-        | never
-    }
-    'pages/posts/alist_html_head.md': {
-      routes:
-        | '/posts/alist_html_head'
-      views:
-        | never
-    }
-    'pages/posts/captive_portal_detection.md': {
-      routes:
-        | '/posts/captive_portal_detection'
-      views:
-        | never
-    }
-    'pages/posts/check_unused_rule_providers.md': {
-      routes:
-        | '/posts/check_unused_rule_providers'
-      views:
-        | never
-    }
-    'pages/posts/cloudflare_add_delete_domain.md': {
-      routes:
-        | '/posts/cloudflare_add_delete_domain'
-      views:
-        | never
-    }
-    'pages/posts/delete_github_release.md': {
-      routes:
-        | '/posts/delete_github_release'
-      views:
-        | never
-    }
-    'pages/posts/domain_check_loop.md': {
-      routes:
-        | '/posts/domain_check_loop'
-      views:
-        | never
-    }
-    'pages/posts/domain_ssl_script.md': {
-      routes:
-        | '/posts/domain_ssl_script'
-      views:
-        | never
-    }
-    'pages/posts/extract_ip_port.md': {
-      routes:
-        | '/posts/extract_ip_port'
-      views:
-        | never
-    }
-    'pages/posts/fonts_linux_install.md': {
-      routes:
-        | '/posts/fonts_linux_install'
-      views:
-        | never
-    }
-    'pages/posts/github_release_auto_upload.md': {
-      routes:
-        | '/posts/github_release_auto_upload'
-      views:
-        | never
-    }
-    'pages/posts/hysteria2_script.md': {
-      routes:
-        | '/posts/hysteria2_script'
-      views:
-        | never
-    }
-    'pages/posts/ked_neno_commands.md': {
-      routes:
-        | '/posts/ked_neno_commands'
-      views:
-        | never
-    }
-    'pages/posts/mihomo_dns_webrtc.md': {
-      routes:
-        | '/posts/mihomo_dns_webrtc'
-      views:
-        | never
-    }
-    'pages/posts/mihomo_linux_install.md': {
-      routes:
-        | '/posts/mihomo_linux_install'
-      views:
-        | never
-    }
-    'pages/posts/nginx_disguise.md': {
-      routes:
-        | '/posts/nginx_disguise'
-      views:
-        | never
-    }
-    'pages/posts/proxy_linux.md': {
-      routes:
-        | '/posts/proxy_linux'
-      views:
-        | never
-    }
-    'pages/posts/sfm_automation_guide.md': {
-      routes:
-        | '/posts/sfm_automation_guide'
-      views:
-        | never
-    }
-    'pages/posts/webp_convert_to.md': {
-      routes:
-        | '/posts/webp_convert_to'
-      views:
-        | never
-    }
-    'pages/posts/Your_Lie_in_April.md': {
-      routes:
-        | '/posts/Your_Lie_in_April'
-      views:
-        | never
-    }
-    'pages/privacy/index.md': {
-      routes:
-        | '/privacy/'
+        | '/posts/hello-valaxy'
       views:
         | never
     }
