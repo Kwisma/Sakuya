@@ -12,15 +12,17 @@
     "new": "valaxy new",
     "serve": "vite preview"
   },
-  "devDependencies": {
+  "dependencies": {
     "@iconify-json/marketeq": "^1.2.2",
     "@unocss/reset": "^66.6.8",
-    "typescript": "^5.9.3",
     "valaxy": "^0.28.7",
     "valaxy-addon-components": "^0.1.0",
     "valaxy-addon-live2d": "^0.3.0",
     "valaxy-addon-waline": "^0.2.1",
     "valaxy-theme-yun": "^0.28.7",
     "vue-gtag-next": "^1.14.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }
