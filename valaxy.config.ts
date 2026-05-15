@@ -2,30 +2,6 @@ import { defineValaxyConfig } from "valaxy";
 import { addonWaline } from "valaxy-addon-waline";
 import { addonComponents } from "valaxy-addon-components";
 import { addonLive2d } from "valaxy-addon-live2d";
-// add icons what you will need
-const safelist = [
-    "i-ri-home-line",
-    "i-ri-qq-line",
-    "i-ri-wechat-pay-line",
-    "i-ri-alipay-line",
-    "i-marketeq-1st-place",
-    "i-marketeq-bag-alt",
-    "i-marketeq-cube",
-    "i-marketeq-gallery",
-    "i-marketeq-marshmallow",
-];
-const colors = ["purple", "green", "blue", "dark"];
-colors.forEach((c) => {
-    safelist.push(
-        ...[
-            `border-${c}-300`,
-            `text-${c}-600`,
-            `hover:bg-${c}-600`,
-            `dark:text-${c}-300`,
-            `focus:ring-${c}-300`,
-        ],
-    );
-});
 
 export default defineValaxyConfig({
     theme: 'yun',
@@ -86,10 +62,6 @@ export default defineValaxyConfig({
     // router: {
     //   extensions: ['.vue'],
     // },
-
-    unocss: {
-        safelist,
-    },
 
     // visualizer: {
     //   open: true,
