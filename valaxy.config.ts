@@ -2,10 +2,13 @@ import { defineValaxyConfig } from "valaxy";
 import { addonWaline } from "valaxy-addon-waline";
 import { addonComponents } from "valaxy-addon-components";
 import { addonLive2d } from "valaxy-addon-live2d";
-
+import siteConfig from "./site.config";
+import themeConfig from "./theme.config";
+import unocssConfig from "./unocss.config";
 export default defineValaxyConfig({
+    siteConfig: siteConfig,
     theme: 'yun',
-
+    themeConfig: themeConfig,
     build: {
         ignoreDeadLinks: 'localhostLinks',
         ssgForPagination: true,
@@ -62,7 +65,7 @@ export default defineValaxyConfig({
     // router: {
     //   extensions: ['.vue'],
     // },
-
+    unocss: unocssConfig,
     // visualizer: {
     //   open: true,
     // },

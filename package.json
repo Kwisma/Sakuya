@@ -10,12 +10,14 @@
     "dev": "valaxy",
     "rss": "valaxy rss",
     "new": "valaxy new",
+    "fuse": "valaxy fuse",
     "serve": "vite preview"
   },
   "dependencies": {
     "@iconify-json/marketeq": "^1.2.2",
     "@unocss/reset": "^66.6.8",
     "valaxy": "^0.28.7",
+    "valaxy-addon-algolia": "^0.2.1",
     "valaxy-addon-components": "^0.1.0",
     "valaxy-addon-live2d": "^0.3.0",
     "valaxy-addon-waline": "^0.2.1",
