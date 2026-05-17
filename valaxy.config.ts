@@ -22,16 +22,16 @@ export default defineValaxyConfig({
     // },
 
     modules: {
-      rss: {
-        enable: true,
-        fullText: true,
-        extractImagePathsFromHTML: true,
-      },
+        rss: {
+            enable: true,
+            fullText: true,
+            extractImagePathsFromHTML: true,
+        },
     },
 
     features: {
-      katex: true,
-      extractFirstImage: true,
+        katex: true,
+        extractFirstImage: true,
     },
 
     math: false,
@@ -51,7 +51,7 @@ export default defineValaxyConfig({
     },
 
     components: {
-      dts: true,
+        dts: true,
     },
 
     // layouts: {
